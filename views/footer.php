@@ -15,6 +15,7 @@
 
 <?php
 if ( 'comic' == $template ) {
+
 	?>
 <script>
 	var bubble_image_0 = "<?php echo esc_url( $image_url_lang1 ); ?>";
@@ -25,7 +26,23 @@ if ( 'comic' == $template ) {
 	var next_comic_read = "0";
 	var comicjet_root_url = "<?php echo COMICJET_URL; ?>";
 	var comicjet_slug = "<?php echo esc_attr( $this->comic_slug ); ?>";
-	var comicjet_next_url = "<?php echo esc_url( $this->_get_next_url() ); ?>";
+<?php
+
+if ( 1 != $this->page_number ) {
+	?>
+	var comicjet_prev_url = "<?php echo esc_url( $this->_get_previous_url() ); ?>";<?php
+}
+
+
+$dir = COMICJET_DIR . 'assets/' . $this->comic_dir . '/';
+$file = $dir . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.jpg';
+if ( file_exists( $file ) ) {
+	?>
+
+	var comicjet_next_url = "<?php echo esc_url( $this->_get_next_url() ); ?>";<?php
+}
+?>
+
 </script>
 <script src="<?php echo COMICJET_ASSETS_URL; ?>/cookie-functions.js"></script>
 <script src="<?php echo COMICJET_ASSETS_URL; ?>/toggle-image.js"></script>

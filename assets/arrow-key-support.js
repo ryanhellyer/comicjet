@@ -4,7 +4,6 @@ function comicjet_keypress(e) {
 
 	e = e || window.event;
 
-
 	if (typeof comicjet_prev_url != "undefined") {
 		if (e.keyCode == "37") {
 			window.location.assign(comicjet_prev_url);
