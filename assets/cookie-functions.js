@@ -20,6 +20,5 @@ function getCookie(cname) {
 }
 
 function eraseCookie(name) {
-	alert(name);
 	setCookie(name,"",-1);
 }

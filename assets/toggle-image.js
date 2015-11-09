@@ -24,7 +24,7 @@ if ("" == comics_read_json) {
 
 
 if ( "end" != comics_read[page_slug] ) {
-	comics_read[comicjet_slug] = next_comic_read;
+	comics_read[comicjet_slug] = page_number;
 	var comics_read_newjson = JSON.stringify(comics_read);
 	setCookie("comics_read", comics_read_newjson, 1);
 }

@@ -22,8 +22,28 @@ if ( 'comic' == $template ) {
 	var bubble_image_1 = "<?php echo esc_url( $image_url_lang2 ); ?>";
 	var current_language1 = "<div onclick='toggle_image()'>Switch to <span>English</span></div>";
 	var current_language2 = "<div onclick='toggle_image()'>Switch to <span>Deutsch</span></div>";
+
+
 	var page_slug = "<?php echo esc_attr( $this->comic_slug ); ?>";
-	var next_comic_read = "0";
+<?php
+
+$count = 1;
+while ( $count < 1000 ) {
+	$file = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . $count . '-' . $this->lang1 . '.jpg';
+	if ( file_exists( $file ) ) {
+		$last_page_number = $count;;
+	}
+	$count++;
+}
+
+if ( $last_page_number == $this->page_number ) {
+	echo 'var page_number = "end";';
+} else {
+	echo 'var page_number = "' . esc_attr( $this->page_number ) . '";';
+
+}
+?>
+
 	var comicjet_root_url = "<?php echo COMICJET_URL; ?>";
 	var comicjet_slug = "<?php echo esc_attr( $this->comic_slug ); ?>";
 <?php
