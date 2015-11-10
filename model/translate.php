@@ -13,7 +13,7 @@ class ComicJet_Model_Translate {
 	 */
 	public $languages = array(
 		'en' => 'English',
-		'nb' => 'Norsk Bokmål',
+		'de' => 'Deutsch',
 	);
 
 	/**
@@ -24,11 +24,11 @@ class ComicJet_Model_Translate {
 	private $translations = array(
 		0 => array(
 			'en' => 'About',
-			'nb' => 'Om',
+			'de' => 'Etwa',
 		),
 		1 => array(
-			'en' => 'about',
-			'nb' => 'om',
+			'en' => 'etwa',
+			'de' => 'etwa',
 		),
 	);
 

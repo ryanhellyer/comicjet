@@ -27,7 +27,7 @@
 						color: #ffcc00;
 						font-family:sans-serif;
 					">
-							<span>private</span> alpha
+							beta
 					</small>
 		</a>
 	</h1>

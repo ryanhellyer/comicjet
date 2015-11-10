@@ -1,7 +1,7 @@
 
 		<h1 id="site-title">Learn languages from comics</h1>
 
-		<form id="comic-type" name="comic-type" method="post">
+		<form id="comic-type" name="comic-type" method="post" action="">
 
 			<label>I speak</label>
 			<select id="language1" name="language1"><?php
@@ -25,7 +25,7 @@
 			<span></span>
 
 			<label>I want to learn</label>
-			<select id="language2" name="language1"><?php
+			<select id="language2" name="language2"><?php
 
 			$selected = '';
 			foreach ( $this->languages as $lang => $language_name ) {
@@ -54,7 +54,7 @@
 
 		// Get all comic data
 		$this->access_data = new ComicJet_Model_Access_Data();
-		$comic_data = $this->access_data->_get_comic_data();
+		$comic_data = $this->access_data->_get_comic_data( $this->lang1, $this->lang2 );
 		foreach ( $comic_data as $key => $comic ) {
 			$link_url = COMICJET_URL . '/' . $this->lang1 . '/' . $this->lang2 . '/' . $comic['slug'][$this->lang1] . '/';
 			$image_url = COMICJET_ASSETS_URL . '/' . $comic['slug']['en'] . '/1-' . $this->lang1 . '.jpg';
@@ -71,3 +71,21 @@
 		?>
 
 		</div>
+
+<?php
+
+/**
+ * Add scripts.
+ */
+
+$script_vars['text_comic_slug'] = 'comic';
+$script_vars['text_already_read'] = 'Already read';
+$script_vars['text_reading'] = 'Reading';
+$script_vars['comicjet_language1'] = 'en';
+$script_vars['comicjet_language2'] = 'de';
+$script_vars['comicjet_root_url'] = COMICJET_URL;
+
+$scripts[] = 'cookie-functions.js';
+$scripts[] = 'language-selector.js';
+$scripts[] = 'read-reading.js';
+$scripts[] = 'arrow-key-support.js';

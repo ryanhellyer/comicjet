@@ -27,6 +27,7 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		}
 
 		ob_start();
+		$script_vars = $scripts = array();
 		require( 'header.php' );
 		require( $template . '.php' );
 		require( 'footer.php' );
@@ -218,6 +219,60 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		}
 
 		return $title;
+	}
+
+	/**
+	 * Outputting the footer JavaScript.
+	 *
+	 * @param  array  $script_vars  Script variables
+	 * @param  array  $scripts      Script SRC's
+	 * @param  string $script       The HTML output
+	 * @access private
+	 */
+	private function scripts( $script_vars, $scripts ) {
+		$script = '';
+
+		/**_
+		 * Add script vars.
+		 */
+		if ( isset( $script_vars ) && is_array( $script_vars ) ) {
+			$script .= "<script>\n";
+			foreach( $script_vars as $var => $value ) {
+				$script .= '	var ' . $var . ' = "' . $value . "\";\n";
+			}
+			$script .= '</script>';
+		}
+
+		/**
+		 * Add scripts.
+		 */
+		if ( isset( $scripts ) && is_array( $scripts ) && ! defined( 'COMICJET_COMPRESS_HTML' ) ) {
+			foreach( $scripts as $var => $file ) {
+				$script .= "\n";
+				$script .= '<script src="' . esc_url( COMICJET_ASSETS_URL . '/' . $file ) . '"></script>';
+			}
+		} elseif ( isset( $scripts ) && is_array( $scripts ) && defined( 'COMICJET_COMPRESS_HTML' ) ) {
+
+			// Generate a hash representing the scripts
+			$hash = md5( json_encode( $scripts ) );
+
+			// If filename matching hash doesn't exist, then make it.
+			$hash_file = COMICJET_DIR . 'assets/cache/' . $hash . '.js';
+			if ( ! file_exists( $hash_file ) ) {
+
+				// Combine all of the files together
+				$concatenated_file_contents = '';
+				foreach( $scripts as $var => $file ) {
+					$concatenated_file_contents .= file_get_contents( COMICJET_DIR . 'assets/' . $file );
+				}
+				$hash = md5( json_encode( $scripts ) );
+				file_put_contents( $hash_file, $concatenated_file_contents );
+			}
+
+			$script .= '<script src="' . esc_url( COMICJET_ASSETS_URL . '/cache/' . $hash . '.js' ) . '"></script>';			
+		}
+
+		return $script;
 	}
 
 }

@@ -1,3 +1,6 @@
+/**
+ * Toggles between images.
+ */
 function toggle_image() {
 	var img = document.getElementById("bubble").src;
 	if (img.indexOf(bubble_image_1)!=-1) {
@@ -13,16 +16,15 @@ function toggle_image() {
 }
 
 
-/* Setting cookies */
+/**
+ * Setting cookies.
+ */
 var comics_read_json = getCookie("comics_read");
-
 if ("" == comics_read_json) {
 	var comics_read = {};
 } else {
 	var comics_read = JSON.parse(comics_read_json);
 }
-
-
 if ( "end" != comics_read[page_slug] ) {
 	comics_read[comicjet_slug] = page_number;
 	var comics_read_newjson = JSON.stringify(comics_read);

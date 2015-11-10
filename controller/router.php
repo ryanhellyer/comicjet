@@ -19,9 +19,10 @@ class ComicJet_Controller_Router {
 	 */
 	public function __construct() {
 
-		// Get all comic data
-		$this->access_data = new ComicJet_Model_Access_Data();
-		$this->comic_data = $this->access_data->_get_comic_data();
+		// Process home page form submissions
+		if ( isset( $_POST['select-language'] ) ) {
+			$this->_home_page_form();
+		}
 
 		// Get the URI
 		$uri = urldecode(
@@ -53,7 +54,7 @@ class ComicJet_Controller_Router {
 		 * eg: domain/
 		 */
 		if ( 2 == $chunk_count ) {
-			$url = COMICJET_URL . $uri . 'en/nb/';
+			$url = COMICJET_URL . $uri . 'en/de/';
 			header( 'Location: ' . $url, true, 302 );
 			exit;
 		}
@@ -71,11 +72,17 @@ class ComicJet_Controller_Router {
 		 * eg: domain/en/nb/ or domain/about/en/
 		 */
 		if ( 4 == $chunk_count ) {
+	
 			$translate = new ComicJet_Model_Translate;
 
 			if ( array_key_exists( $uri_chunks[1], $translate->languages ) && array_key_exists( $uri_chunks[2], $translate->languages ) ) {
 				$lang1 = $uri_chunks[1];
 				$lang2 = $uri_chunks[2];
+
+				// Get all comic data
+				$this->access_data = new ComicJet_Model_Access_Data();
+				$this->comic_data = $this->access_data->_get_comic_data( $lang1, $lang2 );
+
 				new ComicJet_Views_Init( 'home', array( 'lang1' => $lang1, 'lang2' => $lang2 ) );
 			} elseif ( array_key_exists( $uri_chunks[1], $translate->languages ) && ! array_key_exists( $uri_chunks[2], $translate->languages ) ) {
 				new ComicJet_Views_Init( 'static' );
@@ -92,6 +99,10 @@ class ComicJet_Controller_Router {
 			$lang1 = $uri_chunks[1];
 			$lang2 = $uri_chunks[2];
 			$comic_slug = $uri_chunks[3];
+
+			// Get all comic data
+			$this->access_data = new ComicJet_Model_Access_Data();
+			$this->comic_data = $this->access_data->_get_comic_data( $lang1, $lang2 );
 
 			// Get the current comic directory (required because folder structure is in English, but page URLs are not)
 			foreach ( $this->comic_data as $key => $comic ) {
@@ -149,6 +160,30 @@ class ComicJet_Controller_Router {
 		else {
 		    return false;
 		}
+	}
+
+	/**
+	 * Redirects users who submit the form on the home page.
+	 * This redirect will rarely occur, as JavaScript handles
+	 * this seamlessly on the frontend.
+	 */
+	private function _home_page_form() {
+
+		// Confirm that all the require form fields were sent
+		if ( isset( $_POST['language1'] ) && isset( $_POST['language2'] ) && isset( $_POST['select-language'] ) ) {
+			$translate = new ComicJet_Model_Translate;
+			$lang1 = $_POST['language1'];
+			$lang2 = $_POST['language2'];
+
+			// Confirm that the languages are actually real languages, and not something potentially malicious
+			if ( array_key_exists( $lang1, $translate->languages ) && array_key_exists( $lang2, $translate->languages ) ) {
+				$url = COMICJET_URL . '/' . $lang1 . '/' . $lang2 . '/';
+				header( 'Location: ' . esc_url( $url ), true, 302 );
+				exit;
+			}
+
+		}
+
 	}
 
 }

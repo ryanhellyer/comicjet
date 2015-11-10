@@ -30,3 +30,59 @@
 			</div>
 
 		</div>
+<?php
+
+/**
+ * Add scripts.
+ */
+
+$script_vars['bubble_image_0'] = $image_url_lang1;
+if ( isset( $image_url_lang2 ) ) {
+	$script_vars['bubble_image_1'] = $image_url_lang2;
+}
+$script_vars['current_language1'] = "<div onclick=\'toggle_image()\'>Switch to <span>English</span></div>";
+$script_vars['current_language2'] = "<div onclick=\'toggle_image()\'>Switch to <span>Deutsch</span></div>";
+
+$script_vars['page_slug'] = $this->comic_slug ;
+
+
+// Working out the last page number
+$count = 1;
+while ( $count < 1000 ) {
+	$file = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . $count . '-' . $this->lang1 . '.jpg';
+	if ( file_exists( $file ) ) {
+		$last_page_number = $count;;
+	}
+	$count++;
+}
+
+// Set the page number
+if ( $last_page_number == $this->page_number ) {
+	$script_vars['page_number'] = 'end';
+} else {
+	$script_vars['page_number'] = $this->page_number;
+}
+
+$script_vars['comicjet_root_url'] = COMICJET_URL;
+$script_vars['comicjet_slug'] = $this->comic_slug;
+
+
+
+if ( 1 != $this->page_number ) {
+	$script_vars['comicjet_prev_url'] = $this->_get_previous_url();
+}
+
+$dir = COMICJET_DIR . 'assets/' . $this->comic_dir . '/';
+$file = $dir . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.jpg';
+if ( file_exists( $file ) ) {
+	$script_vars['comicjet_next_url'] = $this->_get_next_url();
+}
+
+// If second language set, then dynamically change speech bubble onclick
+if ( isset( $bubble_image[0] ) ) {
+	$scripts[] = 'toggle-image.js';
+}
+
+$scripts[] = 'cookie-functions.js';
+$scripts[] = 'toggle-image.js';
+$scripts[] = 'arrow-key-support.js';
