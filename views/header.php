@@ -14,7 +14,7 @@
 	<h1>
 		<a href="<?php echo $this->_get_home_url(); ?>">COMIC JET! 
 					<small style="
-						display: block;
+						display: inline-block;
 						text-shadow: none;
 						-webkit-text-stroke-width: 0.3px;
 						-webkit-text-stroke-color: #aa5500;
@@ -26,6 +26,8 @@
 						font-size:24px;
 						color: #ffcc00;
 						font-family:sans-serif;
+						position: relative;
+						top: -10px;
 					">
 							beta
 					</small>
