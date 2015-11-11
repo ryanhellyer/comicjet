@@ -22,8 +22,12 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 
 		// Generate image URLs
 		if ( isset( $this->comic_dir ) && isset( $this->page_number )  && isset( $this->lang1 )  && isset( $this->lang2 ) ) {
+
 			$image_url_lang1 = COMICJET_ASSETS_URL . '/' . $this->comic_dir . '/' . $this->page_number . '-' . $this->lang1 . '.jpg';
-			$image_url_lang2 = COMICJET_ASSETS_URL . '/' . $this->comic_dir . '/' . $this->page_number . '-' . $this->lang2 . '.jpg';			
+			$image_url_lang1 = comicjet_convert_file_extension( $image_url_lang1 );
+
+			$image_url_lang2 = COMICJET_ASSETS_URL . '/' . $this->comic_dir . '/' . $this->page_number . '-' . $this->lang2 . '.jpg';
+			$image_url_lang2 = comicjet_convert_file_extension( $image_url_lang2 );
 		}
 
 		ob_start();

@@ -58,6 +58,7 @@
 		foreach ( $comic_data as $key => $comic ) {
 			$link_url = COMICJET_URL . '/' . $this->lang1 . '/' . $this->lang2 . '/' . $comic['slug'][$this->lang1] . '/';
 			$image_url = COMICJET_ASSETS_URL . '/' . $comic['slug']['en'] . '/1-' . $this->lang1 . '.jpg';
+			$image_url = comicjet_convert_file_extension( $image_url );
 
 			echo '
 			<div class="block" id="comic-' . esc_attr( $comic['slug'][$this->lang1] ) . '">
