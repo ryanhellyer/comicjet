@@ -33,7 +33,9 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		ob_start();
 		$script_vars = $scripts = array();
 		require( 'header.php' );
+		define( 'COMICJET_HEADER_TIMER', ( 1000 * ( microtime( true ) - COMICJET_TIMER ) ) );
 		require( $template . '.php' );
+		define( 'COMICJET_FOOTER_TIMER', ( 1000 * ( microtime( true ) - COMICJET_TIMER ) ) );
 		require( 'footer.php' );
 		$page_html = ob_get_contents();
 		$page_html = $this->_compress_html( $page_html );
@@ -253,7 +255,7 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		if ( isset( $scripts ) && is_array( $scripts ) && ! defined( 'COMICJET_COMPRESS_HTML' ) ) {
 			foreach( $scripts as $var => $file ) {
 				$script .= "\n";
-				$script .= '<script src="' . esc_url( COMICJET_ASSETS_URL . '/' . $file ) . '"></script>';
+				$script .= '<script src="' . esc_url( COMICJET_ASSETS_URL . '/scripts/' . $file ) . '"></script>';
 			}
 		} elseif ( isset( $scripts ) && is_array( $scripts ) && defined( 'COMICJET_COMPRESS_HTML' ) ) {
 
@@ -267,10 +269,13 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 				// Combine all of the files together
 				$concatenated_file_contents = '';
 				foreach( $scripts as $var => $file ) {
-					$concatenated_file_contents .= file_get_contents( COMICJET_DIR . 'assets/' . $file );
+					$concatenated_file_contents .= file_get_contents( COMICJET_DIR . 'assets/scripts/' . $file );
 				}
 				$hash = md5( json_encode( $scripts ) );
+				$concatenated_file_contents = str_replace( "\t", '', $concatenated_file_contents );
+				$concatenated_file_contents = str_replace( "\n", '', $concatenated_file_contents );
 				file_put_contents( $hash_file, $concatenated_file_contents );
+
 			}
 
 			$script .= '<script src="' . esc_url( COMICJET_ASSETS_URL . '/cache/' . $hash . '.js' ) . '"></script>';			

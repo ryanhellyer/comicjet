@@ -72,6 +72,7 @@ a:hover {
 	margin: 0 0 0 5%;
 	padding: 0.4em 0 0 0;
 	font-size: 3.4em;
+	text-transform: uppercase;
 }
 
 #site-header h1 a {
@@ -93,6 +94,22 @@ a:hover {
 	-webkit-text-stroke-width: 0.04em;
 	text-stroke-color: #002c50;
 }
+
+#primary {
+	float: right;
+	margin: 1em 5% 0 0;
+}
+
+#primary li {
+	float: left;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.2em;
+}
+
+#primary li a {
+	color: #fff;
+}
+
 
 /* =Headings
 -------------------------------------------------------------- */

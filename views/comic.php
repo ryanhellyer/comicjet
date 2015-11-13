@@ -18,17 +18,18 @@
 				<img id="bubble" onmouseover="this.style.cursor='pointer'" onclick="toggle_image()" src="<?php echo esc_url( $image_url_lang2 ); ?>" />
 			</div>
 
-		<div id="pagination-bottom">
+			<div id="pagination-bottom">
 
-			<div class="pagination previous-link"><?php echo $this->_get_previous_link(); ?></div>
-				<div class="pagination current-language">
-					<div onclick="toggle_image()">
-						<?php printf( 'Switch to %s', '<span>' . esc_html( $this->languages[$this->lang1] ) . '</span>' ); ?>
+				<div class="pagination previous-link"><?php echo $this->_get_previous_link(); ?></div>
+					<div class="pagination current-language">
+						<div onclick="toggle_image()">
+							<?php printf( 'Switch to %s', '<span>' . esc_html( $this->languages[$this->lang1] ) . '</span>' ); ?>
+						</div>
 					</div>
+					<div class="pagination next-link"><?php echo $this->_get_next_link(); ?></div>
 				</div>
-				<div class="pagination next-link"><?php echo $this->_get_next_link(); ?></div>
-			</div>
 
+			</div>
 		</div>
 <?php
 
@@ -48,7 +49,7 @@ $script_vars['page_slug'] = $this->comic_slug ;
 
 // Working out the last page number
 $count = 1;
-while ( $count < 1000 ) {
+while ( $count < 100 ) {
 	$file = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . $count . '-' . $this->lang1 . '.jpg';
 	if ( file_exists( $file ) ) {
 		$last_page_number = $count;;

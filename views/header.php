@@ -12,7 +12,7 @@
 
 <header id="site-header">
 	<h1>
-		<a href="<?php echo $this->_get_home_url(); ?>">COMIC JET! 
+		<a href="<?php echo $this->_get_home_url(); ?>">Comic Jet! 
 					<small style="
 						display: inline-block;
 						text-shadow: none;
@@ -28,11 +28,18 @@
 						font-family:sans-serif;
 						position: relative;
 						top: -10px;
+						text-transform: lowercase;
 					">
 							beta
 					</small>
 		</a>
 	</h1>
+
+	<nav id="primary">
+		<ul>
+			<li><a href="<?php echo COMICJET_URL; ?>/tutorial/">Learn how it works</a></li>
+		</ul>
+	</nav>
 </header>
 
 <div id="wrap">
