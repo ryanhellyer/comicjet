@@ -1,5 +1,5 @@
 
-		<h1 id="site-title"><?php echo esc_html( $this->_get_comic_title( $this->comic_dir ) ); ?></h1>
+		<h1 id="site-title"><?php echo esc_html($this->access_data->_get_comic_title( $this->lang1, $this->comic_dir ) ); ?></h1>
 		<h2 id="site-description">page <?php echo esc_html( $this->page_number ); ?></h2>
 
 		<div id="pagination-top">
@@ -49,10 +49,14 @@ $script_vars['page_slug'] = $this->comic_slug ;
 
 // Working out the last page number
 $count = 1;
-while ( $count < 100 ) {
-	$file = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . $count . '-' . $this->lang1 . '.jpg';
-	if ( file_exists( $file ) ) {
-		$last_page_number = $count;;
+while ( $count < COMICJET_MAXIMUM_COMIC_LENGTH ) {
+	if ( ! isset( $last_page_number ) ) {
+		$file = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . $count . '-' . $this->lang1 . '.jpg';
+
+		if ( file_exists( $file ) ) {
+			$last_page_number = $count;
+		}
+
 	}
 	$count++;
 }

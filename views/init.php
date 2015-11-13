@@ -15,6 +15,7 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 	 */
 	public function __construct( $template, $args = array() ) {
 		$this->_check_template( $template );
+		$this->access_data = new ComicJet_Model_Access_Data();
 
 		foreach ( $args as $key => $arg ) {
 			$this->$key = $arg;
@@ -80,45 +81,6 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		}
 
 		return $template;
-	}
-
-	/**
-	 * Get data about the comic.
-	 *
-	 * @param  string  $comic_dir  The comic directory
-	 * @return array   $data       The comic data
-	 * @access private
-	 */
-	private function _get_comic_data( $comic_dir ) {
-		$assets_dir = COMICJET_DIR . 'assets/';
-		$file_path = $assets_dir . $comic_dir . '/' . $comic_dir . '.data';
-
-		$data = array();
-		if ( file_exists( $file_path ) ) {
-			$data_json = file_get_contents( $file_path );
-			$data = json_decode( $data_json, true );
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Get the comic title.
-	 *
-	 * @param  string  $comic_dir  The comic directory
-	 * @return string  $title      The comic title
-	 * @access private
-	 */
-	private function _get_comic_title( $comic_dir ) {
-		$data = $this->_get_comic_data( $comic_dir );
-
-		if ( isset( $data['title'][$this->lang1] ) ) {
-			$title = $data['title'][$this->lang1];
-		} else {
-			$title = '';
-		}
-
-		return $title;
 	}
 
 	/**
@@ -221,7 +183,7 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 
 		// Add comic title to page title
 		if ( isset( $this->comic_dir ) ) {
-			$title = $this->_get_comic_title( $this->comic_dir ) . ' - ' . $title;
+			$title = $this->access_data->_get_comic_title( $this->lang1, $this->comic_dir ) . ' - ' . $title;
 		}
 
 		return $title;
@@ -260,7 +222,13 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		} elseif ( isset( $scripts ) && is_array( $scripts ) && defined( 'COMICJET_COMPRESS_HTML' ) ) {
 
 			// Generate a hash representing the scripts
-			$hash = md5( json_encode( $scripts ) );
+			$script_blob = '';
+			foreach( $scripts as $var => $file ) {
+				$file_path = COMICJET_DIR . 'assets/scripts/' . $file;
+				$time = filemtime( $file_path );
+				$script_blob .= $time . $file;
+			}
+			$hash = md5( json_encode( $script_blob ) );
 
 			// If filename matching hash doesn't exist, then make it.
 			$hash_file = COMICJET_DIR . 'assets/cache/' . $hash . '.js';

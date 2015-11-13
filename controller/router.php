@@ -81,7 +81,7 @@ class ComicJet_Controller_Router {
 
 				// Get all comic data
 				$this->access_data = new ComicJet_Model_Access_Data();
-				$this->comic_data = $this->access_data->_get_comic_data( $lang1, $lang2 );
+				$this->comic_data = $this->access_data->_get_comic_all_data( $lang1, $lang2 );
 
 				new ComicJet_Views_Init( 'home', array( 'lang1' => $lang1, 'lang2' => $lang2 ) );
 			} elseif ( array_key_exists( $uri_chunks[1], $translate->languages ) && ! array_key_exists( $uri_chunks[2], $translate->languages ) ) {
@@ -102,13 +102,11 @@ class ComicJet_Controller_Router {
 
 			// Get all comic data
 			$this->access_data = new ComicJet_Model_Access_Data();
-			$this->comic_data = $this->access_data->_get_comic_data( $lang1, $lang2 );
+			$this->comic_data = $this->access_data->_get_single_comic_data( $comic_slug );
 
 			// Get the current comic directory (required because folder structure is in English, but page URLs are not)
-			foreach ( $this->comic_data as $key => $comic ) {
-				if ( $comic_slug == $comic['slug'][$lang1] ) {
-					$comic_dir = $comic['slug']['en'];
-				}
+			if ( $comic_slug == $this->comic_data['slug'][$lang1] ) {
+				$comic_dir = $this->comic_data['slug']['en'];
 			}
 
 			// Grab the current page number
