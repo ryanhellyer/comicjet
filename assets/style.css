@@ -208,7 +208,7 @@ h4 {
 .block {
 	float: left;
 	position: relative;
-	width: 27.5%;
+	width: 28.3333%;
 	margin: 0 0 5% 4%;
 	background: #fff;
 }
@@ -421,6 +421,11 @@ p.caption img {
 	padding: 0;
 }
 
+p.credits {
+	text-align: center;
+	font-size: 0.8em;
+}
+
 .alignleft {
 	float: left;
 }
@@ -549,31 +554,6 @@ footer p.align-right {
 }
 
 
-/* =Comic editor
--------------------------------------------------------------- */
-.controls {
-	float: left;
-	width: 90%;
-	margin: 1rem 0;
-	padding: 0 5%;
-}
-
-.sortable li {
-	margin: 3em 0;
-	padding: 1em 3%;
-	border: 1px solid #ddd;
-	background: #fafafa;
-}
-
-.sortable label {
-	font-size: 1em;
-}
-
-
-/* =File input field
--------------------------------------------------------------- */
-input[type=file] {
-}
 
 @media (max-width: 960px) {
 
@@ -731,10 +711,6 @@ input[type=file] {
 		width: 92%;
 		margin: 0 0 5% 4%;
 	}
-}
-
-@media (max-width: 420px) {
-
 }
 
 @media (max-width: 300px) {

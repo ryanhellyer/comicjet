@@ -21,6 +21,18 @@ function esc_attr( $attribute ) {
 }
 
 /**
+ * Stripping unneeded HTML tags.
+ *
+ * @param  string  $html  Some HTML to be escaped
+ * @return string  $html  The escaped HTML
+ */
+function escape_content( $html ) {
+	$html = strip_tags( $html, '<strong><a>' );
+	$html = stripslashes( $html );
+	return $html;
+}
+
+/**
  * Set correct URL file extensions.
  *
  * @param  string  $url  The URL

@@ -7,6 +7,7 @@ TODO:
 / - home page
 	Remove redirect
 	Force user to enter language selection to reach actual page
+	Get ordering from list
 
 /tutorial/ - tutorial page
 	Decide where button will be.
@@ -18,3 +19,9 @@ TODO:
 	This can be implemented with only a flashing button, and the arrow and text can be held within the image.
 	Load via comic template.
 		Add JS in router to provide flashing button effect
+
+/en/bla/ should trigger 404
+
+/en/de/comic/ - comic page
+	Need to have ability to display credits beneath each comic
+

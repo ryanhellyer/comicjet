@@ -15,7 +15,15 @@
 		<div id="comic-display">
 			<div class="image-display">
 				<img src="<?php echo esc_url( $image_url_lang1 ); ?>" />
-				<img id="bubble" onmouseover="this.style.cursor='pointer'" onclick="toggle_image()" src="<?php echo esc_url( $image_url_lang2 ); ?>" />
+				<img id="bubble" onmouseover="this.style.cursor='pointer'" onclick="toggle_image()" src="<?php echo esc_url( $image_url_lang2 ); ?>" /><?php
+			$credits = $this->access_data->_get_credits( $this->lang1, $this->comic_dir );
+			if ( $credits ) {
+				?>
+
+				<p class="credits"><?php echo escape_content( $credits ); ?></p><?php
+			}
+			?>
+
 			</div>
 
 			<div id="pagination-bottom">
@@ -47,8 +55,6 @@ $script_vars['current_language2'] = "<div onclick=\'toggle_image()\'>Switch to <
 $script_vars['page_slug'] = $this->comic_slug ;
 
 
-// Working out the last page number
-
 $file = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.';
 if ( file_exists( $file . 'jpg' ) || file_exists( $file . 'png' ) ) {
 	$script_vars['comicjet_next_url'] = $this->_get_next_url();
@@ -56,24 +62,6 @@ if ( file_exists( $file . 'jpg' ) || file_exists( $file . 'png' ) ) {
 } else {
 	$script_vars['page_number'] = 'end';
 }
-
-/*
-$count = 1;
-while ( $count < COMICJET_MAXIMUM_COMIC_LENGTH ) {
-	if ( ! isset( $last_page_number ) ) {
-		$file = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . $count . '-' . $this->lang1 . '.jpg';
-echo $file;
-die;
-		if ( file_exists( $file ) ) {
-			$last_page_number = $count;
-		}
-
-	}
-	$count++;
-}
-*/
-
-// Set the page number
 
 $script_vars['comicjet_root_url'] = COMICJET_URL;
 $script_vars['comicjet_slug'] = $this->comic_slug;
