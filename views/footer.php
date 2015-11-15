@@ -5,7 +5,7 @@
 
 <footer>
 	<p>
-		Copyright &copy; <?php echo esc_html( date( 'Y' ) ); ?> Comic Jet.
+		<?php echo esc_html( sprintf( $translate->convert( 'Copyright &copy; %s Comic Jet.' ), date( 'Y' ) ) ); ?>
 		Generated in <?php echo round( ( 1000 * ( microtime( true ) - COMICJET_TIMER ) ), 2 ); ?> ms.
 		<!--
 		HTML output start at: <?php echo COMICJET_HEADER_TIMER; ?> ms.

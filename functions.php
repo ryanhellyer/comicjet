@@ -27,7 +27,7 @@ function esc_url( $url ) {
  * @return string  $attribute  The escaped HTML
  */
 function esc_html( $html ) {
-	$html = htmlspecialchars( $html );
+	$html = stripslashes( $html );
 
 	return $html;
 }

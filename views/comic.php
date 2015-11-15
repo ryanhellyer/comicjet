@@ -49,8 +49,8 @@ $script_vars['bubble_image_0'] = $image_url_lang1;
 if ( isset( $image_url_lang2 ) ) {
 	$script_vars['bubble_image_1'] = $image_url_lang2;
 }
-$script_vars['current_language1'] = "<div onclick=\'toggle_image()\'>" . $translate->convert( 'Switch to' ) . " <span>" . esc_html( $this->access_data->_get_lang_name( $this->lang1 ) ) . "</span></div>";
-$script_vars['current_language2'] = "<div onclick=\'toggle_image()\'>" . $translate->convert( 'Switch to' ) . " <span>" . esc_html( $this->access_data->_get_lang_name( $this->lang2 ) ) . "</span></div>";
+$script_vars['current_language1'] = "<div onclick=\'toggle_image()\'>" . sprintf( $translate->convert( 'Switch to %s' ), ' <span>' . esc_html( $this->access_data->_get_lang_name( $this->lang1 ) ) . '</span>' ) . '</div>';
+$script_vars['current_language2'] = "<div onclick=\'toggle_image()\'>" . sprintf( $translate->convert( 'Switch to %s' ), ' <span>' . esc_html( $this->access_data->_get_lang_name( $this->lang2 ) ) . '</span>' ) . '</div>';
 
 $script_vars['page_slug'] = $this->comic_slug ;
 
