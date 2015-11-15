@@ -85,7 +85,11 @@ class ComicJet_Controller_Router {
 
 				new ComicJet_Views_Init( 'home', array( 'lang1' => $lang1, 'lang2' => $lang2 ) );
 			} elseif ( array_key_exists( $uri_chunks[1], $translate->languages ) && ! array_key_exists( $uri_chunks[2], $translate->languages ) ) {
-				new ComicJet_Views_Init( 'static' );
+
+				// We don't have static pages yet, so just default to 404 for mean time
+				new ComicJet_Views_Init( '404' );
+				//new ComicJet_Views_Init( 'static' );
+
 			} else {
 				new ComicJet_Views_Init( '404' );
 			}
