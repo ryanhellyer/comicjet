@@ -8,15 +8,39 @@
  */
 
 
+/**
+ * Escaping a URL.
+ *
+ * @param  string  $url  The URL to be escaped
+ * @return string  $url  The escaped URL
+ */
 function esc_url( $url ) {
+	$url = filter_var( $url, FILTER_SANITIZE_URL );
+
 	return $url;
 }
 
+/**
+ * Escaping HTML.
+ *
+ * @param  string  $attribute  The HTML to be escaped
+ * @return string  $attribute  The escaped HTML
+ */
 function esc_html( $html ) {
+	$html = htmlspecialchars( $html );
+
 	return $html;
 }
 
+/**
+ * Escaping attributes.
+ *
+ * @param  string  $attribute  The attribute to be escaped
+ * @return string  $attribute  The escaped attribute
+ */
 function esc_attr( $attribute ) {
+	$attribute = htmlspecialchars( $attribute );
+
 	return $attribute;
 }
 
