@@ -6,7 +6,7 @@
  * @copyright Copyright (c), Ryan Hellyer
  * @author Ryan Hellyer <ryanhellyer@gmail.com>
  */
-class ComicJet_Views_Init extends ComicJet_Model_Translate {
+class ComicJet_Views_Init {
 
 	public $comic_name;
 
@@ -20,6 +20,8 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		foreach ( $args as $key => $arg ) {
 			$this->$key = $arg;
 		}
+
+		$this->translate = $translate = new ComicJet_Model_Translate( $this->lang1, $this->lang2 );
 
 		// Generate image URLs
 		if ( isset( $this->comic_dir ) && isset( $this->page_number )  && isset( $this->lang1 )  && isset( $this->lang2 ) ) {
@@ -116,9 +118,10 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 	 */
 	private function _get_previous_link() {
 		$link = '';
+		$translate = $this->translate;
 
 		if ( $this->_get_previous_url() ) {
-			$link = '<a href="' . esc_url( $this->_get_previous_url() ) . '">' . esc_html( 'Previous'  /*$this->translate( 'Previous' )*/ ) . '</a>';
+			$link = '<a href="' . esc_url( $this->_get_previous_url() ) . '">' . esc_html( $translate->convert( 'Previous' ) ) . '</a>';
 		}
 
 		return $link;
@@ -152,9 +155,10 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 	 */
 	private function _get_next_link() {
 		$link = '';
+		$translate = $this->translate;
 
 		if ( $this->_get_next_url() ) {
-			$link = '<a href="' . esc_url( $this->_get_next_url() ) . '">' . esc_html( 'Next'  /*$this->translate( 'Previous' )*/ ) . '</a>';
+			$link = '<a href="' . esc_url( $this->_get_next_url() ) . '">' . esc_html( $translate->convert( 'Next' ) ) . '</a>';
 		}
 
 		return $link;

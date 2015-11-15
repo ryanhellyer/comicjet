@@ -1,12 +1,12 @@
 
-		<h1 id="site-title">Learn languages from comics</h1>
+		<h1 id="site-title"><?php echo esc_html( $translate->convert( 'Learn languages from comics' ) ); ?></h1>
 
 		<form id="comic-type" name="comic-type" method="post" action="">
 
-			<label>I speak</label>
+			<label><?php echo esc_html( $translate->convert( 'I speak' ) ); ?></label>
 			<select id="language1" name="language1"><?php
 			$lang1 = 'en';
-			foreach ( $this->languages as $lang => $language_name ) {
+			foreach ( $translate->languages as $lang => $language_name ) {
 
 				if ( isset( $this->lang1 ) && $lang == $this->lang1 ) {
 					$selected = 'selected="selected" ';
@@ -24,11 +24,11 @@
 
 			<span></span>
 
-			<label>I want to learn</label>
+			<label><?php echo esc_html( $translate->convert( 'I want to learn' ) ); ?></label>
 			<select id="language2" name="language2"><?php
 
 			$selected = '';
-			foreach ( $this->languages as $lang => $language_name ) {
+			foreach ( $translate->languages as $lang => $language_name ) {
 
 				if ( isset( $this->lang2 ) && $lang == $this->lang2 ) {
 					$selected = 'selected="selected" ';;
@@ -47,7 +47,7 @@
 
 			<span></span>
 
-			<input type="submit" id="select-language" name="select-language" value="Start learning&nbsp; &gt;" />
+			<input type="submit" id="select-language" name="select-language" value="<?php echo $translate->convert( 'Start learning' ); ?>&nbsp; &gt;" />
 		</form>
 
 		<div id="comic-selection"><?php
@@ -81,8 +81,8 @@
  */
 
 $script_vars['text_comic_slug'] = 'comic';
-$script_vars['text_already_read'] = 'Already read';
-$script_vars['text_reading'] = 'Reading';
+$script_vars['text_already_read'] = $translate->convert( 'Already read' );
+$script_vars['text_reading'] = $translate->convert( 'Reading' );
 $script_vars['comicjet_language1'] = $this->lang1;
 $script_vars['comicjet_language2'] = $this->lang2;
 $script_vars['comicjet_root_url'] = COMICJET_URL;

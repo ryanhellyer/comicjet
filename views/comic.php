@@ -6,7 +6,7 @@
 			<div class="pagination previous-link"><?php echo $this->_get_previous_link(); ?></div>
 			<div class="pagination current-language">
 				<div onclick="toggle_image()">
-					<?php printf( 'Switch to %s', '<span>' . esc_html( $this->languages[$this->lang1] ) . '</span>' ); ?>
+					<?php printf( $translate->convert( 'Switch to %s' ), '<span>' . esc_html( $translate->languages[$this->lang1] ) . '</span>' ); ?>
 				</div>
 			</div>
 			<div class="pagination next-link"><?php echo $this->_get_next_link(); ?></div>
@@ -31,7 +31,7 @@
 				<div class="pagination previous-link"><?php echo $this->_get_previous_link(); ?></div>
 					<div class="pagination current-language">
 						<div onclick="toggle_image()">
-							<?php printf( 'Switch to %s', '<span>' . esc_html( $this->languages[$this->lang1] ) . '</span>' ); ?>
+							<?php printf( $translate->convert( 'Switch to %s' ), '<span>' . esc_html( $translate->languages[$this->lang1] ) . '</span>' ); ?>
 						</div>
 					</div>
 					<div class="pagination next-link"><?php echo $this->_get_next_link(); ?></div>
@@ -49,8 +49,8 @@ $script_vars['bubble_image_0'] = $image_url_lang1;
 if ( isset( $image_url_lang2 ) ) {
 	$script_vars['bubble_image_1'] = $image_url_lang2;
 }
-$script_vars['current_language1'] = "<div onclick=\'toggle_image()\'>Switch to <span>English</span></div>";
-$script_vars['current_language2'] = "<div onclick=\'toggle_image()\'>Switch to <span>Deutsch</span></div>";
+$script_vars['current_language1'] = "<div onclick=\'toggle_image()\'>" . $translate->convert( 'Switch to' ) . " <span>" . esc_html( $this->access_data->_get_lang_name( $this->lang1 ) ) . "</span></div>";
+$script_vars['current_language2'] = "<div onclick=\'toggle_image()\'>" . $translate->convert( 'Switch to' ) . " <span>" . esc_html( $this->access_data->_get_lang_name( $this->lang2 ) ) . "</span></div>";
 
 $script_vars['page_slug'] = $this->comic_slug ;
 

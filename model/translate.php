@@ -27,20 +27,26 @@ class ComicJet_Model_Translate {
 			'de' => 'Etwa',
 		),
 		1 => array(
-			'en' => 'etwa',
-			'de' => 'etwa',
+			'en' => 'I speak',
+			'de' => 'Ich spreche',
 		),
 	);
+
+	/**
+	 * Fire the constructor up :)
+	 */
+	public function __construct( $lang1 = NULL, $lang2 = NULL ) {
+		$this->lang1 = $lang1;
+		$this->lang2 = $lang2;
+	}
 
 	/**
 	 * Translate strings.
 	 *
 	 * @param  string  $string  The string to be translated
-	 * @param  string  $lang1   The language being translated from
-	 * @param  string  $lang2   The language being translated to
 	 * @return string  The language was translated, so giving up and spitting out original string
 	 */
-	protected function translate( $string, $lang1, $lang2 ) {
+	public function convert( $string ) {
 
 		// Loop through every string
 		foreach ( $this->translations as $key => $translation ) {
@@ -49,11 +55,11 @@ class ComicJet_Model_Translate {
 			foreach ( $translation as $lang => $translated_string ) {			
 
 				// If string matches current translated string
-				if ( $string == $translated_string && $lang == $lang1 ) {
+				if ( $string == $translated_string && $lang == $this->lang2 ) {
 
 					// If translation exists, spit it out
-					if ( isset( $translation[$lang2] ) ) {
-						return $translation[$lang2];
+					if ( isset( $translation[$this->lang1] ) ) {
+						return $translation[$this->lang1];
 					}
 				}
 			}

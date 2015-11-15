@@ -73,7 +73,7 @@ class ComicJet_Controller_Router {
 		 */
 		if ( 4 == $chunk_count ) {
 	
-			$translate = new ComicJet_Model_Translate;
+			$translate = new ComicJet_Model_Translate( null, null );
 
 			if ( array_key_exists( $uri_chunks[1], $translate->languages ) && array_key_exists( $uri_chunks[2], $translate->languages ) ) {
 				$lang1 = $uri_chunks[1];

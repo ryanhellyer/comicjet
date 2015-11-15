@@ -287,4 +287,17 @@ class ComicJet_Model_Access_Data {
 		return $comic_dir;
 	}
 
+	/**
+	 * Get the language name via the language slug.
+	 *
+	 * @param  string  $lang_slug  The language slug
+	 * @return string  $lang_name  The language name
+	 */
+	public function _get_lang_name( $lang_slug ) {
+		$translate = new ComicJet_Model_Translate();
+		$lang_name = $translate->languages[$lang_slug];
+
+		return $lang_name;
+	}
+
 }
