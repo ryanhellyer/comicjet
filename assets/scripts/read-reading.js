@@ -12,9 +12,11 @@ if ("" != comics_read_json) {
 		if ( "end" == page_number ) {
 
 			// Style already read comics
-			var comic_block = document.getElementById("comic-"+comic_slug).innerHTML;
-			document.getElementById("comic-"+comic_slug).innerHTML = comic_block + "<div class=\'read\'>" + text_already_read + "</div>";
-			document.getElementById("comic-"+comic_slug).style.opacity = "0.8";
+			if (document.getElementById("comic-"+comic_slug)) {
+				var comic_block = document.getElementById("comic-"+comic_slug).innerHTML;
+				document.getElementById("comic-"+comic_slug).innerHTML = comic_block + "<div class=\'read\'>" + text_already_read + "</div>";
+				document.getElementById("comic-"+comic_slug).style.opacity = "0.8";
+			}
 
 		} else {
 			if (document.getElementById("comic-"+comic_slug)) {

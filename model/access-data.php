@@ -18,12 +18,26 @@ class ComicJet_Model_Access_Data {
 	public function _get_comic_all_data() {
 
 		$xkcd_credits = array(
-			'en' => 'Thanks to <a href="http://xkcd.com/"">XKCD</a> for this comic. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
+			'en' => 'Thanks to <a href="http://xkcd.com/">XKCD</a> for this comic. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
 			'de' => 'Thanks to <a href="http://xkcd.com/">XKCD</a> for this comic and <a href="http://xkcde.dapete.net/">xkcde.dapete.net</a> for the German translation. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
 		);
 
 		$data = array(
 			0 => array(
+				'slug' => array(
+					'en' => 'tutorial',
+					'de' => 'lernprogramm',
+				),
+				'title' => array(
+					'en' => 'Tutorial',
+					'de' => 'Lernprogramm',
+				),
+				'credits' => array(
+					'en' => 'This is comic is based on work by <a href="http://xkcd.com/">XKCD</a>. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
+					'de' => '(String needs translated) This is comic is based on work by <a href="http://xkcd.com/">XKCD</a>. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
+				),
+			),
+			5 => array(
 				'slug' => array(
 					'en' => 'the-red-hall',
 					'de' => 'der-rote-saal ',
@@ -33,7 +47,7 @@ class ComicJet_Model_Access_Data {
 					'de' => 'Der Rote Saal',
 				),
 			),
-			1 => array(
+			10 => array(
 				'slug' => array(
 					'en' => 'xkcd1',
 					'de' => 'xkcd1',
@@ -47,7 +61,7 @@ class ComicJet_Model_Access_Data {
 					'de' => $xkcd_credits['de'],
 				),
 			),
-			2 => array(
+			15 => array(
 				'slug' => array(
 					'en' => 'shadowdancers',
 					'de' => 'schattentänzer',
@@ -57,7 +71,7 @@ class ComicJet_Model_Access_Data {
 					'de' => 'Schattentänzer',
 				),
 			),
-			3 => array(
+			20 => array(
 				'slug' => array(
 					'en' => 'xkcd2',
 					'de' => 'xkcd2',
@@ -71,7 +85,7 @@ class ComicJet_Model_Access_Data {
 					'de' => $xkcd_credits['de'],
 				),
 			),
-			4 => array(
+			25 => array(
 				'slug' => array(
 					'en' => 'the-tower-in-the-sky',
 					'de' => 'der-turm-im-himmel',
@@ -81,7 +95,7 @@ class ComicJet_Model_Access_Data {
 					'de' => 'Der Turm im Himmel',
 				),
 			),
-			5 => array(
+			30 => array(
 				'slug' => array(
 					'en' => 'xkcd3',
 					'de' => 'xkcd3',
@@ -95,7 +109,7 @@ class ComicJet_Model_Access_Data {
 					'de' => $xkcd_credits['de'],
 				),
 			),
-			6 => array(
+			35 => array(
 				'slug' => array(
 					'en' => 'the-letter-of-jael-bara',
 					'de' => 'der-brief-der-jael-bara ',
@@ -105,7 +119,7 @@ class ComicJet_Model_Access_Data {
 					'de' => 'Der brief der Jael Bara',
 				),
 			),
-			7 => array(
+			40 => array(
 				'slug' => array(
 					'en' => 'xkcd4',
 					'de' => 'xkcd4',
@@ -119,7 +133,7 @@ class ComicJet_Model_Access_Data {
 					'de' => $xkcd_credits['de'],
 				),
 			),
-			8 => array(
+			45 => array(
 				'slug' => array(
 					'en' => 'breaking-all-barriers',
 					'de' => 'alle-schranken-fallen',
@@ -129,7 +143,7 @@ class ComicJet_Model_Access_Data {
 					'de' => 'Alle Schranken fallen',
 				),
 			),
-			9 => array(
+			50 => array(
 				'slug' => array(
 					'en' => 'xkcd5',
 					'de' => 'xkcd5',
@@ -174,6 +188,7 @@ class ComicJet_Model_Access_Data {
 	 */
 	public function _get_single_comic_data( $comic ) {
 
+		$data = array();
 		$all_data = $this->_get_comic_all_data();
 		foreach ( $all_data as $key => $comic_data ) {
 			foreach ( $comic_data['slug'] as $lang => $string ) {

@@ -105,7 +105,7 @@ class ComicJet_Controller_Router {
 			$this->comic_data = $this->access_data->_get_single_comic_data( $comic_slug );
 
 			// Get the current comic directory (required because folder structure is in English, but page URLs are not)
-			if ( $comic_slug == $this->comic_data['slug'][$lang1] ) {
+			if ( isset( $this->comic_data['slug'][$lang1] ) && $comic_slug == $this->comic_data['slug'][$lang1] ) {
 				$comic_dir = $this->comic_data['slug']['en'];
 			} else {
 				$comic_dir = $comic_slug;
