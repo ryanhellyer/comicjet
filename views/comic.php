@@ -55,7 +55,7 @@ $script_vars['current_language2'] = "<div onclick=\'toggle_image()\'>" . sprintf
 $script_vars['page_slug'] = $this->comic_slug ;
 
 
-$file = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.';
+$file = COMICJET_ASSETS_DIR . '/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.';
 if ( file_exists( $file . 'jpg' ) || file_exists( $file . 'png' ) ) {
 	$script_vars['comicjet_next_url'] = $this->_get_next_url();
 	$script_vars['page_number'] = $this->page_number;

@@ -63,7 +63,7 @@ function escape_content( $html ) {
  * @return string  $url  The fixed URL
  */
 function comicjet_convert_file_extension( $url ) {
-	$file = str_replace( COMICJET_ASSETS_URL, COMICJET_DIR . 'assets', $url );
+	$file = str_replace( COMICJET_ASSETS_URL, COMICJET_ASSETS_DIR, $url );
 
 	$file = substr_replace( $file, '.jpg', -4 );
 	if ( file_exists( $file ) ) {

@@ -21,7 +21,16 @@ class ComicJet_Views_Init {
 			$this->$key = $arg;
 		}
 
-		$this->translate = $translate = new ComicJet_Model_Translate( $this->lang1, $this->lang2 );
+		// Loading translations (use defaults if languages not available)
+		$lang1 = 'en';
+		if ( isset( $this->lang1 ) ) {
+			$lang1 = $this->lang1;
+		}
+		$lang2 = 'de';
+		if ( isset( $this->lang2 ) ) {
+			$lang2 = $this->lang2;
+		}
+		$this->translate = $translate = new ComicJet_Model_Translate( $lang1, $lang2 );
 
 		// Generate image URLs
 		if ( isset( $this->comic_dir ) && isset( $this->page_number )  && isset( $this->lang1 )  && isset( $this->lang2 ) ) {
@@ -136,9 +145,9 @@ class ComicJet_Views_Init {
 	private function _get_next_url() {
 		$url = '';
 
-		$file_path = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.jpg';
+		$file_path = COMICJET_ASSETS_DIR . '/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.jpg';
 
-		$file_path = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.';
+		$file_path = COMICJET_ASSETS_DIR . '/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.';
 		if ( file_exists( $file_path . 'jpg' ) || file_exists( $file_path . 'png' ) ) {
 			$url = COMICJET_URL . '/' . $this->lang1 . '/' . $this->lang2 . '/' . $this->comic_slug . '/' . ( $this->page_number + 1 ) . '/';
 			$link = '<a href="' . esc_url( $url ) . '">' . esc_html( 'Next'  /*$this->translate( 'Previous' )*/ ) . '</a>';
@@ -233,20 +242,20 @@ class ComicJet_Views_Init {
 			// Generate a hash representing the scripts
 			$script_blob = '';
 			foreach( $scripts as $var => $file ) {
-				$file_path = COMICJET_DIR . 'assets/scripts/' . $file;
+				$file_path = COMICJET_ASSETS_DIR . '/scripts/' . $file;
 				$time = filemtime( $file_path );
 				$script_blob .= $time . $file;
 			}
 			$hash = md5( json_encode( $script_blob ) );
 
 			// If filename matching hash doesn't exist, then make it.
-			$hash_file = COMICJET_DIR . 'assets/cache/' . $hash . '.js';
+			$hash_file = COMICJET_ASSETS_DIR . '/cache/' . $hash . '.js';
 			if ( ! file_exists( $hash_file ) ) {
 
 				// Combine all of the files together
 				$concatenated_file_contents = '';
 				foreach( $scripts as $var => $file ) {
-					$concatenated_file_contents .= file_get_contents( COMICJET_DIR . 'assets/scripts/' . $file );
+					$concatenated_file_contents .= file_get_contents( COMICJET_ASSETS_DIR . '/scripts/' . $file );
 				}
 				$hash = md5( json_encode( $scripts ) );
 				$concatenated_file_contents = str_replace( "\t", '', $concatenated_file_contents );
