@@ -54,15 +54,15 @@
 
 		// Get all comic data
 		$this->access_data = new ComicJet_Model_Access_Data();
-		$comic_data = $this->access_data->_get_comic_all_data();
-
-		foreach ( $comic_data as $key => $comic ) {
+		$all_comic_data = $this->access_data->_get_comic_all_data();
+		foreach ( $all_comic_data as $key => $comic ) {
 			$link_url = COMICJET_URL . '/' . $this->lang1 . '/' . $this->lang2 . '/' . $comic['slug'][$this->lang1] . '/';
 			$image_url = COMICJET_ASSETS_URL . '/' . $comic['slug']['en'] . '/thumbnail-' . $this->lang1 . '.jpg';
 			$image_url = comicjet_convert_file_extension( $image_url );
+			$comic_dir = $this->access_data->_get_comic_dir( $comic['slug'][$this->lang1] );
 
 			echo '
-			<div class="block" id="comic-' . esc_attr( $comic['slug'][$this->lang1] ) . '">
+			<div class="block" id="comic-' . esc_attr( $comic_dir ) . '">
 				<a href="' . esc_url( $link_url ) . '" class="block-inner">
 					<img src="' . esc_url( $image_url) . '" />
 					<p>' . esc_html( $comic['title'][$this->lang1] ) . '</p>
@@ -83,8 +83,8 @@
 $script_vars['text_comic_slug'] = 'comic';
 $script_vars['text_already_read'] = 'Already read';
 $script_vars['text_reading'] = 'Reading';
-$script_vars['comicjet_language1'] = 'en';
-$script_vars['comicjet_language2'] = 'de';
+$script_vars['comicjet_language1'] = $this->lang1;
+$script_vars['comicjet_language2'] = $this->lang2;
 $script_vars['comicjet_root_url'] = COMICJET_URL;
 
 $scripts[] = 'cookie-functions.js';

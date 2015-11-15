@@ -104,13 +104,6 @@ class ComicJet_Controller_Router {
 			$this->access_data = new ComicJet_Model_Access_Data();
 			$this->comic_data = $this->access_data->_get_single_comic_data( $comic_slug );
 
-			// Get the current comic directory (required because folder structure is in English, but page URLs are not)
-			if ( isset( $this->comic_data['slug'][$lang1] ) && $comic_slug == $this->comic_data['slug'][$lang1] ) {
-				$comic_dir = $this->comic_data['slug']['en'];
-			} else {
-				$comic_dir = $comic_slug;
-			}
-
 			// Grab the current page number
 			if ( 6 == $chunk_count ) {
 				if ( ctype_digit( (string) $uri_chunks[4] ) ) {
@@ -123,6 +116,7 @@ class ComicJet_Controller_Router {
 			}
 
 			// Output comic if it exists, otherwise 404
+			$comic_dir = $this->access_data->_get_comic_dir( $comic_slug );
 			$file1 = COMICJET_DIR . 'assets/' . $comic_dir . '/' . $page_number . '-' . $lang1;
 			$file2 = COMICJET_DIR . 'assets/' . $comic_dir . '/' . $page_number . '-' . $lang2;
 			if (

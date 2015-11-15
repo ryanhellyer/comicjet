@@ -33,10 +33,10 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 
 		ob_start();
 		$script_vars = $scripts = array();
+		$scripts[] = 'cookie-functions.js';
+		$scripts[] = 'hide-tutorial.js';
 		require( 'header.php' );
 		define( 'COMICJET_HEADER_TIMER', ( 1000 * ( microtime( true ) - COMICJET_TIMER ) ) );
-//echo $template;
-//echo 'xxx';die;
 		require( $template . '.php' );
 
 		define( 'COMICJET_FOOTER_TIMER', ( 1000 * ( microtime( true ) - COMICJET_TIMER ) ) );

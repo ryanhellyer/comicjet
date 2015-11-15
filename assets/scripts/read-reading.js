@@ -29,7 +29,7 @@ if ("" != comics_read_json) {
 				var parent = document.getElementById("comic-"+comic_slug);
 				var child = parent.childNodes[1];
 
-				if (0 == page_number) {
+				if (0 == page_number || 1 == page_number) {
 					var extra = "";
 				} else {
 					var extra = page_number + "/";

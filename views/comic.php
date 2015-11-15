@@ -64,8 +64,7 @@ if ( file_exists( $file . 'jpg' ) || file_exists( $file . 'png' ) ) {
 }
 
 $script_vars['comicjet_root_url'] = COMICJET_URL;
-$script_vars['comicjet_slug'] = $this->comic_slug;
-
+$script_vars['comicjet_slug'] = $this->access_data->_get_comic_dir( $this->comic_slug );
 
 // Get previous URL
 if ( 1 != $this->page_number ) {
@@ -78,6 +77,5 @@ if ( isset( $bubble_image[0] ) ) {
 	$scripts[] = 'toggle-image.js';
 }
 
-$scripts[] = 'cookie-functions.js';
 $scripts[] = 'toggle-image.js';
 $scripts[] = 'arrow-key-support.js';

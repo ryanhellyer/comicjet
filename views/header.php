@@ -37,7 +37,7 @@
 
 	<nav id="primary">
 		<ul>
-			<li><a href="<?php echo COMICJET_URL; ?>/tutorial/">Learn how it works</a></li>
+			<li id="tutorial"><a href="<?php echo COMICJET_URL; ?>/en/de/tutorial/">Learn how it works</a></li>
 		</ul>
 	</nav>
 </header>

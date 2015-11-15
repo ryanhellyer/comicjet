@@ -159,6 +159,7 @@ class ComicJet_Model_Access_Data {
 			),
 		);
 
+
 		/* Pulls data directly from disk 
 		$assets_dir = COMICJET_DIR . 'assets/';
 		$items = scandir( $assets_dir );
@@ -261,6 +262,29 @@ class ComicJet_Model_Access_Data {
 		}
 
 		return $title;
+	}
+
+
+	/**
+	 * Get the comic credit text.
+	 *
+	 * @param  string  $comic_slug  The comic directory
+	 * @return string  $comic_dir   The comic directory
+	 */
+	public function _get_comic_dir( $comic_slug ) {
+		$comic_dir = $comic_slug;
+		$data = array();
+		$all_data = $this->_get_comic_all_data();
+		foreach ( $all_data as $key => $comic_data ) {
+			foreach ( $comic_data['slug'] as $lang => $string ) {
+				if ( $comic_slug == $string ) {
+					$comic_dir = $comic_data['slug']['en'];
+					break;
+				}
+			}
+		}
+
+		return $comic_dir;
 	}
 
 }
