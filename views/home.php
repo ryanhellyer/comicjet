@@ -55,6 +55,7 @@
 		// Get all comic data
 		$this->access_data = new ComicJet_Model_Access_Data();
 		$all_comic_data = $this->access_data->_get_comic_all_data();
+		$count = 1;
 		foreach ( $all_comic_data as $key => $comic ) {
 			$link_url = COMICJET_URL . '/' . $this->lang1 . '/' . $this->lang2 . '/' . $comic['slug'][$this->lang1] . '/';
 			$image_url = COMICJET_ASSETS_URL . '/' . $comic['slug']['en'] . '/thumbnail-' . $this->lang1 . '.jpg';
@@ -62,13 +63,14 @@
 			$comic_dir = $this->access_data->_get_comic_dir( $comic['slug'][$this->lang1] );
 
 			echo '
-			<div class="block" id="comic-' . esc_attr( $comic_dir ) . '">
+			<div class="' . esc_attr( 'block block-' . $count )  . '" id="comic-' . esc_attr( $comic_dir ) . '">
 				<a href="' . esc_url( $link_url ) . '" class="block-inner">
 					<img src="' . esc_url( $image_url) . '" />
 					<p>' . esc_html( $comic['title'][$this->lang1] ) . '</p>
 				</a>
 			</div>';
 
+			$count++;
 		}
 		?>
 

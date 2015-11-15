@@ -213,6 +213,36 @@ h4 {
 	background: #fff;
 }
 
+body.hide-tutorial #comic-tutorial,
+body.hide-tutorial #tutorial {
+	display: none;
+}
+
+body.hide-tutorial .block-5,
+body.hide-tutorial .block-8,
+body.hide-tutorial .block-11,
+body.hide-tutorial .block-14,
+body.hide-tutorial .block-17 {
+	clear: both;
+}
+
+body.hide-tutorial .block-4,
+body.hide-tutorial .block-7,
+body.hide-tutorial .block-10,
+body.hide-tutorial .block-13,
+body.hide-tutorial .block-16 {
+	clear: none;
+}
+
+.block-4,
+.block-7,
+.block-10,
+.block-13,
+.block-16 {
+	clear: both;
+}
+
+
 .read {
 	position: absolute;
 	left: 1em;
@@ -679,11 +709,6 @@ footer p.align-right {
 		margin: 5% 5%;
 	}
 
-
-
-
-
-
 	.view_comic #site-title {
 		padding: 0.5em 1em 0 1em;
 	}
@@ -698,6 +723,47 @@ footer p.align-right {
 		margin: 0 0 5% 4%;
 	}
 
+	.block-4,
+	.block-10,
+	.block-16 {
+		clear: none;
+	}
+
+	.block-3,
+	.block-5,
+	.block-7
+	.block-9,
+	.block-11,
+	.block-13,
+	.block-15,
+	.block-17,
+	.block-19 {
+		clear: both;
+	}
+
+	body.hide-tutorial .block-3,
+	body.hide-tutorial .block-5,
+	body.hide-tutorial .block-7,
+	body.hide-tutorial .block-9,
+	body.hide-tutorial .block-11,
+	body.hide-tutorial .block-13,
+	body.hide-tutorial .block-15,
+	body.hide-tutorial .block-17,
+	body.hide-tutorial .block-19 {
+		clear: none;
+	}
+
+	body.hide-tutorial .block-4,
+	body.hide-tutorial .block-6,
+	body.hide-tutorial .block-8,
+	body.hide-tutorial .block-10,
+	body.hide-tutorial .block-12,
+	body.hide-tutorial .block-14,
+	body.hide-tutorial .block-16,
+	body.hide-tutorial .block-18,
+	body.hide-tutorial .block-20 {
+		clear: both;
+	}
 
 	#current-language div {
 		margin: 0 0 0 0;
