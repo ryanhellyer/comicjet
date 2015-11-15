@@ -3,6 +3,6 @@
 		<h2 id="site-description">We are dreadfully sorry, but we can not find that page!</h2>
 
 		<p class="caption">
-			<img src="http://comicjet.com/views/assets/404.png" />
+			<img src="<?php echo COMICJET_ASSETS_URL; ?>/404.png" />
 			Comic courtesy of xkcd.com.
 		</p>

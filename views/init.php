@@ -35,7 +35,10 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		$script_vars = $scripts = array();
 		require( 'header.php' );
 		define( 'COMICJET_HEADER_TIMER', ( 1000 * ( microtime( true ) - COMICJET_TIMER ) ) );
+//echo $template;
+//echo 'xxx';die;
 		require( $template . '.php' );
+
 		define( 'COMICJET_FOOTER_TIMER', ( 1000 * ( microtime( true ) - COMICJET_TIMER ) ) );
 		require( 'footer.php' );
 		$page_html = ob_get_contents();
@@ -131,7 +134,9 @@ class ComicJet_Views_Init extends ComicJet_Model_Translate {
 		$url = '';
 
 		$file_path = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.jpg';
-		if ( file_exists( $file_path ) ) {
+
+		$file_path = COMICJET_DIR . 'assets/' . $this->comic_dir . '/' . ( $this->page_number + 1 ) . '-' . $this->lang1 . '.';
+		if ( file_exists( $file_path . 'jpg' ) || file_exists( $file_path . 'png' ) ) {
 			$url = COMICJET_URL . '/' . $this->lang1 . '/' . $this->lang2 . '/' . $this->comic_slug . '/' . ( $this->page_number + 1 ) . '/';
 			$link = '<a href="' . esc_url( $url ) . '">' . esc_html( 'Next'  /*$this->translate( 'Previous' )*/ ) . '</a>';
 		}

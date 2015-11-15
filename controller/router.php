@@ -34,7 +34,7 @@ class ComicJet_Controller_Router {
 		/**
 		 * Redirecting to https.
 		 */
-		if ( ! $this->_is_https() ) {
+		if ( $this->_force_https() ) {
 			$url = COMICJET_URL . $uri;
 			header( 'Location: ' . $url, true, 302 );
 			exit;
@@ -81,7 +81,7 @@ class ComicJet_Controller_Router {
 
 				// Get all comic data
 				$this->access_data = new ComicJet_Model_Access_Data();
-				$this->comic_data = $this->access_data->_get_comic_all_data( $lang1, $lang2 );
+				$this->comic_data = $this->access_data->_get_comic_all_data();
 
 				new ComicJet_Views_Init( 'home', array( 'lang1' => $lang1, 'lang2' => $lang2 ) );
 			} elseif ( array_key_exists( $uri_chunks[1], $translate->languages ) && ! array_key_exists( $uri_chunks[2], $translate->languages ) ) {
@@ -124,9 +124,9 @@ class ComicJet_Controller_Router {
 			$file1 = COMICJET_DIR . 'assets/' . $comic_dir . '/' . $page_number . '-' . $lang1;
 			$file2 = COMICJET_DIR . 'assets/' . $comic_dir . '/' . $page_number . '-' . $lang2;
 			if (
-				( file_exists( $file1 . '.jpg' ) && file_exists( $file2 . '.jpg' ) )
-				||
-				( file_exists( $file1 . '.png' ) && file_exists( $file2 . '.png' ) )
+				( file_exists( $file1 . '.png' ) || file_exists( $file1 . '.jpg' ) )
+				&&
+				( file_exists( $file2 . '.png' ) || file_exists( $file2 . '.jpg' ) )
 			) {
 
 				// If page number 1 is specified, then redirect to that comics' root URL
@@ -147,16 +147,22 @@ class ComicJet_Controller_Router {
 	}
 
 	/**
-	 * Check if is https URL.
+	 * Check if should force use of https URL.
 	 *
-	 * @return  bool  True if is https
+	 * @return  bool  True if should be https, but isn't
 	 */
-	private function _is_https(){
+	private function _force_https(){
+
+		// If config says site is not https, then no point in forcing it
+		if ( 'http://' == substr( COMICJET_URL, 0, 7 ) ) {
+			return false;
+		}
+
 		if ( ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) || $_SERVER['SERVER_PORT'] == 443 ) {
-		    return true;
+		    return false;
 		} 
 		else {
-		    return false;
+		    return true;
 		}
 	}
 

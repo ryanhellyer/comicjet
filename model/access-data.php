@@ -15,20 +15,15 @@ class ComicJet_Model_Access_Data {
 	 * @param   string $lang2  language 2
 	 * @return  array  $data   All comic data
 	 */
-	public function _get_comic_all_data( $lang1 = NULL, $lang2 = NULL ) {
+	public function _get_comic_all_data() {
 		$assets_dir = COMICJET_DIR . 'assets/';
 		$items = scandir( $assets_dir );
 
 		$all_data = array();
 		foreach ( $items as $key => $comic ) {
 
-			$file1 = $assets_dir . $comic . '/thumbnail-' . $lang1 . '.';
-			$file2 = $assets_dir . $comic . '/thumbnail-' . $lang2 . '.';
-			if (
-				( file_exists( $file1 . 'png' ) || file_exists( $file1 . 'jpg' ) )
-				&&
-				( file_exists( $file2 . 'png' ) || file_exists( $file2 . 'jpg' ) )
-			) {
+			$file = $assets_dir . $comic . '/'. $comic . '.data';
+			if ( file_exists( $file ) ) {
 				$data = $this->_get_single_comic_data( $comic );
 				if ( ! empty( $data ) ) {
 					$all_data[] = $data;
@@ -47,14 +42,26 @@ class ComicJet_Model_Access_Data {
 	 * @return  array  $data   All comic data
 	 */
 	public function _get_single_comic_data( $comic ) {
-		$dir = COMICJET_DIR . 'assets/' . $comic;
-		$file = $dir . '/' . $comic . '.data';
-
+		$file = COMICJET_DIR . 'assets/' . $comic . '/' . $comic . '.data';
 		$data = array();
 		if ( file_exists( $file ) ) {
 			$data_json = file_get_contents( $file );
-			$decoded_data = json_decode( $data_json, true );
-			$data = $decoded_data;
+			$data = json_decode( $data_json, true );
+		} else {
+
+
+			$all_comic_data = $this->_get_comic_all_data();
+			foreach ( $all_comic_data as $key => $comic_data ) {
+				foreach ( $comic_data['slug'] as $lang => $slug ) {
+					if ( $slug == $comic ) {
+						$comic = $comic_data['slug']['en']; // Grab English slug
+						$file = COMICJET_DIR . 'assets/' . $comic . '/' . $comic . '.data';
+						$data_json = file_get_contents( $file );
+						$data = json_decode( $data_json, true );
+					}
+				}
+			}
+
 		}
 
 		return $data;
