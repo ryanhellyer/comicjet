@@ -14,6 +14,10 @@
 
 		<div id="comic-display">
 			<div class="image-display">
+
+				<div class="arrow" id="arrow-prev"></div>
+				<div class="arrow" id="arrow-next"></div>
+
 				<img src="<?php echo esc_url( $image_url_lang1 ); ?>" />
 				<img id="bubble" onmouseover="this.style.cursor='pointer'" onclick="toggle_image()" src="<?php echo esc_url( $image_url_lang2 ); ?>" /><?php
 			$credits = $this->access_data->_get_credits( $this->lang1, $this->comic_dir );
@@ -79,3 +83,4 @@ if ( isset( $bubble_image[0] ) ) {
 
 $scripts[] = 'toggle-image.js';
 $scripts[] = 'arrow-key-support.js';
+$scripts[] = 'arrow-buttons.js';
