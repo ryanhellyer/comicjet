@@ -121,12 +121,13 @@ class ComicJet_Controller_Router {
 
 			// Output comic if it exists, otherwise 404
 			$comic_dir = $this->access_data->_get_comic_dir( $comic_slug );
-			$file1 = COMICJET_ASSETS_DIR . '/' . $comic_dir . '/' . $page_number . '-' . $lang1;
-			$file2 = COMICJET_ASSETS_DIR . '/' . $comic_dir . '/' . $page_number . '-' . $lang2;
+			$file1 = COMICJET_ASSETS_DIR . '/' . $comic_dir . '/' . $page_number . '-' . $lang1 . '.';
+			$file2 = COMICJET_ASSETS_DIR . '/' . $comic_dir . '/' . $page_number . '-' . $lang2 . '.';
+
 			if (
-				( file_exists( $file1 . '.png' ) || file_exists( $file1 . '.jpg' ) )
+				( file_exists( $file1 . 'png' ) || file_exists( $file1 . 'jpg' ) )
 				&&
-				( file_exists( $file2 . '.png' ) || file_exists( $file2 . '.jpg' ) )
+				( file_exists( $file2 . 'png' ) || file_exists( $file2 . 'jpg' ) )
 			) {
 
 				// If page number 1 is specified, then redirect to that comics' root URL

@@ -118,7 +118,7 @@ class ComicJet_Model_Access_Data {
 			35 => array(
 				'slug' => array(
 					'en' => 'the-letter-of-jael-bara',
-					'de' => 'der-brief-der-jael-bara ',
+					'de' => 'der-brief-der-jael-bara',
 				),
 				'title' => array(
 					'en' => 'The letter of Jael Bara',
