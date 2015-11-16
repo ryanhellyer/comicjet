@@ -17,24 +17,30 @@ class ComicJet_Model_Access_Data {
 	 */
 	public function _get_comic_all_data() {
 
-		$xkcd_credits = array(
-			'en' => 'Thanks to <a href="http://xkcd.com/">XKCD</a> for this comic. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
-			'de' => 'Thanks to <a href="http://xkcd.com/">XKCD</a> for this comic and <a href="http://xkcde.dapete.net/">xkcde.dapete.net</a> for the German translation. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
+		$creative_commons = array(
+			'en' => 'This work is licensed under a Creative Commons Attribution-NonCommercial 2.5 License.',
+			'de' => 'Diese Arbeit ist unter Lizenz von einer kreativen, nicht kommerziellen GbR ( Gesellschaft bürgerlichen Rechts) 2.5 Lizenz.',
 		);
+
+		$xkcd_credits = array(
+			'en' => 'Thanks to <a href="http://xkcd.com/">XKCD</a> for this comic. ' . $creative_commons['en'],
+			'de' => 'Vielen Dank an <a href="http://xkcd.com/">XKCD</a> für dieses Comic und an <a href="http://xkcde.dapete.net/">xkcde.dapete.net</a> für die deutsche Übersetzung.' . $creative_commons['de'],
+		);
+
 
 		$data = array(
 			0 => array(
 				'slug' => array(
 					'en' => 'tutorial',
-					'de' => 'lernprogramm',
+					'de' => 'tutorial',
 				),
 				'title' => array(
 					'en' => 'Tutorial',
-					'de' => 'Lernprogramm',
+					'de' => 'Tutorial',
 				),
 				'credits' => array(
-					'en' => 'This is comic is based on work by <a href="http://xkcd.com/">XKCD</a>. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
-					'de' => '(String needs translated) This is comic is based on work by <a href="http://xkcd.com/">XKCD</a>. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5 License</a>.',
+					'en' => 'This is comic is based on work by <a href="http://xkcd.com/">XKCD</a>. ' . $creative_commons['en'],
+					'de' => 'Diese Comic basiert auf (der) Arbeit von <a href="http://xkcd.com/">XKCD</a>. ' . $creative_commons['de'],
 				),
 			),
 			5 => array(
