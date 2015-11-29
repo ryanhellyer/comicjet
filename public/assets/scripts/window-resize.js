@@ -62,17 +62,24 @@ window.onload = function(event){
 
 function show_hide_tutorial() {
 	console.log(tutorial_number);
-	var elements = document.getElementsByClassName("pulse");
-	Array.prototype.forEach.call(elements, function(element) {
-		element.style.display = 'none';
-	});
-	var element = document.getElementById("pulse-"+tutorial_number);
-	element.style.display = 'block';
 
-	var elements = document.getElementsByClassName("tutorial-text");
-	Array.prototype.forEach.call(elements, function(element) {
-		element.style.display = 'none';
-	});
-	var element = document.getElementById("tutorial-text-"+tutorial_number);
-	element.style.display = 'block';
+	if (document.getElementById('pulse-'+tutorial_number)) {
+		var elements = document.getElementsByClassName("pulse");
+		Array.prototype.forEach.call(elements, function(element) {
+			element.style.display = 'none';
+		});
+		if (document.getElementById('pulse-'+tutorial_number)) {
+			var element = document.getElementById("pulse-"+tutorial_number);
+			element.style.display = 'block';
+		}
+
+		var elements = document.getElementsByClassName("tutorial-text");
+		Array.prototype.forEach.call(elements, function(element) {
+			element.style.display = 'none';
+		});
+		if (document.getElementById('tutorial-text-'+tutorial_number)) {
+			var element = document.getElementById("tutorial-text-"+tutorial_number);
+			element.style.display = 'block';
+		}
+	}
 }

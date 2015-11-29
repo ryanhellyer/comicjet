@@ -17,17 +17,16 @@
 				<div class="arrow" id="arrow-prev"></div>
 				<div class="arrow" id="arrow-next"></div><?php
 
-				$tutorials = $this->access_data->_get_tutorials( $this->lang1, $this->comic_dir );
-				foreach ( $tutorials as $key => $tutorial ) {
-					echo '
-<script>
-var ' . esc_attr( 'pulse_top_' . $key ) . ' = ' . absint( $tutorial['marker']['top'] ) . ';
-var ' . esc_attr( 'pulse_left_' . $key ) . ' = ' . absint( $tutorial['marker']['left'] ) . ';
-var ' . esc_attr( 'tutorial_text_top_' . $key ) . ' = ' . absint( $tutorial['text']['top'] ) . ';
-var ' . esc_attr( 'tutorial_text_left_' . $key ) . ' = ' . absint( $tutorial['text']['left'] ) . ';
-var ' . esc_attr( 'tutorial_text_width_' . $key ) . ' = ' . absint( $tutorial['text']['width'] ) . ';
-</script>
+				$tutorials = $this->access_data->_get_tutorials( $this->lang1, $this->comic_dir, $this->page_number );
 
+				foreach ( $tutorials as $key => $tutorial ) {
+					$script_vars['pulse_top_' . $key] =  absint( $tutorial['marker']['top'] );
+					$script_vars['pulse_left_' . $key] =  absint( $tutorial['marker']['left'] );
+					$script_vars['tutorial_text_top_' . $key] =  absint( $tutorial['text']['top'] );
+					$script_vars['tutorial_text_left_' . $key] =  absint( $tutorial['text']['left'] );
+					$script_vars['tutorial_text_width_' . $key] =  absint( $tutorial['text']['width'] );
+
+					echo '
 				<button id="' . esc_attr( 'pulse-' . $key ) . '" class="toggle-image pulse"></button>
 				<div class="toggle-image tutorial-text" id="' . esc_attr( 'tutorial-text-' . $key ) . '">' . esc_html( $tutorial['text'][$this->lang1] ) . '</div>';
 				}

@@ -39,30 +39,60 @@ class ComicJet_Model_Access_Data {
 					'de' => 'Tutorial',
 				),
 				'tutorials' => array(
-					0 => array(
-						'marker' => array(
-							'top' => 14,
-							'left' => 49,
+					1 => array(
+						0 => array(
+							'marker' => array(
+								'top' => 14,
+								'left' => 49,
+							),
+							'text' => array(
+								'top' => 3,
+								'left' => 55,
+								'width' => 21,
+								'en' => 'Click on the comic to switch language',
+								'de' => 'Some German text goes here',
+							),
 						),
-						'text' => array(
-							'top' => 3,
-							'left' => 55,
-							'width' => 21,
-							'en' => 'Click on the comic to switch language',
-							'de' => 'Some German text goes here',
+						1 => array(
+							'marker' => array(
+								'top' => 14,
+								'left' => 49,
+							),
+							'text' => array(
+								'top' => 3,
+								'left' => 55,
+								'width' => 21,
+								'en' => 'Click on the comic to switch back to the original language',
+								'de' => 'Some other German text goes here',
+							),
+						),
+						2 => array(
+							'marker' => array(
+								'top' => 1,
+								'left' => 95,
+							),
+							'text' => array(
+								'top' => 10,
+								'left' => 80,
+								'width' => 21,
+								'en' => 'Click on the next button',
+								'de' => 'And another other German text goes here',
+							),
 						),
 					),
-					1 => array(
-						'marker' => array(
-							'top' => 14,
-							'left' => 49,
-						),
-						'text' => array(
-							'top' => 3,
-							'left' => 55,
-							'width' => 21,
-							'en' => 'Click on the comic to switch back to the original language',
-							'de' => 'Some other German text goes here',
+					2 => array(
+						0 => array(
+							'marker' => array(
+								'top' => 14,
+								'left' => 49,
+							),
+							'text' => array(
+								'top' => 3,
+								'left' => 55,
+								'width' => 21,
+								'en' => 'Some tutorial goes here!',
+								'de' => 'Some German text goes here',
+							),
 						),
 					),
 				),
@@ -264,14 +294,15 @@ class ComicJet_Model_Access_Data {
 	/**
 	 * Get tutorials.
 	 *
-	 * @param  string  $lang       The language
-	 * @param  string  $comic_dir  The comic directory
-	 * @return string  $tutorials  The tutorials
+	 * @param  string  $lang         The language
+	 * @param  string  $comic_dir    The comic directory
+	 * @param  int     $page_number  The current page number
+	 * @return string  $tutorials    The tutorials
 	 */
-	public function _get_tutorials( $lang, $comic_dir ) {
+	public function _get_tutorials( $lang, $comic_dir, $page_number ) {
 		$data = $this->_get_single_comic_data( $comic_dir );
-		if ( isset( $data['tutorials'][0]['text'][$lang] ) ) {
-			$tutorials = $data['tutorials'];
+		if ( isset( $data['tutorials'][$page_number][0]['text'][$lang] ) ) {
+			$tutorials = $data['tutorials'][$page_number];
 		} else {
 			$tutorials = false;
 		}
