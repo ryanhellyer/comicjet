@@ -38,6 +38,34 @@ class ComicJet_Model_Access_Data {
 					'en' => 'Tutorial',
 					'de' => 'Tutorial',
 				),
+				'tutorials' => array(
+					0 => array(
+						'marker' => array(
+							'top' => 14,
+							'left' => 49,
+						),
+						'text' => array(
+							'top' => 3,
+							'left' => 55,
+							'width' => 21,
+							'en' => 'Click on the comic to switch language',
+							'de' => 'Some German text goes here',
+						),
+					),
+					1 => array(
+						'marker' => array(
+							'top' => 14,
+							'left' => 49,
+						),
+						'text' => array(
+							'top' => 3,
+							'left' => 55,
+							'width' => 21,
+							'en' => 'Click on the comic to switch back to the original language',
+							'de' => 'Some other German text goes here',
+						),
+					),
+				),
 				'credits' => array(
 					'en' => 'This is comic is based on work by <a href="http://xkcd.com/">XKCD</a>. ' . $creative_commons['en'],
 					'de' => 'Diese Comic basiert auf (der) Arbeit von <a href="http://xkcd.com/">XKCD</a>. ' . $creative_commons['de'],
@@ -231,6 +259,24 @@ class ComicJet_Model_Access_Data {
 		*/
 
 		return $data;
+	}
+
+	/**
+	 * Get tutorials.
+	 *
+	 * @param  string  $lang       The language
+	 * @param  string  $comic_dir  The comic directory
+	 * @return string  $tutorials  The tutorials
+	 */
+	public function _get_tutorials( $lang, $comic_dir ) {
+		$data = $this->_get_single_comic_data( $comic_dir );
+		if ( isset( $data['tutorials'][0]['text'][$lang] ) ) {
+			$tutorials = $data['tutorials'];
+		} else {
+			$tutorials = false;
+		}
+
+		return $tutorials;
 	}
 
 	/**

@@ -12,7 +12,22 @@ function toggle_image() {
 		document.getElementsByClassName("current-language")[0].innerHTML = current_language1;
 		document.getElementsByClassName("current-language")[1].innerHTML = current_language1;
 	}
+}
 
+var tutorial_number = 0;
+
+/**
+ * Toggle between tutorial notes.
+ */
+function toggle_tutorial() {
+	tutorial_number += 1;
+	show_hide_tutorial();
+//	console.log(tutorial_number );
+}
+var toggle_the_image = document.getElementsByClassName('toggle-image');
+for(var i=0;i<toggle_the_image.length;i++){
+	toggle_the_image[i].addEventListener('click', toggle_image, false);
+	toggle_the_image[i].addEventListener('click', toggle_tutorial, false);
 }
 
 /**

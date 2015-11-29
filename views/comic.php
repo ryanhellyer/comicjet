@@ -1,11 +1,10 @@
-
 		<h1 id="site-title"><?php echo esc_html($this->access_data->_get_comic_title( $this->lang1, $this->comic_dir ) ); ?></h1>
 		<h2 id="site-description">page <?php echo esc_html( $this->page_number ); ?></h2>
 
 		<div id="pagination-top">
 			<div class="pagination previous-link"><?php echo $this->_get_previous_link(); ?></div>
 			<div class="pagination current-language">
-				<div onclick="toggle_image()">
+				<div class="toggle-image">
 					<?php printf( $translate->convert( 'Switch to %s' ), '<span>' . esc_html( $translate->languages[$this->lang1] ) . '</span>' ); ?>
 				</div>
 			</div>
@@ -16,10 +15,29 @@
 			<div class="image-display">
 
 				<div class="arrow" id="arrow-prev"></div>
-				<div class="arrow" id="arrow-next"></div>
+				<div class="arrow" id="arrow-next"></div><?php
 
-				<img src="<?php echo esc_url( $image_url_lang1 ); ?>" />
-				<img id="bubble" onmouseover="this.style.cursor='pointer'" onclick="toggle_image()" src="<?php echo esc_url( $image_url_lang2 ); ?>" /><?php
+				$tutorials = $this->access_data->_get_tutorials( $this->lang1, $this->comic_dir );
+				foreach ( $tutorials as $key => $tutorial ) {
+					echo '
+<script>
+var ' . esc_attr( 'pulse_top_' . $key ) . ' = ' . absint( $tutorial['marker']['top'] ) . ';
+var ' . esc_attr( 'pulse_left_' . $key ) . ' = ' . absint( $tutorial['marker']['left'] ) . ';
+var ' . esc_attr( 'tutorial_text_top_' . $key ) . ' = ' . absint( $tutorial['text']['top'] ) . ';
+var ' . esc_attr( 'tutorial_text_left_' . $key ) . ' = ' . absint( $tutorial['text']['left'] ) . ';
+var ' . esc_attr( 'tutorial_text_width_' . $key ) . ' = ' . absint( $tutorial['text']['width'] ) . ';
+</script>
+
+				<button id="' . esc_attr( 'pulse-' . $key ) . '" class="toggle-image pulse"></button>
+				<div class="toggle-image tutorial-text" id="' . esc_attr( 'tutorial-text-' . $key ) . '">' . esc_html( $tutorial['text'][$this->lang1] ) . '</div>';
+				}
+
+				?>
+
+
+
+				<img id="bubble-2" src="<?php echo esc_url( $image_url_lang1 ); ?>" />
+				<img id="bubble" onmouseover="this.style.cursor='pointer'" class="toggle-image" src="<?php echo esc_url( $image_url_lang2 ); ?>" /><?php
 			$credits = $this->access_data->_get_credits( $this->lang1, $this->comic_dir );
 			if ( $credits ) {
 				?>
@@ -34,7 +52,7 @@
 
 				<div class="pagination previous-link"><?php echo $this->_get_previous_link(); ?></div>
 					<div class="pagination current-language">
-						<div onclick="toggle_image()">
+						<div class="toggle-image">
 							<?php printf( $translate->convert( 'Switch to %s' ), '<span>' . esc_html( $translate->languages[$this->lang1] ) . '</span>' ); ?>
 						</div>
 					</div>
@@ -53,8 +71,8 @@ $script_vars['bubble_image_0'] = $image_url_lang1;
 if ( isset( $image_url_lang2 ) ) {
 	$script_vars['bubble_image_1'] = $image_url_lang2;
 }
-$script_vars['current_language1'] = "<div onclick=\'toggle_image()\'>" . sprintf( $translate->convert( 'Switch to %s' ), ' <span>' . esc_html( $this->access_data->_get_lang_name( $this->lang1 ) ) . '</span>' ) . '</div>';
-$script_vars['current_language2'] = "<div onclick=\'toggle_image()\'>" . sprintf( $translate->convert( 'Switch to %s' ), ' <span>' . esc_html( $this->access_data->_get_lang_name( $this->lang2 ) ) . '</span>' ) . '</div>';
+$script_vars['current_language1'] = "<div class=\'toggle-image()\'>" . sprintf( $translate->convert( 'Switch to %s' ), ' <span>' . esc_html( $this->access_data->_get_lang_name( $this->lang1 ) ) . '</span>' ) . '</div>';
+$script_vars['current_language2'] = "<div class=\'toggle-image()\'>" . sprintf( $translate->convert( 'Switch to %s' ), ' <span>' . esc_html( $this->access_data->_get_lang_name( $this->lang2 ) ) . '</span>' ) . '</div>';
 
 $script_vars['page_slug'] = $this->comic_slug ;
 
@@ -83,4 +101,4 @@ if ( isset( $bubble_image[0] ) ) {
 
 $scripts[] = 'toggle-image.js';
 $scripts[] = 'arrow-key-support.js';
-$scripts[] = 'arrow-buttons.js';
+$scripts[] = 'window-resize.js';

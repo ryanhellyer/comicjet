@@ -15,7 +15,7 @@
  * @return string  $url  The escaped URL
  */
 function esc_url( $url ) {
-	$url = filter_var( $url, FILTER_SANITIZE_URL );
+	$url = esc_attr( $url );
 
 	return $url;
 }
@@ -54,6 +54,17 @@ function escape_content( $html ) {
 	$html = strip_tags( $html, '<strong><a>' );
 	$html = stripslashes( $html );
 	return $html;
+}
+
+/**
+ * Absolute integer.
+ *
+ * @param  string  $int  The integer to be checked
+ * @return string  $int  The result integer
+ */
+function absint( $int ) {
+	$int = intval( $int );
+	return $int;
 }
 
 /**
