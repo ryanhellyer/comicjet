@@ -27,17 +27,6 @@ Next arrow appears on last page - it shouldn't.
 Page 9/X - need to know how many pages are left.
 
 
-TUTORIAL
-	When new visitor ...
-	Show indicators to set language (but only if not on correct on already)
-	Show indicator to click a specific comic and grey out all other comics
-		use a comic with an obvious bit of text on the page to demo it - perhaps an XKCD one?
-	Show indicator on page to say to click it to see the text change
-		explain that the text will change language
-	Hide the tutorial comic afterwards
-	Perhaps make indicators pulsate via CSS
-		http://codepen.io/danest/pen/GxfqB/
-
-
-
-
+Translate:
+	'de' => 'And another other German text goes here',
+	'de' => 'Some German text goes here',

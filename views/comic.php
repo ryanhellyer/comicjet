@@ -1,5 +1,5 @@
 		<h1 id="site-title"><?php echo esc_html($this->access_data->_get_comic_title( $this->lang1, $this->comic_dir ) ); ?></h1>
-		<h2 id="site-description">page <?php echo esc_html( $this->page_number ); ?></h2>
+		<h2 id="site-description">page <?php echo esc_html( $this->page_number . '/' . $this->access_data->_get_number_of_pages( $this->comic_dir ) ); ?></h2>
 
 		<div id="pagination-top">
 			<div class="pagination previous-link"><?php echo $this->_get_previous_link(); ?></div>
@@ -12,23 +12,31 @@
 		</div>
 
 		<div id="comic-display">
-			<div class="image-display">
+			<div class="image-display"><?php
+				if ( 1 != $this->page_number ) {
+					echo '
+				<div class="arrow" id="arrow-prev"></div>';
+				}
 
-				<div class="arrow" id="arrow-prev"></div>
-				<div class="arrow" id="arrow-next"></div><?php
+				$number_of_pages = $this->access_data->_get_number_of_pages( $this->comic_dir );
+				if ( $this->page_number != $number_of_pages ) {
+					echo '
+				<div class="arrow" id="arrow-next"></div>';
+				}
 
 				$tutorials = $this->access_data->_get_tutorials( $this->lang1, $this->comic_dir, $this->page_number );
+				if ( is_array( $tutorials ) ) {
+					foreach ( $tutorials as $key => $tutorial ) {
+						$script_vars['pulse_top_' . $key] =  absint( $tutorial['marker']['top'] );
+						$script_vars['pulse_left_' . $key] =  absint( $tutorial['marker']['left'] );
+						$script_vars['tutorial_text_top_' . $key] =  absint( $tutorial['text']['top'] );
+						$script_vars['tutorial_text_left_' . $key] =  absint( $tutorial['text']['left'] );
+						$script_vars['tutorial_text_width_' . $key] =  absint( $tutorial['text']['width'] );
 
-				foreach ( $tutorials as $key => $tutorial ) {
-					$script_vars['pulse_top_' . $key] =  absint( $tutorial['marker']['top'] );
-					$script_vars['pulse_left_' . $key] =  absint( $tutorial['marker']['left'] );
-					$script_vars['tutorial_text_top_' . $key] =  absint( $tutorial['text']['top'] );
-					$script_vars['tutorial_text_left_' . $key] =  absint( $tutorial['text']['left'] );
-					$script_vars['tutorial_text_width_' . $key] =  absint( $tutorial['text']['width'] );
-
-					echo '
+						echo '
 				<button id="' . esc_attr( 'pulse-' . $key ) . '" class="toggle-image pulse"></button>
 				<div class="toggle-image tutorial-text" id="' . esc_attr( 'tutorial-text-' . $key ) . '">' . esc_html( $tutorial['text'][$this->lang1] ) . '</div>';
+					}
 				}
 
 				?>

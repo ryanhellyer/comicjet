@@ -38,6 +38,9 @@ class ComicJet_Model_Access_Data {
 					'en' => 'Tutorial',
 					'de' => 'Tutorial',
 				),
+				'comics' => array(
+					'number' => 2,
+				),
 				'tutorials' => array(
 					1 => array(
 						0 => array(
@@ -83,14 +86,14 @@ class ComicJet_Model_Access_Data {
 					2 => array(
 						0 => array(
 							'marker' => array(
-								'top' => 14,
-								'left' => 49,
+								'top' => 17,
+								'left' => 2,
 							),
 							'text' => array(
-								'top' => 3,
-								'left' => 55,
-								'width' => 21,
-								'en' => 'Some tutorial goes here!',
+								'top' => 7,
+								'left' => 8,
+								'width' => 24,
+								'en' => 'Head back to the home page to begin learning!',
 								'de' => 'Some German text goes here',
 							),
 						),
@@ -368,6 +371,34 @@ class ComicJet_Model_Access_Data {
 		}
 
 		return $comic_dir;
+	}
+
+	/**
+	 * Get the comic credit text.
+	 *
+	 * @param  string  $comic_slug  The comic directory
+	 * @return string  $comic_dir   The comic directory
+	 */
+	public function _get_number_of_pages( $comic_slug ) {
+		$comic_dir = $comic_slug;
+		$data = array();
+		$all_data = $this->_get_comic_all_data();
+		$number = false;
+		foreach ( $all_data as $key => $comic_data ) {
+			foreach ( $comic_data['slug'] as $lang => $string ) {
+				if ( $comic_slug == $string ) {
+
+					// Grab the number of pages
+					if ( isset( $comic_data['comics']['number'] ) ) {
+						$number = $comic_data['comics']['number'];
+					}
+
+					break;
+				}
+			}
+		}
+
+		return $number;
 	}
 
 	/**
