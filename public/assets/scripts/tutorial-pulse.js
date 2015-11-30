@@ -16,4 +16,10 @@ window.onload = function(event){
 	var pulsewidth = 40;
 	document.getElementById('pulse-0').style.top=((height-pulsewidth)/2)+'px';
 	document.getElementById('pulse-0').style.left=((width-pulsewidth)/2)+'px';
+
+	// Make pulse button clickable
+	var href = document.getElementById('comic-link-1').href;
+	document.getElementById('pulse-0').onclick = function(){
+		window.location.assign(href);
+	};
 }

@@ -64,7 +64,7 @@
 
 			echo '
 			<div class="' . esc_attr( 'block block-' . $count )  . '" id="comic-' . esc_attr( $comic_dir ) . '">
-				<a href="' . esc_url( $link_url ) . '" class="block-inner">
+				<a id="' . esc_attr( 'comic-link-' . $count ) . '" href="' . esc_url( $link_url ) . '" class="block-inner">
 					<img id="comic-thumb-' . esc_attr( $comic_dir ) . '" src="' . esc_url( $image_url) . '" />
 					<p>' . esc_html( $comic['title'][$this->lang1] ) . '</p>
 				</a>

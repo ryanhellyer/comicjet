@@ -113,6 +113,9 @@ class ComicJet_Model_Access_Data {
 					'en' => 'The Red Hall',
 					'de' => 'Der Rote Saal',
 				),
+				'comics' => array(
+					'number' => 49,
+				),
 			),
 			10 => array(
 				'slug' => array(
@@ -127,6 +130,9 @@ class ComicJet_Model_Access_Data {
 					'en' => $xkcd_credits['en'],
 					'de' => $xkcd_credits['de'],
 				),
+				'comics' => array(
+					'number' => 39,
+				),
 			),
 			15 => array(
 				'slug' => array(
@@ -136,6 +142,9 @@ class ComicJet_Model_Access_Data {
 				'title' => array(
 					'en' => 'Shadowdancers',
 					'de' => 'Schattentänzer',
+				),
+				'comics' => array(
+					'number' => 93,
 				),
 			),
 			20 => array(
@@ -151,6 +160,9 @@ class ComicJet_Model_Access_Data {
 					'en' => $xkcd_credits['en'],
 					'de' => $xkcd_credits['de'],
 				),
+				'comics' => array(
+					'number' => 39,
+				),
 			),
 			25 => array(
 				'slug' => array(
@@ -160,6 +172,9 @@ class ComicJet_Model_Access_Data {
 				'title' => array(
 					'en' => 'The tower in the sky',
 					'de' => 'Der Turm im Himmel',
+				),
+				'comics' => array(
+					'number' => 52,
 				),
 			),
 			30 => array(
@@ -175,6 +190,9 @@ class ComicJet_Model_Access_Data {
 					'en' => $xkcd_credits['en'],
 					'de' => $xkcd_credits['de'],
 				),
+				'comics' => array(
+					'number' => 39,
+				),
 			),
 			35 => array(
 				'slug' => array(
@@ -184,6 +202,9 @@ class ComicJet_Model_Access_Data {
 				'title' => array(
 					'en' => 'The letter of Jael Bara',
 					'de' => 'Der brief der Jael Bara',
+				),
+				'comics' => array(
+					'number' => 82,
 				),
 			),
 			40 => array(
@@ -199,6 +220,9 @@ class ComicJet_Model_Access_Data {
 					'en' => $xkcd_credits['en'],
 					'de' => $xkcd_credits['de'],
 				),
+				'comics' => array(	
+					'number' => 39,
+				),
 			),
 			45 => array(
 				'slug' => array(
@@ -208,6 +232,9 @@ class ComicJet_Model_Access_Data {
 				'title' => array(
 					'en' => 'Breaking all barriers',
 					'de' => 'Alle Schranken fallen',
+				),
+				'comics' => array(
+					'number' => 121,
 				),
 			),
 			50 => array(
@@ -222,6 +249,9 @@ class ComicJet_Model_Access_Data {
 				'credits' => array(
 					'en' => $xkcd_credits['en'],
 					'de' => $xkcd_credits['de'],
+				),
+				'comics' => array(
+					'number' => 39,
 				),
 			),
 		);
