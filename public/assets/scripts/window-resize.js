@@ -61,7 +61,6 @@ window.onload = function(event){
 }
 
 function show_hide_tutorial() {
-	console.log(tutorial_number);
 
 	if (document.getElementById('pulse-'+tutorial_number)) {
 		var elements = document.getElementsByClassName("pulse");

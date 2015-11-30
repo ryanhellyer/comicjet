@@ -65,7 +65,7 @@
 			echo '
 			<div class="' . esc_attr( 'block block-' . $count )  . '" id="comic-' . esc_attr( $comic_dir ) . '">
 				<a href="' . esc_url( $link_url ) . '" class="block-inner">
-					<img src="' . esc_url( $image_url) . '" />
+					<img id="comic-thumb-' . esc_attr( $comic_dir ) . '" src="' . esc_url( $image_url) . '" />
 					<p>' . esc_html( $comic['title'][$this->lang1] ) . '</p>
 				</a>
 			</div>';
@@ -93,3 +93,4 @@ $scripts[] = 'cookie-functions.js';
 $scripts[] = 'language-selector.js';
 $scripts[] = 'read-reading.js';
 $scripts[] = 'arrow-key-support.js';
+$scripts[] = 'tutorial-pulse.js';
