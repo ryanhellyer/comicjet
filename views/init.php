@@ -130,7 +130,7 @@ class ComicJet_Views_Init {
 		$translate = $this->translate;
 
 		if ( $this->_get_previous_url() ) {
-			$link = '<a href="' . esc_url( $this->_get_previous_url() ) . '">' . esc_html( $translate->convert( 'Previous' ) ) . '</a>';
+			$link = '<a href="' . esc_url( $this->_get_previous_url() ) . '">' . esc_html( $translate->convert( 'Previous page' ) ) . '</a>';
 		}
 
 		return $link;
@@ -167,7 +167,7 @@ class ComicJet_Views_Init {
 		$translate = $this->translate;
 
 		if ( $this->_get_next_url() ) {
-			$link = '<a href="' . esc_url( $this->_get_next_url() ) . '">' . esc_html( $translate->convert( 'Next' ) ) . '</a>';
+			$link = '<a href="' . esc_url( $this->_get_next_url() ) . '">' . esc_html( $translate->convert( 'Next page' ) ) . '</a>';
 		}
 
 		return $link;

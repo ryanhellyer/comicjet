@@ -54,6 +54,14 @@ class ComicJet_Model_Translate {
 			'en' => 'Copyright &copy; %s Comic Jet.',
 			'de' => 'Copyright &copy; %s Comic Jet.',
 		),
+		8 => array(
+			'en' => 'Next page',
+			'de' => 'Nexte seite',
+		),
+		9 => array(
+			'en' => 'Previous page',
+			'de' => 'Previous seite',
+		),
 	);
 
 	/**
