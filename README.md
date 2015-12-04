@@ -17,17 +17,6 @@ Suggestions from others:
 		ask for translators English -> German for other comics
 		ask Gaia authors for permission to translate their comics
 
-Personal experience:
-	Need keyboard access to switch language.
-		Perhaps ENTER. SPACE is already used for page down.
-
-Next arrow appears on last page - it shouldn't.
-
-"Next" -> "Next page"
-			"Nexte Seite"
-	- could be confused with "Next comic"
-
-
 Translate:
 	'de' => 'And another other German text goes here',
 	'de' => 'Some German text goes here',
