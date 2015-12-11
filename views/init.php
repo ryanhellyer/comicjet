@@ -45,7 +45,6 @@ class ComicJet_Views_Init {
 		ob_start();
 		$script_vars = $scripts = array();
 		$scripts[] = 'cookie-functions.js';
-		$scripts[] = 'hide-tutorial.js';
 		require( 'header.php' );
 		define( 'COMICJET_HEADER_TIMER', ( 1000 * ( microtime( true ) - COMICJET_TIMER ) ) );
 		require( $template . '.php' );

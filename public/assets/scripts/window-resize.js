@@ -11,26 +11,11 @@ function comic_resize() {
 	var width = image.width;
 	var height = image.height;
 
-	var i = 0;
-	while (i < 4) {
-
-		if (document.getElementById('pulse-'+i)) {
-			// Pulse buttons
-			var position_top = height * (window['pulse_top_'+i] / 100);
-			var position_left = width * (window['pulse_left_'+i] / 100);
-			document.getElementById("pulse-"+i).style.top = position_top+'px';
-			document.getElementById("pulse-"+i).style.left = position_left+'px';
-
-			// Tutorial text
-			var position_top = height * (window['tutorial_text_top_'+i] / 100);
-			var position_left = width * (window['tutorial_text_left_'+i] / 100);
-			var tutorial_width = width * (window['tutorial_text_width_'+i] / 100);
-			document.getElementById("tutorial-text-"+i).style.top = position_top+'px';
-			document.getElementById("tutorial-text-"+i).style.left = position_left+'px';
-			document.getElementById("tutorial-text-"+i).style.width = tutorial_width+'px';
-		}
-
-		i++;
+	if (document.getElementById('pulse')) {
+		var position_top = (height/3.5)-40;
+		var position_left = (width/1.6)-40;
+		document.getElementById("pulse").style.top = position_top+'px';
+		document.getElementById("pulse").style.left = position_left+'px';
 	}
 
 	// Setting positioning of the navigation arrows
@@ -72,22 +57,9 @@ window.onload = function(event){
 
 function show_hide_tutorial() {
 
-	if (document.getElementById('pulse-'+tutorial_number)) {
-		var elements = document.getElementsByClassName("pulse");
-		Array.prototype.forEach.call(elements, function(element) {
-			element.style.display = 'none';
-		});
-		if (document.getElementById('pulse-'+tutorial_number)) {
-			var element = document.getElementById("pulse-"+tutorial_number);
-			element.style.display = 'block';
-		}
-
-		var elements = document.getElementsByClassName("tutorial-text");
-		Array.prototype.forEach.call(elements, function(element) {
-			element.style.display = 'none';
-		});
-		if (document.getElementById('tutorial-text-'+tutorial_number)) {
-			var element = document.getElementById("tutorial-text-"+tutorial_number);
+	if (document.getElementById('pulse')) {
+		if (document.getElementById('pulse')) {
+			var element = document.getElementById("pulse");
 			element.style.display = 'block';
 		}
 	}

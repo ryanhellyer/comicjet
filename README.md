@@ -17,6 +17,35 @@ Suggestions from others:
 		ask for translators English -> German for other comics
 		ask Gaia authors for permission to translate their comics
 
+co-up
+	Remove tutorial button and icon
+	On clicking "Start learning" go to tutorial
+		Or, on clicking comic go to tutorial
+	Red tutorial text should be above tutorial
+	"Go to tutorial" button should be gone.
+
+Nina and F
+	Tutorial - remove all buttons
+		Giant text, with bare instructions
+			Below is the comic
+	Remove comics on first page
+		Show background image with person reading tablet
+		On click "Get started" (changed from begin learning), start tutorial
+	Center the arrows on the screen, rather than centered on image
+	Home page
+		Maybe move comic title above image
+		Maybe make thumbnails less tall
+	Make comics skinnier at desktop
+
+Annika,
+	Title in comics should be smaller
+	Logo is shit 
+	Get started button is diffidence shape
+	Next prev buttons word positioning in comparison to title
+	Title and page 9/93 should be on same line. Don't center on middle.
+
+
+
 Translate:
 	'de' => 'And another other German text goes here',
 	'de' => 'Some German text goes here',

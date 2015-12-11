@@ -24,24 +24,7 @@
 				<div class="arrow" id="arrow-next"></div>';
 				}
 
-				$tutorials = $this->access_data->_get_tutorials( $this->lang1, $this->comic_dir, $this->page_number );
-				if ( is_array( $tutorials ) ) {
-					foreach ( $tutorials as $key => $tutorial ) {
-						$script_vars['pulse_top_' . $key] =  absint( $tutorial['marker']['top'] );
-						$script_vars['pulse_left_' . $key] =  absint( $tutorial['marker']['left'] );
-						$script_vars['tutorial_text_top_' . $key] =  absint( $tutorial['text']['top'] );
-						$script_vars['tutorial_text_left_' . $key] =  absint( $tutorial['text']['left'] );
-						$script_vars['tutorial_text_width_' . $key] =  absint( $tutorial['text']['width'] );
-
-						echo '
-				<button id="' . esc_attr( 'pulse-' . $key ) . '" class="toggle-image pulse"></button>
-				<div class="toggle-image tutorial-text" id="' . esc_attr( 'tutorial-text-' . $key ) . '">' . esc_html( $tutorial['text'][$this->lang1] ) . '</div>';
-					}
-				}
-
 				?>
-
-
 
 				<img id="bubble-2" src="<?php echo esc_url( $image_url_lang1 ); ?>" />
 				<img id="bubble" onmouseover="this.style.cursor='pointer'" class="toggle-image" src="<?php echo esc_url( $image_url_lang2 ); ?>" /><?php

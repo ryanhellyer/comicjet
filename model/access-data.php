@@ -29,6 +29,7 @@ class ComicJet_Model_Access_Data {
 
 
 		$data = array(
+			/*
 			0 => array(
 				'slug' => array(
 					'en' => 'tutorial',
@@ -104,6 +105,7 @@ class ComicJet_Model_Access_Data {
 					'de' => 'Diese Comic basiert auf (der) Arbeit von <a href="http://xkcd.com/">XKCD</a>. ' . $creative_commons['de'],
 				),
 			),
+			*/
 			5 => array(
 				'slug' => array(
 					'en' => 'the-red-hall',

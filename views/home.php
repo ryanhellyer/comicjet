@@ -47,9 +47,10 @@
 
 			<span></span>
 
-			<input type="submit" id="select-language" name="select-language" value="<?php echo $translate->convert( 'Start learning' ); ?>&nbsp; &gt;" />
+			<input type="submit" id="select-language" name="select-language" value="<?php echo $translate->convert( 'Get started' ); ?>&nbsp; &gt;" />
 		</form>
 
+		<div id="the-tutorial"></div>
 		<div id="comic-selection"><?php
 
 		// Get all comic data
@@ -89,8 +90,8 @@ $script_vars['comicjet_language1'] = $this->lang1;
 $script_vars['comicjet_language2'] = $this->lang2;
 $script_vars['comicjet_root_url'] = COMICJET_URL;
 
-$scripts[] = 'cookie-functions.js';
 $scripts[] = 'language-selector.js';
 $scripts[] = 'read-reading.js';
 $scripts[] = 'arrow-key-support.js';
-$scripts[] = 'tutorial-pulse.js';
+$scripts[] = 'hide-comics.js';
+$scripts[] = 'window-resize.js';

@@ -35,8 +35,8 @@ class ComicJet_Model_Translate {
 			'de' => 'Ich möchte lernen',
 		),
 		3 => array(
-			'en' => 'Start learning',
-			'de' => 'Beginne zu lernen',
+			'en' => 'Get started',
+			'de' => 'Anfangen',
 		),
 		4 => array(
 			'en' => 'Reading',

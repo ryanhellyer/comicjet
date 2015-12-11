@@ -27,3 +27,6 @@ function comicjet_keypress(e) {
 	}
 
 }
+
+var bla = document.getElementById( 'tutorial-heading' );
+console.log(bla);

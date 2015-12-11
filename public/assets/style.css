@@ -202,7 +202,20 @@ h4 {
 }
 
 #comic-selection {
+	display: none;
 	padding-top: 4%;
+}
+
+#the-tutorial {
+	float: left;
+	width: 100%;
+}
+
+.instruction {
+	float: left;
+	width: 100%;
+	color: #000;
+	font-weight: bold;
 }
 
 .block {
@@ -211,27 +224,6 @@ h4 {
 	width: 28%;
 	margin: 0 0 5% 4%;
 	background: #fff;
-}
-
-body.hide-tutorial #comic-tutorial,
-body.hide-tutorial #tutorial {
-	display: none;
-}
-
-body.hide-tutorial .block-5,
-body.hide-tutorial .block-8,
-body.hide-tutorial .block-11,
-body.hide-tutorial .block-14,
-body.hide-tutorial .block-17 {
-	clear: both;
-}
-
-body.hide-tutorial .block-4,
-body.hide-tutorial .block-7,
-body.hide-tutorial .block-10,
-body.hide-tutorial .block-13,
-body.hide-tutorial .block-16 {
-	clear: none;
 }
 
 .block-4,
@@ -422,12 +414,12 @@ body.hide-tutorial .block-16 {
 .pulse {
 	display: inline-block;
 	z-index: 4;
-	width: 40px;
-	height: 40px;
+	width: 80px;
+	height: 80px;
 	border: none;
 	box-shadow: 0 0 0 0 rgba(200, 0, 0, 0.7);
 	border-radius: 50%;
-	background-color: rgba(200, 0, 0, 1);
+	background-color: rgba(200, 0, 0, 0.9);
 	background-size: cover;
 	background-repeat: no-repeat;
 	border: 1px solid rgba(0,0,0,0.3);
@@ -461,28 +453,61 @@ body.hide-tutorial .block-16 {
 @-ms-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(200, 0, 0, 0);}}
 @keyframes pulse {to {box-shadow: 0 0 0 15px rgba(200, 0, 0, 0);}}
 
-.tutorial-text {
-	position: absolute;
-	z-index: 3;
-	text-align: center;
-	color: #000;
-	font-family: Impact, 'Open Sans', sans-serif;
-	font-size: 2em;
-	line-height: 1em;
-	font-weight: normal;
-	color: rgba(200,0,0,1);
-	text-shadow: 0px 0px 1px rgba(0,0,0,1);
+#pulse {
+	left: 50px;
+	top: 50px;
 }
+
+#tutorial-heading-wrapper {
+	float: left;
+	width: 100%;
+	min-height: 14em;
+	margin: 1em 0;
+	text-align: center;
+}
+
+#tutorial-heading {
+	clear: both;
+	display: inline-block;
+	margin: 1em 3em 2em 3em;
+	padding: 1.4em 2em;
+	border: 2px solid #fff;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+	box-shadow: 0 0 0 2px #1196cf;
+	background: #0185bf;
+}
+#tutorial-heading div {
+	display: inline-block;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+	color: #fff;
+	font-size: 2em;
+	margin: 0;
+	padding: 0.4em 2em;
+	background: #0185bf;
+}
+
+#tutorial-heading .current-language {
+	text-align: center;
+}
+
+.current-language div {
+	margin: 0 0 1em 0;
+	padding: 1.4em 2em;
+	border: 2px solid #fff;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+	box-shadow: 0 0 0 2px #1196cf;
+}
+
+.current-language span {
+	font-weight: bold;
+}
+
 
 .toggle-image {
 	cursor: pointer;
-}
-
-#pulse-1,
-#tutorial-text-1,
-#pulse-2,
-#tutorial-text-2 {
-	display: none;
 }
 
 /* =Content
@@ -840,30 +865,6 @@ footer p.align-right {
 	.block-15,
 	.block-17,
 	.block-19 {
-		clear: both;
-	}
-
-	body.hide-tutorial .block-3,
-	body.hide-tutorial .block-5,
-	body.hide-tutorial .block-7,
-	body.hide-tutorial .block-9,
-	body.hide-tutorial .block-11,
-	body.hide-tutorial .block-13,
-	body.hide-tutorial .block-15,
-	body.hide-tutorial .block-17,
-	body.hide-tutorial .block-19 {
-		clear: none;
-	}
-
-	body.hide-tutorial .block-4,
-	body.hide-tutorial .block-6,
-	body.hide-tutorial .block-8,
-	body.hide-tutorial .block-10,
-	body.hide-tutorial .block-12,
-	body.hide-tutorial .block-14,
-	body.hide-tutorial .block-16,
-	body.hide-tutorial .block-18,
-	body.hide-tutorial .block-20 {
 		clear: both;
 	}
 
