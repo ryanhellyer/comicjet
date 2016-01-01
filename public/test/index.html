@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<title>The Red Hall - Comic Jet</title>
+	<link rel="stylesheet" href="style.css" type="text/css" media="all" />
+</head>
+<body class="comic">
+
+<header id="site-header">
+	<h1>
+		<a href="https://dev.comicjet.com/en/de/">Comic Jet! 
+					<small style="
+						display: inline-block;
+						text-shadow: none;
+						-webkit-text-stroke-width: 0.3px;
+						-webkit-text-stroke-color: #aa5500;
+						text-stroke-width: 0;
+						border:none;
+						position: relative;
+						font-weight: bold;
+						letter-spacing:0;
+						font-size:24px;
+						color: #ffcc00;
+						font-family:sans-serif;
+						position: relative;
+						top: -10px;
+						text-transform: lowercase;
+					">
+							beta
+					</small>
+		</a>
+	</h1>
+
+</header>
+
+<div id="wrap">
+	<div class="inner">
+		<div class="content">
+			<h1 id="site-title"></h1>
+
+			<ol id="comic">
+<!--
+				<li><img src="comics/1-en.jpg" /></li>
+				<li><img src="comics/2-en.jpg" /></li>
+				<li><img src="comics/3-en.jpg" /></li>
+				<li><img src="comics/4-en.jpg" /></li>
+-->
+			</ol>
+
+		</div>
+	</div>
+</div>
+
+<footer>
+	<p>
+		Copyright &copy; 2016 Comic Jet.
+	</p>
+</footer>
+
+<script>
+
+var current_url = window.location.href;
+var comics_folder_url = window.location.origin + '/test/comics/';
+var primary_language = 'de';
+var secondary_language = 'en';
+
+var comics = [
+	{name:'The Red Hall',slug:'the-red-hall',pages:4},
+	{name:'Batman',slug:'batman',pages:4},
+	{name:'Wonder woman',slug:'wonderwoman',pages:5},
+];
+
+// Looping through all comics until finding current one
+//              ==== used in both current JS files
+var current_slug = get_query_var('comic');
+for (i = 0; i < comics.length; i++) { 
+	slug = comics[i].slug;
+	if ( current_slug == slug ) {
+		var comic = comics[i];
+	}
+}
+
+document.getElementById('site-title').innerHTML = comic.name;
+
+/**
+ * Get a query var from URL.
+              ==== used in both current JS files
+ */
+function get_query_var(name) {
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	results = regex.exec(location.search);
+	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+</script>
+
+<script src="scripts/infinite-scroll.js"></script>
+<script src="scripts/clicks.js"></script>
+<!--
+<script src="scripts/temp.js"></script>
+-->
+
+</body>
+</html>

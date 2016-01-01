@@ -193,333 +193,21 @@ h4 {
 	padding: 0;
 }
 
-#comic-display,
-#comic-selection {
+#comic {
 	float: left;
 	background: #fafafa;
 	border-top: 1px solid #f1f1f1;
 	width: 100%;
 }
 
-#comic-selection {
-	display: none;
-	padding-top: 4%;
-}
 
-#the-tutorial {
-	float: left;
-	width: 100%;
-}
-
-.instruction {
-	float: left;
-	width: 100%;
-	color: #000;
-	font-weight: bold;
-}
-
-.block {
-	float: left;
-	position: relative;
-	width: 28%;
-	margin: 0 0 5% 4%;
-	background: #fff;
-}
-
-.block-4,
-.block-7,
-.block-10,
-.block-13,
-.block-16 {
-	clear: both;
-}
-
-
-.read {
-	position: absolute;
-	left: 1em;
-	top: 1em;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 0.8em;
-	text-transform: uppercase;
-	background: rgba(0,0,0,0.4);
-	color: #fff;
-	padding: 0.3em 0.7em;
-}
-
-.block-inner {
-	display: block;
-	border: 1px solid #ddd;
-}
-
-.block-inner:hover {
-	text-decoration: none;
-}
-
-#comic-type {
-	float: left;
-	width: 100%;
-	margin: 1em 0 2em 0;
-	text-align: center;
-}
-
-#comic-type span {
-	display: inline-block;
-	width: 2em;
-}
-
-#comic-type label {
-	display: inline-block;
-	line-height: 2em;
-	margin-right: 0.5em;
-	font-size: 1.1em;
-}
-
-#comic-type input,
-#comic-type select {
-	display: inline-block;
-	font-size: 1.2em;
-	font-family: 'Open Sans', sans-serif;
-	margin: 0;
-	cursor: pointer;
-	color: #fff;
-	background-color: #0185bf;
-	border: 1px solid #0185bf;
-	outline: none;
-	padding: 0.4em 2%;
-}
-
-#comic-type input {
-	padding: 0.45em 2%;
-}
-
-#comic-type select {
-	padding: 0.4em 2%;
-	background-image: url(down-arrow.png);
-	background-repeat: no-repeat;
-	background-position: 95% 48%;
-	-webkit-appearance: button;
-	appearance: button;
-}
-
-#comic-type input:hover,
-#comic-type select:hover,
-#comic-type option {
-	background-color: #1196cf;
-}
-
-.block:hover img {
-	opacity: 0.9;
-}
-
-.comic-link,
-.comic-link:hover {
-	display: block;
-	text-decoration: none;
-}
-
-.edit-link {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	text-align: center;
-	font-family: 'Open Sans', sans-serif;
-	line-height: 40px;
-	background: #eee;
-	border: 1px solid #ccc;
-	padding: 0 15px;
-}
-
-.block p {
-	font-weight: 200;
-	height: 1.1em;
-	text-align: center;
-	font-size: 1.0em;
-	line-height: 1em;
-	color: #333;
-	font-family: 'Open Sans', sans-serif;
-	margin: 0;
-	padding: 0.7em 0.4em;
-}
-
-/* Pagination */
-#pagination-top {
-	float: left;
-	width: 100%;
-	margin: 0 0 1em 0;
-}
-
-#pagination-bottom {
-	float: left;
-	width: 100%;
-	margin: 1em 0 0 0;
-}
-
-.pagination {
-	min-height: 1px;
-	float: left;
-	width: 33.33%;
-}
-
-.pagination a,
-.pagination div {
-	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
-	color: #fff;
-	margin: 2em 0 1em 0;
-	padding: 0.4em 2em;
-	background: #0185bf;
-}
-
-.pagination div:hover,
-.pagination a:hover {
-	background: #1196cf;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.pagination small {
-	font-size: 0.8em;
-}
-
-.previous-link {
-	text-align: left;
-}
-
-.current-language {
-	text-align: center;
-}
-
-.current-language div {
-	margin: 0 0 1em 0;
-	padding: 1.4em 2em;
-	border: 2px solid #fff;
-	-moz-border-radius: 2em;
-	border-radius: 2em;
-	box-shadow: 0 0 0 2px #1196cf;
-}
-
-.current-language span {
-	font-weight: bold;
-}
-
-.next-link {
-	text-align: right;
-}
-
-
-/* =Pulsing button
--------------------------------------------------------------- */
-
-.pulse {
-	display: inline-block;
-	z-index: 4;
-	width: 80px;
-	height: 80px;
-	border: none;
-	box-shadow: 0 0 0 0 rgba(200, 0, 0, 0.7);
-	border-radius: 50%;
-	background-color: rgba(200, 0, 0, 0.9);
-	background-size: cover;
-	background-repeat: no-repeat;
-	border: 1px solid rgba(0,0,0,0.3);
-	cursor: pointer;
-	-webkit-animation: pulse 0.5s infinite cubic-bezier(0, 0, 0, 1);
-	-moz-animation: pulse 0.5s infinite cubic-bezier(0, 0, 0, 1);
-	-ms-animation: pulse 0.5s infinite cubic-bezier(0, 0, 0, 1);
-	animation: pulse 0.5s infinite cubic-bezier(0, 0, 0, 1);
-
-	display: none;
-	position: absolute;
-	z-index: 3;
-	text-align: center;
-	color: #000;
-	font-family: Impact, 'Open Sans', sans-serif;
-	font-size: 2em;
-	line-height: 1em;
-	font-weight: normal;
-	font-style: italic;
-	text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
-}
-
-.pulse:hover {
-	-webkit-animation: none;
-	-moz-animation: none;
-	-ms-animation: none;
-	animation: none;
-}
-@-webkit-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(200, 0, 0, 0);}}
-@-moz-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(200, 0, 0, 0);}}
-@-ms-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(200, 0, 0, 0);}}
-@keyframes pulse {to {box-shadow: 0 0 0 15px rgba(200, 0, 0, 0);}}
-
-#pulse {
-	left: 50px;
-	top: 50px;
-}
-
-#tutorial-heading-wrapper {
-	float: left;
-	width: 100%;
-	min-height: 14em;
-	margin: 1em 0;
-	text-align: center;
-}
-
-#tutorial-heading {
-	clear: both;
-	display: inline-block;
-	margin: 1em 3em 2em 3em;
-	padding: 1.4em 2em;
-	border: 2px solid #fff;
-	-moz-border-radius: 2em;
-	border-radius: 2em;
-	box-shadow: 0 0 0 2px #1196cf;
-	background: #0185bf;
-}
-#tutorial-heading div {
-	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: bold;
-	color: #fff;
-	font-size: 2em;
-	margin: 0;
-	padding: 0.4em 2em;
-	background: #0185bf;
-}
-
-#tutorial-heading .current-language {
-	text-align: center;
-}
-
-.current-language div {
-	margin: 0 0 1em 0;
-	padding: 1.4em 2em;
-	border: 2px solid #fff;
-	-moz-border-radius: 2em;
-	border-radius: 2em;
-	box-shadow: 0 0 0 2px #1196cf;
-}
-
-.current-language span {
-	font-weight: bold;
-}
-
-
-.toggle-image {
-	cursor: pointer;
-}
 
 /* =Content
 -------------------------------------------------------------- */
 
-img {
+#comic img {
 	display: block;
 	width: 100%;
-}
-
-#wrap a:hover img {
-	opacity: 0.8;
 }
 
 p {
@@ -540,11 +228,6 @@ p.caption {
 	font-size: 0.8em;
 }
 
-p.caption img {
-	margin: 0 0 2em 0;
-	padding: 0;
-}
-
 p.credits {
 	text-align: center;
 	font-size: 0.8em;
@@ -562,68 +245,6 @@ p.credits {
 .alignright {
 	float: right;
 }
-
-/* =Forms
--------------------------------------------------------------- */
-label {
-	font-size: 1.4em;
-	color: #555;
-	font-weight: 200;
-	font-family: 'Open Sans', sans-serif;
-}
-
-#back,
-#contact form {
-	float: left;
-	width: 90%;
-	margin: 0 5%;
-}
-
-#contact p {
-	float: left;
-	width: 100%;
-}
-
-#contact label {
-}
-
-#contact input {
-	margin-left: 1em;
-}
-
-#contact textarea,
-#contact input {
-	background: #fafafa;
-	border: 1px solid #ddd;
-	font-size: 1.4em;
-	color: #555;
-	font-weight: 200;
-	font-family: 'Open Sans', sans-serif;
-}
-
-#contact textarea {
-	float: left;
-	width: 95%;
-	height: 6em;
-}
-
-#contact #submit,
-#submit {
-	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
-	color: #fff;
-	margin: 0 0 1em 0;
-	padding: 0.4em 2em;
-	background: #0185bf;
-}
-
-#contact #submit:hover,
-#submit:hover {
-	background: #1196cf;
-	text-decoration: none;
-	cursor: pointer;
-}
-
 
 /* =Footer
 -------------------------------------------------------------- */
@@ -659,15 +280,8 @@ footer p.align-right {
 	overflow: visible;
 }
 
-#bubble {
-	position: absolute;
-	left: 0;
-	top: 0;
+img {
 	width: 100%;
-}
-
-#bubble-2 {
-	display: none;
 }
 
 .error {
@@ -680,36 +294,7 @@ footer p.align-right {
 	padding: 0.5em 0;
 }
 
-.arrow {
-	position: absolute;
-	top: 100px;
-	width: 55px;
-	height: 200px;
-	z-index: 2;
-}
-
-.arrow:hover {
-	cursor: pointer;
-}
-
-#arrow-prev {
-	background: url(arrow-prev.png) 0 50% no-repeat;
-	left: -55px;
-	display: none;
-}
-
-#arrow-next {
-	background: url(arrow-next.png) 0 50% no-repeat;
-	right: -65px;
-	display: none;
-}
-
-
 @media (max-width: 1105px) {
-	#arrow-prev,
-	#arrow-next {
-		display: none !important; /* Using !important to override the inline styling from JavaScript */
-	}
 }
 
 @media (max-width: 900px) {
@@ -778,39 +363,6 @@ footer p.align-right {
 		float: right;
 		width: 50%;
 		padding: 0.4em 2%;
-		margin-right: 4%;
-	}
-
-	#pagination-top {
-		margin: 0 0 1em 0;
-	}
-
-	#pagination-bottom {
-		margin-bottom: 1em;
-	}
-
-	.pagination a {
-		margin: 0.4em 0 0 0;
-		padding: 0.4em 0.6em;
-	}
-
-	.pagination div {
-		margin: 0;
-		padding: 0.7em 2em;
-	}
-
-	.previous-link,
-	.next-link {
-		width: 29%;
-				xposition: relative;
-				xtop: -1em;
-	}
-
-	.previous-link {
-		margin-left: 4%;
-	}
-
-	.next-link {
 		margin-right: 4%;
 	}
 
