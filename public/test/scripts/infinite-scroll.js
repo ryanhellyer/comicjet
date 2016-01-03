@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function (e) {
+
+function Class_Scroll(e) {
 
 	/**
 	 * Class constructor.
@@ -102,10 +103,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
 	/**
 	 * Set the current page URL.
 	 * URL is based on the page number we are at.
+	 *
+	 * Note: This is not very performant. 
+	 *       Changing the hash causes graphical glitches.
 	 */
 	this.set_page_url = function (current_page_number) {
-		window.history.pushState(null, null, 'index.html'+'?comic='+comic.slug+'#'+current_page_number);
+		var hash = window.location.hash.substring(1);
+		if ( hash != current_page_number ) { // Making sure we don't hammer pushState unnecessarily
+			window.history.pushState(null, null, 'index.html'+'?comic='+comic.slug+'&primary_language='+primary_language+'&secondary_language='+secondary_language+'#'+current_page_number);
+		}
 	}
 
 	__construct(this);
-});
+}
+document.addEventListener("DOMContentLoaded", Class_Scroll );

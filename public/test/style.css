@@ -95,18 +95,19 @@ a:hover {
 	text-stroke-color: #002c50;
 }
 
-#primary {
+#primary-menu {
 	float: right;
 	margin: 1em 5% 0 0;
 }
 
-#primary li {
+#primary-menu li {
 	float: left;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 1.2em;
+	margin-left: 1em;
 }
 
-#primary li a {
+#primary-menu li a {
 	color: #fff;
 }
 
@@ -323,18 +324,18 @@ img {
 		font-size: 1.3em;
 	}
 
-	nav#primary {
+	nav#primary-menu {
 		margin-top: 0.2em;
 		margin-right: 0.5em;
 	}
 
-	nav#primary li {
+	nav#primary-menu li {
 		float: none;
 		font-size: 0.9em;
 		text-align: right;
 	}
 
-	nav#primary a {
+	nav#primary-menu a {
 		padding: 0.75em 0.5em;
 	}
 

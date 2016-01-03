@@ -34,22 +34,20 @@
 		</a>
 	</h1>
 
+	<nav id="primary-menu">
+		<ul>
+			<li primary-language="en" secondary-language="de"><a href="#">English</a></li>
+			<li primary-language="de" secondary-language="en"><a href="#">Deutsch</a></li>
+		</ul>
+	</nav>
+
 </header>
 
 <div id="wrap">
 	<div class="inner">
 		<div class="content">
 			<h1 id="site-title"></h1>
-
-			<ol id="comic">
-<!--
-				<li><img src="comics/1-en.jpg" /></li>
-				<li><img src="comics/2-en.jpg" /></li>
-				<li><img src="comics/3-en.jpg" /></li>
-				<li><img src="comics/4-en.jpg" /></li>
--->
-			</ol>
-
+			<ol id="comic"></ol>
 		</div>
 	</div>
 </div>
@@ -60,15 +58,19 @@
 	</p>
 </footer>
 
+<script src="scripts/functions.js"></script>
+<script src="scripts/infinite-scroll.js"></script>
+<script src="scripts/clicks.js"></script>
+
 <script>
 
 var current_url = window.location.href;
 var comics_folder_url = window.location.origin + '/test/comics/';
-var primary_language = 'de';
-var secondary_language = 'en';
+var primary_language = get_query_var('primary_language' );
+var secondary_language = get_query_var('secondary_language' );
 
 var comics = [
-	{name:'The Red Hall',slug:'the-red-hall',pages:4},
+	{name:{'en':'The Red Hall','de':'Der Rote Saal'},slug:'the-red-hall',pages:4},
 	{name:'Batman',slug:'batman',pages:4},
 	{name:'Wonder woman',slug:'wonderwoman',pages:5},
 ];
@@ -83,25 +85,8 @@ for (i = 0; i < comics.length; i++) {
 	}
 }
 
-document.getElementById('site-title').innerHTML = comic.name;
-
-/**
- * Get a query var from URL.
-              ==== used in both current JS files
- */
-function get_query_var(name) {
-	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-	results = regex.exec(location.search);
-	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+refresh_content();
 </script>
-
-<script src="scripts/infinite-scroll.js"></script>
-<script src="scripts/clicks.js"></script>
-<!--
-<script src="scripts/temp.js"></script>
--->
 
 </body>
 </html>

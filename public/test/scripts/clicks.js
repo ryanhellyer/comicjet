@@ -1,5 +1,5 @@
-document.getElementById('comic').addEventListener("click", function (e) {
 
+document.getElementById('comic').addEventListener("click", function (e) {
 	// Change the comic language
 	if(e.target && e.target.nodeName == "IMG") {
 
@@ -14,6 +14,30 @@ document.getElementById('comic').addEventListener("click", function (e) {
 			var new_language = secondary_language;
 		}
 		img.src = comics_folder_url+comic.slug+'/'+id+'-'+new_language+'.jpg';
+
+	}
+
+});
+
+document.getElementById('primary-menu').addEventListener("click", function (e) {
+
+	// Change the comic language
+	if(e.target && e.target.nodeName == "A") {
+		primary_language = e.target.parentNode.getAttribute('primary-language');
+		secondary_language = e.target.parentNode.getAttribute('secondary-language');
+
+		// Get current page number, and add all pages up to that point
+		var hash = window.location.hash
+		if ( '' == hash ) {
+			var current_page_number = 1;
+		} else {
+			var current_page_number = hash.replace('#', '');
+		}
+
+		window.history.pushState(null, null, 'index.html'+'?comic='+comic.slug+'&primary_language='+primary_language+'&secondary_language='+secondary_language+'#'+current_page_number);
+
+
+		refresh_content();
 
 	}
 
