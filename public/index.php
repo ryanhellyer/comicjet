@@ -1,11 +1,15 @@
-<!DOCTYPE html>
+<?php
+
+$base_url = 'https://dev.comicjet.com/';
+
+?><!DOCTYPE html>
 <html lang="en_US">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<title>The Red Hall - Comic Jet</title>
-	<link rel="stylesheet" href="style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="<?php echo $base_url; ?>style.css" type="text/css" media="all" />
 </head>
 <body class="comic">
 
@@ -58,17 +62,16 @@
 	</p>
 </footer>
 
-<script src="scripts/functions.js"></script>
-<script src="scripts/infinite-scroll.js"></script>
-<script src="scripts/clicks.js"></script>
+<script src="<?php echo $base_url; ?>scripts/functions.js"></script>
+<script src="<?php echo $base_url; ?>scripts/infinite-scroll.js"></script>
+<script src="<?php echo $base_url; ?>scripts/clicks.js"></script>
 
 <script>
 
-var current_url = window.location.href;
-var comics_folder_url = window.location.origin + '/comics/';
-var primary_language = get_query_var('primary_language' );
-var secondary_language = get_query_var('secondary_language' );
-
+/**
+ * Set available languages and comics.
+ */
+var available_languages = ["en","de"];
 var comics = [
 	{
 		name:{'en':'The Red Hall','de':'Der Rote Saal'},
@@ -82,16 +85,35 @@ var comics = [
 	},
 ];
 
-// Looping through all comics until finding current one
-//              ==== used in both current JS files
-var current_slug = get_query_var('comic');
+
+/**
+ * Work out which languages we're on.
+ */
+var current_url = window.location.pathname.split( '/' );
+if ( '-1' != available_languages.indexOf(current_url[1]) ) {
+	var primary_language = current_url[1];
+}
+if ( '-1' != available_languages.indexOf(current_url[2]) ) {
+	var secondary_language = current_url[2];
+}
+
+
+/**
+ * Work out which comic we're on.
+ */
+var current_slug = current_url[3];
 for (i = 0; i < comics.length; i++) { 
 	slugs = comics[i].slug;
 	slug = slugs[primary_language];
 	if ( current_slug == slug ) {
+		var comic_slug = slug;
 		var comic = comics[i];
 	}
 }
+
+
+var comics_folder_url = window.location.origin + '/comics/';
+
 
 refresh_content();
 </script>
