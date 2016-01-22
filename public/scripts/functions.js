@@ -24,3 +24,11 @@ function get_query_var(name) {
 	results = regex.exec(location.search);
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
+/**
+ * If is number.
+ */
+function is_number(obj) {
+	return !isNaN(parseFloat(obj));
+}
+

@@ -40,8 +40,8 @@ $base_url = 'https://dev.comicjet.com/';
 
 	<nav id="primary-menu">
 		<ul>
-			<li primary-language="en" secondary-language="de"><a href="#">English</a></li>
-			<li primary-language="de" secondary-language="en"><a href="#">Deutsch</a></li>
+			<li primary-language="en" secondary-language="de"><a href="">English</a></li>
+			<li primary-language="de" secondary-language="en"><a href="">Deutsch</a></li>
 		</ul>
 	</nav>
 

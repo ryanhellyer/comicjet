@@ -110,7 +110,11 @@ function Class_Scroll(e) {
 		var hash = window.location.hash.substring(1);
 		if ( hash != current_page_number ) { // Making sure we don't hammer pushState unnecessarily
 			var comic_slug = comic.slug[primary_language];
-			window.history.pushState(null, null, '/'+primary_language+'/'+secondary_language+'/'+comic_slug+'#'+current_page_number);
+			var string = '/'+primary_language+'/'+secondary_language+'/'+comic_slug;
+			if ( is_number(current_page_number) ) {
+				string = string + '#' + current_page_number;
+			}
+			window.history.pushState(null, null, string);
 		}
 	}
 

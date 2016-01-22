@@ -39,7 +39,12 @@ document.getElementById('primary-menu').addEventListener("click", function (e) {
 		}
 		var comic_slug = comic.slug[primary_language];
 
-		window.history.pushState(null, null, '/'+primary_language+'/'+secondary_language+'/'+comic_slug+'#'+current_page_number);
+		var string = '/'+primary_language+'/'+secondary_language+'/'+comic_slug;
+		if ( is_number(current_page_number) ) {
+			string = string + '#' + current_page_number;
+		}
+
+		window.history.pushState(null, null, string);
 
 		refresh_content();
 
