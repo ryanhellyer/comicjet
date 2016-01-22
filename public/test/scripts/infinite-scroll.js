@@ -3,10 +3,8 @@ function Class_Scroll(e) {
 
 	/**
 	 * Class constructor.
-	 *
-	 * @param  object  methods  The class methods
 	 */
-	var __construct = function (methods) {
+	var __construct = function () {
 
 		// Get current page number, and add all pages up to that point
 		var hash = window.location.hash
@@ -16,15 +14,15 @@ function Class_Scroll(e) {
 			var current_page_number = hash.replace('#', '');
 		}
 		for (i = 0; i < current_page_number; i++) {
-			methods.maybe_add_new_page();
+			this.maybe_add_new_page();
 		}
 
 		// Add new pages on scrolling.
 		document.onscroll = function() {
-			methods.maybe_add_new_page();
+			this.maybe_add_new_page();
 
-			current_page_number = methods.get_current_page_number();
-			methods.set_page_url(current_page_number);
+			current_page_number = this.get_current_page_number();
+			this.set_page_url(current_page_number);
 		};
 	}
 
@@ -111,10 +109,11 @@ function Class_Scroll(e) {
 	this.set_page_url = function (current_page_number) {
 		var hash = window.location.hash.substring(1);
 		if ( hash != current_page_number ) { // Making sure we don't hammer pushState unnecessarily
-			window.history.pushState(null, null, 'index.html'+'?comic='+comic.slug+'&primary_language='+primary_language+'&secondary_language='+secondary_language+'#'+current_page_number);
+			var comic_slug = comic.slug[primary_language];
+			window.history.pushState(null, null, 'index.html'+'?comic='+comic_slug+'&primary_language='+primary_language+'&secondary_language='+secondary_language+'#'+current_page_number);
 		}
 	}
 
-	__construct(this);
+	__construct();
 }
 document.addEventListener("DOMContentLoaded", Class_Scroll );
