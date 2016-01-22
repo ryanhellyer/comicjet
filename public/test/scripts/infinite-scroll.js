@@ -34,11 +34,12 @@ function Class_Scroll(e) {
 	 * @param  int  page_number  The page number to add
 	 */
 	this.add_new_page = function (page_number) {
-		li_node = document.createElement('li');
-		img_node = document.createElement('img');
-		new_li = document.getElementById('comic').appendChild(li_node);
-		new_img = new_li.appendChild(img_node);
-		new_img.src = comics_folder_url+comic.slug+'/'+page_number+'-'+primary_language+'.jpg';
+		var li_node = document.createElement('li');
+		var img_node = document.createElement('img');
+		var new_li = document.getElementById('comic').appendChild(li_node);
+		var new_img = new_li.appendChild(img_node);
+		var comic_slug = comic.slug['en'];
+		new_img.src = comics_folder_url+comic_slug+'/'+page_number+'-'+primary_language+'.jpg';
 		new_img.id = page_number;
 	}
 
