@@ -86,6 +86,9 @@ var comics = [
 ];
 
 
+var comics_folder_url = window.location.origin + '/comics/';
+
+
 /**
  * Work out which languages we're on.
  */
@@ -111,11 +114,12 @@ for (i = 0; i < comics.length; i++) {
 	}
 }
 
-
-var comics_folder_url = window.location.origin + '/comics/';
-
-
-refresh_content();
+if (undefined == comic) {
+	console.log(comic);
+} else {
+	document.addEventListener("DOMContentLoaded", Class_Scroll );
+	refresh_content();
+}
 </script>
 
 </body>

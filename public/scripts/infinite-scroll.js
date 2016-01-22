@@ -120,4 +120,3 @@ function Class_Scroll(e) {
 
 	__construct();
 }
-document.addEventListener("DOMContentLoaded", Class_Scroll );
