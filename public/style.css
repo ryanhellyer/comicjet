@@ -203,6 +203,139 @@ h4 {
 
 
 
+/* =Home page form
+-------------------------------------------------------------- */
+
+#comic-type {
+	float: left;
+	width: 100%;
+	margin: 1em 0 2em 0;
+	text-align: center;
+}
+
+#comic-type span {
+	display: inline-block;
+	width: 2em;
+}
+
+#comic-type label {
+	display: inline-block;
+	line-height: 2em;
+	margin-right: 0.5em;
+	font-size: 1.1em;
+}
+
+#comic-type input,
+#comic-type select {
+	display: inline-block;
+	font-size: 1.2em;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	cursor: pointer;
+	color: #fff;
+	background-color: #0185bf;
+	border: 1px solid #0185bf;
+	outline: none;
+	padding: 0.4em 2%;
+}
+
+#comic-type input {
+	padding: 0.45em 2%;
+}
+
+#comic-type select {
+	padding: 0.4em 2%;
+	background-image: url(down-arrow.png);
+	background-repeat: no-repeat;
+	background-position: 95% 48%;
+	-webkit-appearance: button;
+	appearance: button;
+}
+
+#comic-type input:hover,
+#comic-type select:hover,
+#comic-type option {
+	background-color: #1196cf;
+}
+
+
+
+/* =Comic display on home page
+-------------------------------------------------------------- */
+
+#comic-display,
+#comic-selection {
+	float: left;
+	background: #fafafa;
+	border-top: 1px solid #f1f1f1;
+	width: 100%;
+}
+
+#comic-selection {
+	padding-top: 4%;
+}
+
+.block {
+	float: left;
+	position: relative;
+	width: 28%;
+	margin: 0 0 5% 4%;
+	background: #fff;
+}
+
+body.hide-tutorial #comic-tutorial,
+body.hide-tutorial #tutorial {
+	display: none;
+}
+
+body.hide-tutorial .block-5,
+body.hide-tutorial .block-8,
+body.hide-tutorial .block-11,
+body.hide-tutorial .block-14,
+body.hide-tutorial .block-17 {
+	clear: both;
+}
+
+body.hide-tutorial .block-4,
+body.hide-tutorial .block-7,
+body.hide-tutorial .block-10,
+body.hide-tutorial .block-13,
+body.hide-tutorial .block-16 {
+	clear: none;
+}
+
+.block-4,
+.block-7,
+.block-10,
+.block-13,
+.block-16 {
+	clear: both;
+}
+
+
+.read {
+	position: absolute;
+	left: 1em;
+	top: 1em;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.8em;
+	text-transform: uppercase;
+	background: rgba(0,0,0,0.4);
+	color: #fff;
+	padding: 0.3em 0.7em;
+}
+
+.block-inner {
+	display: block;
+	border: 1px solid #ddd;
+}
+
+.block-inner:hover {
+	text-decoration: none;
+}
+
+
+
 /* =Content
 -------------------------------------------------------------- */
 

@@ -15,7 +15,7 @@ $base_url = 'https://dev.comicjet.com/';
 
 <header id="site-header">
 	<h1>
-		<a href="https://dev.comicjet.com/en/de/">Comic Jet! 
+		<a href="<?php echo $base_url; ?>en/de/">Comic Jet! 
 					<small style="
 						display: inline-block;
 						text-shadow: none;
@@ -65,6 +65,7 @@ $base_url = 'https://dev.comicjet.com/';
 <script src="<?php echo $base_url; ?>scripts/functions.js"></script>
 <script src="<?php echo $base_url; ?>scripts/infinite-scroll.js"></script>
 <script src="<?php echo $base_url; ?>scripts/clicks.js"></script>
+<script src="<?php echo $base_url; ?>scripts/home-page.js"></script>
 
 <script>
 
@@ -115,7 +116,8 @@ for (i = 0; i < comics.length; i++) {
 }
 
 if (undefined == comic) {
-	console.log(comic);
+	home_page();
+	console.log(comic);// Home page since no comic set
 } else {
 	document.addEventListener("DOMContentLoaded", Class_Scroll );
 	refresh_content();
