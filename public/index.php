@@ -81,12 +81,13 @@ var comics = [
 	},
 	{
 		name:{'en':'Shadow dancers','de':'Dhadow danzers de'},
-		slug:'shadowdancers',
+		slug:{'en':'shadowdancers','de':'dhadow-danzers-de'},
 		pages:4
 	},
 ];
 
 
+var home_url = '<?php echo $base_url; ?>';
 var comics_folder_url = window.location.origin + '/comics/';
 
 
@@ -115,9 +116,15 @@ for (i = 0; i < comics.length; i++) {
 	}
 }
 
-if (undefined == comic) {
+
+if ( '/' == window.location.pathname ) {
 	home_page();
-	console.log(comic);// Home page since no comic set
+	console.log( 'HOME PAGE!' );
+} else if ( '/'+primary_language+'/'+secondary_language+'/' == window.location.pathname ) { /********* Should be comparing to "available_languages" *********/
+	home_page();
+	console.log( 'en/de')
+} else if (undefined == comic) {
+	alert('404');
 } else {
 	document.addEventListener("DOMContentLoaded", Class_Scroll );
 	refresh_content();
