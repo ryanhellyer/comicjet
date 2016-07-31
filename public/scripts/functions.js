@@ -31,4 +31,3 @@ function get_query_var(name) {
 function is_number(obj) {
 	return !isNaN(parseFloat(obj));
 }
-

@@ -331,6 +331,7 @@ body.hide-tutorial .block-16 {
 }
 
 .block-inner:hover {
+	opacity: 0.8;
 	text-decoration: none;
 }
 
@@ -394,8 +395,13 @@ footer p {
 	margin: 2em 0;
 	color: #aaa;
 	font-size: 0.9em;
-	width: 50%;
+	width: 100%;
 	padding: 0;
+}
+
+footer a,
+footer a:hover {
+	color: #aaa;
 }
 
 footer p.align-right {

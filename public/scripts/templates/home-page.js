@@ -29,7 +29,6 @@ function home_page() {
 `;
 
 	if(typeof primary_language!='undefined') {
-
 		for (i = 0; i < comics.length; i++) { 
 			slugs = comics[i].slug;
 			names = comics[i].name;
@@ -43,6 +42,8 @@ function home_page() {
 				</a>
 			</div>`;
 		}
+	} else {
+console.log('home without language selection yet');
 	}
 
 

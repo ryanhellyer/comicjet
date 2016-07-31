@@ -1,7 +1,25 @@
 
 document.getElementById('comic').addEventListener("click", function (e) {
+
+	// Change language
+	if(e.target && e.target.id == 'select-language') {
+
+		// Preventing form submission
+		event.preventDefault();
+
+		var primary_language = document.getElementById('language1').value;
+		var secondary_language = document.getElementById('language2').value;
+
+		var string = '/'+primary_language+'/'+secondary_language+'/';
+
+		window.history.pushState(null, null, string);
+
+		refresh_content();
+
+	}
+
 	// Change the comic language
-	if(e.target && e.target.nodeName == "IMG") {
+	if(e.target && e.target.nodeName == 'IMG') {
 
 		var img = e.target;
 		var id = e.target.id;''

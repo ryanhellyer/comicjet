@@ -1,6 +1,6 @@
 <?php
 
-$base_url = 'https://dev.comicjet.com/';
+$base_url = 'http://dev.comicjet.com/';
 
 ?><!DOCTYPE html>
 <html lang="en_US">
@@ -8,7 +8,7 @@ $base_url = 'https://dev.comicjet.com/';
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<title>The Red Hall - Comic Jet</title>
+	<title>Comic Jet</title>
 	<link rel="stylesheet" href="<?php echo $base_url; ?>style.css" type="text/css" media="all" />
 </head>
 <body class="comic">
@@ -58,14 +58,16 @@ $base_url = 'https://dev.comicjet.com/';
 
 <footer>
 	<p>
-		Copyright &copy; 2016 Comic Jet.
+		Copyright &copy; 2016 <a href="<?php echo $base_url; ?>">Comic Jet</a>.
+		<a href="#" class="alignright">Legal Notice</a>
 	</p>
 </footer>
 
 <script src="<?php echo $base_url; ?>scripts/functions.js"></script>
 <script src="<?php echo $base_url; ?>scripts/infinite-scroll.js"></script>
 <script src="<?php echo $base_url; ?>scripts/clicks.js"></script>
-<script src="<?php echo $base_url; ?>scripts/home-page.js"></script>
+<script src="<?php echo $base_url; ?>scripts/templates/home-page.js"></script>
+<script src="<?php echo $base_url; ?>scripts/templates/error-404-page.js"></script>
 
 <script>
 
@@ -120,11 +122,11 @@ for (i = 0; i < comics.length; i++) {
 if ( '/' == window.location.pathname ) {
 	home_page();
 	console.log( 'HOME PAGE!' );
-} else if ( '/'+primary_language+'/'+secondary_language+'/' == window.location.pathname ) { /********* Should be comparing to "available_languages" *********/
+} else if ( '/'+primary_language+'/'+secondary_language+'/' == window.location.pathname ) {
 	home_page();
 	console.log( 'en/de')
 } else if (undefined == comic) {
-	alert('404');
+	error_404_page();
 } else {
 	document.addEventListener("DOMContentLoaded", Class_Scroll );
 	refresh_content();
