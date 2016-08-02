@@ -25,32 +25,28 @@ function translate_page( element_id ) {
 			'en':'I want to learn',
 			'de':'Ich will lernen',
 		},
-/*
 		{
 			'id':'select-language',
-			'en':'Start learning',
-			'de':'Beginne zu lernen',
+			'en':'Start learning >',
+			'de':'Beginne zu lernen >',
+		},
+		{
+			'id':'site-title',
+			'en':'Learn languages from comics',
+			'de':'Sprachen lernen von Comics',
 		}
-*/
 	];
-
-//console.log(translation_strings);
 
 	for (i = 0; i < translation_strings.length; i++) { 
 		var id = translation_strings[i]['id'];
 
 		var element = document.getElementById(id);
-		if ( element && typeof element.innerHTML != 'undefined') {
+		if ( element && typeof element.innerHTML != 'undefined' && element.innerHTML != '') {
 			element.innerHTML = translation_strings[i][get_primary_language()];
+		} else {
+			element.value = translation_strings[i][get_primary_language()];
 		}
 
 	}
-
-
-
-	// Extract required string
-//	var translated_string = translation_strings[0][element_id][get_primary_language()];
-
-//	return translated_string;
 }
 document.addEventListener("DOMContentLoaded", translate_page );

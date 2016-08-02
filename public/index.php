@@ -80,12 +80,32 @@ var comics = [
 	{
 		name:{'en':'The Red Hall','de':'Der Rote Saal'},
 		slug:{'en':'the-red-hall','de':'der-rote-saal'},
-		pages:4
+		pages:49
 	},
 	{
 		name:{'en':'Shadow dancers','de':'Dhadow danzers de'},
 		slug:{'en':'shadowdancers','de':'dhadow-danzers-de'},
-		pages:4
+		pages:93
+	},
+	{
+		name:{'en':'Breaking all barriers','de':'Alle Schranken Fallen'},
+		slug:{'en':'breaking-all-barriers','de':'alle-schranken-fallen'},
+		pages:121
+	},
+	{
+		name:{'en':'The Letter of Jael Bara','de':'Der Brief der Jael Bara'},
+		slug:{'en':'the-letter-of-jael-bara','de':'der-brief-der-jael-bara'},
+		pages:82
+	},
+	{
+		name:{'en':'The Tower in the Sky','de':'Der Turm im Himmel'},
+		slug:{'en':'the-tower-in-the-sky','de':'der-turm-im-himmel'},
+		pages:52
+	},
+	{
+		name:{'en':'Monster','de':'Monster'},
+		slug:{'en':'monster','de':'monster'},
+		pages:32
 	},
 ];
 

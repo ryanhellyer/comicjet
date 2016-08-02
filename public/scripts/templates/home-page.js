@@ -1,6 +1,6 @@
 function home_page() {
 
-	document.getElementById('site-title').innerHTML = 'Comic Jet';
+	document.getElementById('site-title').innerHTML = 'Learn languages from comics';
 
 	var content_area = `
 		<form id="comic-type" name="comic-type" method="post" action="">
@@ -60,8 +60,6 @@ console.log('home without language selection yet');
 
 	document.getElementById('comic').innerHTML = content_area;
 
-translate_page();
-//	document.getElementById('i-speak').innerHTML = 'xxxx';
-//		document.getElementById(id+'-text').innerHTML = translation_strings[i][get_primary_language()];
+	translate_page();
 
 }
