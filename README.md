@@ -6,6 +6,7 @@ TODO:
 http://comicbookplus.com/
 http://digitalcomicmuseum.com/
 http://furycomics.com/
+Main comic is creative commons ... http://www.jesusandmo.net/images/jesusogmosmags.pdf (Jesus and Mo)
 
 Tutorial:
 	unavoidable - happens on viewing your first comic
