@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>xkcDE &ndash; Eine deutsche Version von xkcd</title>
+		<link rel="stylesheet" type="text/css" href="/xkcde.css" />
+		<link rel="stylesheet" type="text/css" href="/xkcde-print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="/xkcde-handheld.css" media="handheld" />
+		<link rel="icon" type="image/png" href="/images/favicon.png" />
+		<link rel="apple-touch-icon" type="image/png" href="/images/apple-touch-icon.png" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+	</head>
+	<body lang="de">
+		<div class="box" id="header_box">
+			<h1 class="title"><img src="/images/xkcde.png" alt="xkcDE" width="210" height="83"/></h1>
+			<div class="subtitle">Eine deutsche Version von <a href="http://www.xkcd.com/" hreflang="en">xkcd</a>, dem Webcomic über Romantik, Sarkasmus, Mathematik und Sprache</div>
+		</div>
+		<div class="box" id="main_box">
+			<h2 class="hidden">Navigation</h2>
+			<ul id="navigation">
+				<li><a href="/45/" class="first" title="zum ersten Strip (#45) springen" rel="start">Anfang</a></li>
+<li><a href="/1159/" class="previous" title="zum vorigen Strip (#1159) springen" rel="prev">zurück</a></li>							</ul>
+			<h2 class="comictitle">
+				<span class="hidden">Titel:</span>
+				Logarithmische Darstellung			</h2>
+			<p>Übersetzung von <a href="http://www.xkcd.com/1162/" hreflang="en">xkcd #1162</a> vom <time datetime="2013-01-18">18. Januar 2013</time> (übersetzt am <time datetime="2013-01-19">19. Januar 2013</time>)</p>
+			<div class="comic">
+				<img src="/comics/logarithmische_darstellung.png" title="Knuthsche Papier-Stapel-Notation: Schreib die Zahl auf Seiten. Staple Sie. Wenn der Stapel zu hoch ist, um in den Raum zu passen, schreibe die Zahl der Seiten auf, die man bräuchte, um die Zahl aufzuschreiben. DIESE Zahl passt nicht in den Raum? Wiederholen. Wenn der Stapel passt, schreibe die Zahl der Iterationen auf eine Karte. Pinne sie an den Stapel." alt="Deutsche Übersetzung des xkcd-Strips &quot;Logarithmische Darstellung&quot;" />
+				<div id="alttext">Knuthsche Papier-Stapel-Notation: Schreib die Zahl auf Seiten. Staple Sie. Wenn der Stapel zu hoch ist, um in den Raum zu passen, schreibe die Zahl der Seiten auf, die man bräuchte, um die Zahl aufzuschreiben. DIESE Zahl passt nicht in den Raum? Wiederholen. Wenn der Stapel passt, schreibe die Zahl der Iterationen auf eine Karte. Pinne sie an den Stapel.</div>
+					</div>
+						</div>
+		<div class="box" id="footer_box">
+			<h2 class="hidden">Links</h2>
+			<ul class="links">
+				<li><a href="/recent/">Zuletzt übersetzt</a></li>
+				<li><a href="/about/">Über das Projekt</a></li>
+				<li><a href="/rss.php">RSS-Feed</a></li>
+				<li><a href="http://twitter.com/_xkcDE_">Twitter</a></li>
+			</ul>
+			<hr/>
+			<h2 class="hidden">Rechtliches</h2>
+			<div id="copyright">
+				<p>xkcd © Randall Munroe; Übersetzung/Grafik (sofern nicht anders angegeben) © Peter Schlömer. Freigegeben unter der Creative-Commons-Lizenz <a href="http://creativecommons.org/licenses/by-nc/2.5/deed.de" title="Namensnennung-Keine kommerzielle Nutzung 2.5 US-amerikanisch (nicht portiert)">CC-by-nc-2.5</a>.</p>
+			</div>
+		</div>
+	</body>
+</html>
