@@ -1,6 +1,6 @@
 function home_page() {
 
-	document.getElementById('site-title').innerHTML = 'Home page (needs translated)';
+	document.getElementById('site-title').innerHTML = 'Comic Jet';
 
 	var content_area = `
 		<form id="comic-type" name="comic-type" method="post" action="">
@@ -28,21 +28,25 @@ function home_page() {
 		<div id="comic-selection">
 `;
 
-	if(typeof primary_language!='undefined') {
+	if(typeof get_primary_language()!='undefined') {
 		for (i = 0; i < comics.length; i++) { 
 			slugs = comics[i].slug;
 			names = comics[i].name;
-			name = names[primary_language];
-			var slug = slugs[primary_language];
+			name = names[get_primary_language()];
+			var slug = slugs[get_primary_language()];
 			content_area = content_area + `
 			<div class="block block-1" id="`+slug+`">
-				<a id="comic-link-10" href="`+home_url+`en/de/`+slug+`/" class="block-inner">
+				<a id="comic-link-10" href="`+home_url+get_primary_language()+`/`+get_secondary_language()+`/`+slug+`/" class="block-inner">
 					<img id="`+slug+`" src="`+home_url+`comics/`+slugs['en']+`/thumbnail-en.jpg" />
 					<p>`+name+`</p>
 				</a>
 			</div>`;
 		}
 	} else {
+
+
+
+alert('home without selection');
 console.log('home without language selection yet');
 	}
 

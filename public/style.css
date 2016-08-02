@@ -222,7 +222,9 @@ h4 {
 	display: inline-block;
 	line-height: 2em;
 	margin-right: 0.5em;
-	font-size: 1.1em;
+    font-size: 1.4em;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #comic-type input,

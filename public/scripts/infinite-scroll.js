@@ -37,7 +37,7 @@ function Class_Scroll(e) {
 		var new_li = document.getElementById('comic').appendChild(li_node);
 		var new_img = new_li.appendChild(img_node);
 		var comic_slug = comic.slug['en'];
-		new_img.src = comics_folder_url+comic_slug+'/'+page_number+'-'+primary_language+'.jpg';
+		new_img.src = comics_folder_url+comic_slug+'/'+page_number+'-'+get_secondary_language()+'.jpg';
 		new_img.id = page_number;
 	}
 
@@ -109,8 +109,8 @@ function Class_Scroll(e) {
 	this.set_page_url = function (current_page_number) {
 		var hash = window.location.hash.substring(1);
 		if ( hash != current_page_number ) { // Making sure we don't hammer pushState unnecessarily
-			var comic_slug = comic.slug[primary_language];
-			var string = '/'+primary_language+'/'+secondary_language+'/'+comic_slug;
+			var comic_slug = comic.slug[get_primary_language()];
+			var string = '/'+get_primary_language()+'/'+get_secondary_language()+'/'+comic_slug;
 			if ( is_number(current_page_number) ) {
 				string = string + '#' + current_page_number;
 			}

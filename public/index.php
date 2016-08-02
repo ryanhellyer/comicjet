@@ -15,7 +15,7 @@ $base_url = 'http://dev.comicjet.com/';
 
 <header id="site-header">
 	<h1>
-		<a href="<?php echo $base_url; ?>en/de/">Comic Jet! 
+		<a id="header-link" href="<?php echo $base_url; ?>">Comic Jet! 
 					<small style="
 						display: inline-block;
 						text-shadow: none;
@@ -92,39 +92,29 @@ var comics = [
 var home_url = '<?php echo $base_url; ?>';
 var comics_folder_url = window.location.origin + '/comics/';
 
-
 /**
- * Work out which languages we're on.
+ * Get current URL chunks.
  */
-var current_url = window.location.pathname.split( '/' );
-if ( '-1' != available_languages.indexOf(current_url[1]) ) {
-	var primary_language = current_url[1];
-}
-if ( '-1' != available_languages.indexOf(current_url[2]) ) {
-	var secondary_language = current_url[2];
-}
-
+var current_url_chunks = window.location.pathname.split( '/' );
 
 /**
  * Work out which comic we're on.
  */
-var current_slug = current_url[3];
+var current_slug = current_url_chunks[3];
 for (i = 0; i < comics.length; i++) { 
 	slugs = comics[i].slug;
-	slug = slugs[primary_language];
+	slug = slugs[get_primary_language()];
 	if ( current_slug == slug ) {
 		var comic_slug = slug;
 		var comic = comics[i];
 	}
 }
 
-
+set_header_link();
 if ( '/' == window.location.pathname ) {
 	home_page();
-	console.log( 'HOME PAGE!' );
-} else if ( '/'+primary_language+'/'+secondary_language+'/' == window.location.pathname ) {
+} else if ( '/'+get_primary_language()+'/'+get_secondary_language()+'/' == window.location.pathname ) {
 	home_page();
-	console.log( 'en/de')
 } else if (undefined == comic) {
 	error_404_page();
 } else {

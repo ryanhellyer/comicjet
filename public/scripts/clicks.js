@@ -14,7 +14,7 @@ document.getElementById('comic').addEventListener("click", function (e) {
 
 		window.history.pushState(null, null, string);
 
-		refresh_content();
+		home_page();
 
 	}
 
@@ -27,10 +27,10 @@ document.getElementById('comic').addEventListener("click", function (e) {
 
 		var end_of_file = src.substr(src.length - 7);
 
-		if ( '-'+secondary_language+'.jpg' == end_of_file ) {
-			var new_language = primary_language;
-		} else if ( '-'+primary_language+'.jpg' == end_of_file ) {
-			var new_language = secondary_language;
+		if ( '-'+get_secondary_language()+'.jpg' == end_of_file ) {
+			var new_language = get_primary_language();
+		} else if ( '-'+get_primary_language()+'.jpg' == end_of_file ) {
+			var new_language = get_secondary_language();
 		}
 
 		var comic_slug = comic.slug['en'];
@@ -45,6 +45,7 @@ document.getElementById('primary-menu').addEventListener("click", function (e) {
 
 	// Change the comic language
 	if(e.target && e.target.nodeName == "A") {
+
 		primary_language = e.target.parentNode.getAttribute('primary-language');
 		secondary_language = e.target.parentNode.getAttribute('secondary-language');
 
@@ -55,14 +56,24 @@ document.getElementById('primary-menu').addEventListener("click", function (e) {
 		} else {
 			var current_page_number = hash.replace('#', '');
 		}
-		var comic_slug = comic.slug[primary_language];
 
-		var string = '/'+primary_language+'/'+secondary_language+'/'+comic_slug;
-		if ( is_number(current_page_number) ) {
-			string = string + '#' + current_page_number;
+		var string = '/'+primary_language+'/'+secondary_language+'/';
+//alert(comic_slug);
+
+		if ( comic && typeof comic.slug != 'undefined') {
+			var comic_slug = comic.slug[primary_language];
+
+			var string = string+comic_slug+'/';
+
+			if ( is_number(current_page_number) ) {
+				string = string + '#' + current_page_number;
+			}
+
 		}
 
 		window.history.pushState(null, null, string);
+
+		set_header_link();
 
 		refresh_content();
 
