@@ -5,7 +5,7 @@ function home_page() {
 	var content_area = `
 		<form id="comic-type" name="comic-type" method="post" action="">
 
-			<label>I speak</label>
+			<label id="i-speak">I speak</label>
 			<select id="language1" name="language1">
 				<option selected="selected" value="en">English</option>
 				<option value="de">Deutsch</option>
@@ -13,7 +13,7 @@ function home_page() {
 
 			<span></span>
 
-			<label>I want to learn</label>
+			<label id="i-want-to-learn">I want to learn</label>
 			<select id="language2" name="language2">
 				<option value="en">English</option>
 				<option selected="selected" value="de">Deutsch</option>
@@ -59,5 +59,9 @@ console.log('home without language selection yet');
 `;
 
 	document.getElementById('comic').innerHTML = content_area;
+
+translate_page();
+//	document.getElementById('i-speak').innerHTML = 'xxxx';
+//		document.getElementById(id+'-text').innerHTML = translation_strings[i][get_primary_language()];
 
 }

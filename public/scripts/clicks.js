@@ -58,8 +58,8 @@ document.getElementById('primary-menu').addEventListener("click", function (e) {
 		}
 
 		var string = '/'+primary_language+'/'+secondary_language+'/';
-//alert(comic_slug);
 
+		// If we're on a comic, then modify URL accordingly
 		if ( comic && typeof comic.slug != 'undefined') {
 			var comic_slug = comic.slug[primary_language];
 

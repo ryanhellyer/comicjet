@@ -58,8 +58,8 @@ $base_url = 'http://dev.comicjet.com/';
 
 <footer>
 	<p>
-		Copyright &copy; 2016 <a href="<?php echo $base_url; ?>">Comic Jet</a>.
-		<a href="#" class="alignright">Legal Notice</a>
+		<span id="copyright">Copyright</span> &copy; 2016 <a href="<?php echo $base_url; ?>">Comic Jet</a>.
+		<a id="legal-notice" href="#" class="alignright">Legal Notice</a>
 	</p>
 </footer>
 
@@ -68,6 +68,7 @@ $base_url = 'http://dev.comicjet.com/';
 <script src="<?php echo $base_url; ?>scripts/clicks.js"></script>
 <script src="<?php echo $base_url; ?>scripts/templates/home-page.js"></script>
 <script src="<?php echo $base_url; ?>scripts/templates/error-404-page.js"></script>
+<script src="<?php echo $base_url; ?>scripts/translation.js"></script>
 
 <script>
 
@@ -121,6 +122,7 @@ if ( '/' == window.location.pathname ) {
 	document.addEventListener("DOMContentLoaded", Class_Scroll );
 	refresh_content();
 }
+
 </script>
 
 </body>

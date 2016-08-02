@@ -24,6 +24,7 @@ function Class_Scroll(e) {
 			current_page_number = this.get_current_page_number();
 			this.set_page_url(current_page_number);
 		};
+
 	}
 
 	/**
