@@ -337,6 +337,30 @@ body.hide-tutorial .block-16 {
 	text-decoration: none;
 }
 
+#to-comic-selection {
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin: 2em 0;
+}
+
+#to-comic-selection-link {
+	display: inline-block;
+	font-size: 1.2em;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	cursor: pointer;
+	color: #fff;
+	background-color: #0185bf;
+	border: 1px solid #0185bf;
+	outline: none;
+	padding: 0.4em 2%;
+}
+
+#to-comic-selection-link:hover {
+	background-color: #1196cf;
+	text-decoration: none;
+}
 
 
 /* =Content

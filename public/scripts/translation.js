@@ -35,6 +35,7 @@ function translate_page( element_id ) {
 			'en':'Learn languages from comics',
 			'de':'Sprachen lernen von Comics',
 		}
+//		Back to comic selection page
 	];
 
 	for (i = 0; i < translation_strings.length; i++) { 
