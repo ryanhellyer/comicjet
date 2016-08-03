@@ -34,3 +34,6 @@ Nginx redirect all old comic URLs to the new ones
 Finish "back to comic selection page" button on each comic.
 	also needs translated
 
+
+Convert file formats:
+mogrify -format jpg /home/ryan/vagrant/VVV/www/dev.comicjet.com/public/comics/xkcd1/*.png

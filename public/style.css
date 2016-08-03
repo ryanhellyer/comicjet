@@ -369,6 +369,7 @@ body.hide-tutorial .block-16 {
 #comic img {
 	display: block;
 	width: 100%;
+	margin-bottom: 4em;
 }
 
 p {
