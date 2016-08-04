@@ -284,35 +284,13 @@ h4 {
 	margin-bottom: 0;
 }
 
-body.hide-tutorial #comic-tutorial,
-body.hide-tutorial #tutorial {
-	display: none;
+.page-counter {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1em;
+	text-align: center;
+	color: #000;
+	margin: 1em 0 2em 0;
 }
-
-body.hide-tutorial .block-5,
-body.hide-tutorial .block-8,
-body.hide-tutorial .block-11,
-body.hide-tutorial .block-14,
-body.hide-tutorial .block-17 {
-	clear: both;
-}
-
-body.hide-tutorial .block-4,
-body.hide-tutorial .block-7,
-body.hide-tutorial .block-10,
-body.hide-tutorial .block-13,
-body.hide-tutorial .block-16 {
-	clear: none;
-}
-
-.block-4,
-.block-7,
-.block-10,
-.block-13,
-.block-16 {
-	clear: both;
-}
-
 
 .read {
 	position: absolute;
@@ -368,7 +346,6 @@ body.hide-tutorial .block-16 {
 #comic img {
 	display: block;
 	width: 100%;
-	margin-bottom: 4em;
 }
 
 p {

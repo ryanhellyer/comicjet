@@ -74,8 +74,8 @@ Xonsole.log(bla);
 
 		// Add page counter
 		var page_count = document.createElement('div');
-		page_count.innerHTML = page_number+'/'+get_total_page_count(comic_slug);
-		page_count.id = 'page-counter';
+		page_count.innerHTML = '<strong>'+page_number+'</strong>/'+get_total_page_count(comic_slug);
+		page_count.className = 'page-counter';
 		new_li.appendChild(page_count);
 
 	}
