@@ -59,6 +59,8 @@ a:hover {
 /* =Header
 -------------------------------------------------------------- */
 #site-header {
+	position: fixed;
+	z-index: 10;
 	width: 100%;
 	float: left;
 	background: #f4f4f4;
@@ -166,6 +168,7 @@ h4 {
 }
 
 .content {
+	margin-top: 60px;
 	float: left;
 	width: 100%;
 	background: #fff;
@@ -205,32 +208,18 @@ h4 {
 
 
 
-/* =Home page form
+/* =Buttons
 -------------------------------------------------------------- */
 
-#comic-type {
+.buttons {
 	float: left;
 	width: 100%;
-	margin: 1em 0 2em 0;
+	margin: 1em auto 3em auto;
 	text-align: center;
 }
 
-#comic-type span {
-	display: inline-block;
-	width: 2em;
-}
-
-#comic-type label {
-	display: inline-block;
-	line-height: 2em;
-	margin-right: 0.5em;
-    font-size: 1.4em;
-    color: #333;
-    font-family: 'Open Sans', sans-serif;
-}
-
-#comic-type input,
-#comic-type select {
+.button {
+	width: auto;
 	display: inline-block;
 	font-size: 1.2em;
 	font-family: 'Open Sans', sans-serif;
@@ -240,26 +229,14 @@ h4 {
 	background-color: #0185bf;
 	border: 1px solid #0185bf;
 	outline: none;
-	padding: 0.4em 2%;
+	margin: 0 7%;
+	padding: 0.9em 7%;
 }
 
-#comic-type input {
-	padding: 0.45em 2%;
-}
-
-#comic-type select {
-	padding: 0.4em 2%;
-	background-image: url(down-arrow.png);
-	background-repeat: no-repeat;
-	background-position: 95% 48%;
-	-webkit-appearance: button;
-	appearance: button;
-}
-
-#comic-type input:hover,
-#comic-type select:hover,
-#comic-type option {
-	background-color: #1196cf;
+.button:hover {
+	opacity: 0.8;
+	text-decoration: none;
+	color: #fff;
 }
 
 
@@ -299,7 +276,7 @@ h4 {
 	display: inline-block;
 	position: relative;
 	width: 28%;
-	margin: 0 0 5% 4%;
+	margin: 0 0 4% 4%;
 	background: #fff;
 }
 
@@ -496,7 +473,7 @@ img {
 @media (max-width: 800px) {
 
 	#site-header h1 {
-		font-size: 2.4em;
+		font-size: 2.0em;
 	}
 
 	#site-header h1 small {
@@ -510,6 +487,11 @@ img {
 
 	#site-title {
 		font-size: 1.3em;
+		padding: 2% 4% 0 4%;
+	}
+
+	.content {
+		margin-top: 2.7em;
 	}
 
 	nav#primary-menu {
@@ -527,49 +509,23 @@ img {
 		padding: 0.75em 0.5em;
 	}
 
-	#comic-type select,
-	#comic-type label {
-		margin-bottom: 1em;
-	}
-
-	#comic-type label {
-		width: 40%;
-		text-align: right;
+	.buttons {
 		float: left;
-	}
-
-	#comic-type select {
-		float: left;
-		width: 50% !important;
-	}
-
-	#comic-type span {
-		display: block;
-		clear: left;
-	}
-
-	#comic-type input {
-		float: right;
-		width: 50%;
-		padding: 0.4em 2%;
-		margin-right: 4%;
-	}
-
-	#comic-type {
 		width: 100%;
-		margin-bottom: 2em;
+		margin: 2% auto;
 	}
-	#comic-type select {
-		float: none;
-		width: 90%;
-		margin: 0 auto;
-		display: block;
+
+	.button {
+		width: 78%;
+		margin: 2% auto;
 	}
-	#login {
-		width: 90%;
-		margin: 0.7em 5% 0.7em 0;
-		float: right;
+
+	p {
+		font-size: 0.8em;
+		margin: 0;
+		padding: 0.2em 0.4em 0.4em 0.4em;
 	}
+
 	p.caption {
 		float: left;
 		width: 90%;
@@ -613,34 +569,14 @@ img {
 		margin: 0 0 0 0;
 		padding: 0.7em 0.8em;
 	}
+
+	#legal-notice {
+		float: none;
+	}
 }
 
 @media (max-width: 600px) {
-
-	.block {
-		width: 92%;
-		margin: 0 0 5% 4%;
-	}
 }
 
 @media (max-width: 300px) {
-
-	#comic-type label,
-	#comic-type select {
-		width: 88% !important;
-		margin: 0 6%;
-		text-align: left;
-	}
-
-	#comic-type select {
-		margin-bottom: 1em;
-	}
-
-	#comic-type input {
-		float: none;
-		width: 90%;
-		margin: 1em auto 0 auto;
-		padding: 0.4em 2%;
-	}
-
 }

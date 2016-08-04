@@ -37,13 +37,16 @@ $base_url = 'http://dev.comicjet.com/';
 					</small>
 		</a>
 	</h1>
-
+<?php
+/*
 	<nav id="primary-menu">
 		<ul>
 			<li primary-language="en" secondary-language="de"><a href="">English</a></li>
 			<li primary-language="de" secondary-language="en"><a href="">Deutsch</a></li>
 		</ul>
 	</nav>
+*/
+?>
 
 </header>
 

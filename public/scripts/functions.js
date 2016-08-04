@@ -63,3 +63,44 @@ function get_secondary_language() {
 function set_header_link() {
 	document.getElementById('header-link').href = home_url+get_primary_language()+'/'+get_secondary_language()+'/';
 }
+
+/**
+ * Get total page count for a specific comic.
+ */
+function get_total_page_count(comic_slug) {
+
+	for (i = 0; i < comics.length; i++) { 
+		if (comic_slug == comics[i].slug['en']) {
+			pages = comics[i].pages;
+			return pages;
+		}
+	}
+
+}
+
+
+
+function setCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(";");
+	for(var i=0; i<ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==" ") c = c.substring(1);
+		if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+	}
+	return "";
+}
+
+function eraseCookie(name) {
+	setCookie(name,"",-1);
+}

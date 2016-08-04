@@ -16,21 +16,6 @@ function translate_page() {
 			'de':'Impressum (auf Englisch)',
 		},
 		{
-			'id':'i-speak',
-			'en':'I speak',
-			'de':'Ich spreche',
-		},
-		{
-			'id':'i-want-to-learn',
-			'en':'I want to learn',
-			'de':'Ich will lernen',
-		},
-		{
-			'id':'select-language',
-			'en':'Start learning >',
-			'de':'Beginne zu lernen >',
-		},
-		{
 			'id':'site-title',
 			'en':'Learn languages from comics',
 			'de':'Sprachen lernen von Comics',

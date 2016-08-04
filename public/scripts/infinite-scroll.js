@@ -13,16 +13,17 @@ function Class_Scroll(e) {
 		} else {
 			var current_page_number = hash.replace('#', '');
 		}
+
 		for (i = 0; i < current_page_number; i++) {
-			this.maybe_add_new_page();
+			this.maybe_add_new_page( true );
 		}
 
 /*
-console.log('Check for presence of ol#comic before adding it. Currently generating three.');
+Xonsole.log('Check for presence of ol#comic before adding it. Currently generating three.');
 
 		// Insert OL#comic tag
 		var bla = document.getElementById('comic');
-		console.log(bla);
+Xonsole.log(bla);
 		var new_ol = document.createElement('ol');
 		new_ol.id = 'comic';
 		document.getElementById('page-content').appendChild(new_ol);
@@ -61,6 +62,8 @@ console.log('Check for presence of ol#comic before adding it. Currently generati
 	 * @param  int  page_number  The page number to add
 	 */
 	this.add_new_page = function (page_number) {
+
+		// Add new list item with image
 		var li_node = document.createElement('li');
 		var img_node = document.createElement('img');
 		var new_li = document.getElementById('comic').appendChild(li_node);
@@ -68,12 +71,19 @@ console.log('Check for presence of ol#comic before adding it. Currently generati
 		var comic_slug = comic.slug['en'];
 		new_img.src = comics_folder_url+comic_slug+'/'+page_number+'-'+get_secondary_language()+'.jpg';
 		new_img.id = page_number;
+
+		// Add page counter
+		var page_count = document.createElement('div');
+		page_count.innerHTML = page_number+'/'+get_total_page_count(comic_slug);
+		page_count.id = 'page-counter';
+		new_li.appendChild(page_count);
+
 	}
 
 	/**
 	 * Add a new page if required.
 	 */
-	this.maybe_add_new_page = function () {
+	this.maybe_add_new_page = function (load_to_specific_anchor = false) {
 		var all_existing_pages = document.getElementById('comic');
 
 		var list_items = all_existing_pages.getElementsByTagName('li');
@@ -94,7 +104,11 @@ console.log('Check for presence of ol#comic before adding it. Currently generati
 				var current_distance_from_top = document.body.scrollTop + window.innerHeight;
 
 				// If the distance of the last page from the top is less than the current distance from the top, then add a new page
-				if ( distance_of_last_page_from_top < ( current_distance_from_top ) ) {
+				if (
+					true == load_to_specific_anchor // Allows for loading everything up until the specified anchor
+					||
+					( distance_of_last_page_from_top < current_distance_from_top )
+				) {
 					this.add_new_page(length + 2);
 				}
 

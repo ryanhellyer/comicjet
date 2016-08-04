@@ -4,27 +4,10 @@ function home_page() {
 
 	var content_area = `
 
-		<form id="comic-type" name="comic-type" method="post" action="">
-
-			<label id="i-speak">I speak</label>
-			<select id="language1" name="language1">
-				<option selected="selected" value="en">English</option>
-				<option value="de">Deutsch</option>
-			</select>
-
-			<span></span>
-
-			<label id="i-want-to-learn">I want to learn</label>
-			<select id="language2" name="language2">
-				<option value="en">English</option>
-				<option selected="selected" value="de">Deutsch</option>
-			</select>
-
-			<span></span>
-
-			<input type="submit" id="select-language" name="select-language" value="Start learning&nbsp; &gt;" />
-		</form>
-
+		<div class="buttons">
+			<a class="button" href="`+home_url+``+`de/en/">Learnen Englisch</a>
+			<a class="button" href="`+home_url+`en/de/`+`">Learn German</a>
+		</div>
 
 		<div id="comic-selection">
 `;
