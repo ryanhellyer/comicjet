@@ -120,8 +120,10 @@ h3 {
 	font-size: normal;
 	font-size: 20px;
 	font-size: 2.0rem;
-	margin: 10px 0 10px 0;
-	margin: 1rem 0 1rem 0;
+	font-weight: normal;
+	margin: 20px 0 0 0;
+	margin: 2rem 0 0 0;
+	padding: 0;
 }
 
 h4 {
@@ -196,7 +198,7 @@ h4 {
 
 #comic {
 	float: left;
-	background: #fafafa;
+	background: #fff;
 	border-top: 1px solid #f1f1f1;
 	width: 100%;
 }
@@ -261,6 +263,22 @@ h4 {
 }
 
 
+/* =Static page
+-------------------------------------------------------------- */
+
+#static-page {
+	float: left;
+	background: #fafafa;
+	border-top: 1px solid #f1f1f1;
+	width: 92%;
+	padding: 2em 4%;
+}
+
+#static-page p {
+	padding: 0;
+	margin: 1em 0;
+}
+
 
 /* =Comic display on home page
 -------------------------------------------------------------- */
@@ -278,11 +296,15 @@ h4 {
 }
 
 .block {
-	float: left;
+	display: inline-block;
 	position: relative;
 	width: 28%;
 	margin: 0 0 5% 4%;
 	background: #fff;
+}
+
+#comic .block img {
+	margin-bottom: 0;
 }
 
 body.hide-tutorial #comic-tutorial,

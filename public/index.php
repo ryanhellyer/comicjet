@@ -51,7 +51,7 @@ $base_url = 'http://dev.comicjet.com/';
 	<div class="inner">
 		<div class="content">
 			<h1 id="site-title"></h1>
-			<ol id="comic"></ol>
+			<div id="page-content"></div>
 			<div id="to-comic-selection">
 				<a id="to-comic-selection-link" href="#">Back to comic selection page</a>
 			</div>
@@ -61,8 +61,8 @@ $base_url = 'http://dev.comicjet.com/';
 
 <footer>
 	<p>
-		<span id="copyright">Copyright</span> &copy; 2016 <a href="<?php echo $base_url; ?>">Comic Jet</a>.
-		<a id="legal-notice" href="#" class="alignright">Legal Notice</a>
+		<span id="copyright">Copyright</span> &copy; 2016 <a href="<?php echo $base_url; ?>">Comic Jet</a>. <span id="creation">A creation of</span> <a href="https://geek.hellyer.kiwi/">Ryan Hellyer</a>
+		<a id="legal-notice" href="<?php echo $base_url; ?>legal-notice/" class="alignright">Legal Notice</a>
 	</p>
 </footer>
 
@@ -71,6 +71,7 @@ $base_url = 'http://dev.comicjet.com/';
 <script src="<?php echo $base_url; ?>scripts/clicks.js"></script>
 <script src="<?php echo $base_url; ?>scripts/templates/home-page.js"></script>
 <script src="<?php echo $base_url; ?>scripts/templates/error-404-page.js"></script>
+<script src="<?php echo $base_url; ?>scripts/templates/legal-notice-page.js"></script>
 <script src="<?php echo $base_url; ?>scripts/translation.js"></script>
 
 <script>
@@ -160,13 +161,41 @@ for (i = 0; i < comics.length; i++) {
 }
 
 set_header_link();
+var current_url = window.location.pathname.split( '/' );
+console.log(available_languages.indexOf(current_url[1]));
+console.log(available_languages.indexOf(current_url[2]));
 if ( '/' == window.location.pathname ) {
+	var page_type = 'home';
+
+	// Redirect, based on the browsers language setting
+	var browser_language = navigator.language;
+	var german_languages = ['de-AT', 'de-DE', 'de-LI', 'de-LU', 'de-CH'];
+	var result = german_languages.indexOf(browser_language);
+	if ( 0 == result ) {
+		var string = '/de/en/';
+	} else {
+		var string = '/en/de/';
+	}
+	window.history.pushState(null, null, string);
 	home_page();
+
 } else if ( '/'+get_primary_language()+'/'+get_secondary_language()+'/' == window.location.pathname ) {
+	var page_type = 'home';
 	home_page();
-} else if (undefined == comic) {
+} else if ( '/legal-notice/' == window.location.pathname ) {
+	var page_type = 'legal-notice';
+	legal_notice_page();
+} else if (
+	undefined == comic
+	||
+	( '-1' == available_languages.indexOf(current_url[1]) )
+	&&
+	( '-1' == available_languages.indexOf(current_url[2]) )
+) {
+	var page_type = '404';
 	error_404_page();
 } else {
+	var page_type = 'comic';
 	document.addEventListener("DOMContentLoaded", Class_Scroll );
 	refresh_content();
 }

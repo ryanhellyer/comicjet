@@ -1,5 +1,5 @@
 
-document.getElementById('comic').addEventListener("click", function (e) {
+document.getElementById('page-content').addEventListener("click", function (e) {
 
 	// Change language
 	if(e.target && e.target.id == 'select-language') {

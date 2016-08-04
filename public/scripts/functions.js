@@ -9,6 +9,7 @@ function refresh_content() {
 	document.getElementById('site-title').innerHTML = comic.name[get_primary_language()];
 
 	// Reset the page content
+	document.getElementById('page-content').innerHTML = '<ol id="comic"></ol>';
 	var thecomic = document.getElementById('comic');
 	thecomic.innerHTML = '';
 	Class_Scroll();

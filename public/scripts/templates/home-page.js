@@ -3,6 +3,7 @@ function home_page() {
 	document.getElementById('site-title').innerHTML = 'Learn languages from comics';
 
 	var content_area = `
+
 		<form id="comic-type" name="comic-type" method="post" action="">
 
 			<label id="i-speak">I speak</label>
@@ -58,7 +59,7 @@ console.log('home without language selection yet');
 		</div>
 `;
 
-	document.getElementById('comic').innerHTML = content_area;
+	document.getElementById('page-content').innerHTML = content_area;
 
 	translate_page();
 

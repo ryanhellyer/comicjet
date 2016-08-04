@@ -17,6 +17,11 @@ function Class_Scroll(e) {
 			this.maybe_add_new_page();
 		}
 
+		// Insert OL#comic tag
+		var new_ol = document.createElement('ol');
+		new_ol.id = 'comic';
+		document.getElementById('page-content').appendChild(new_ol);
+
 		// Add new pages on scrolling.
 		document.onscroll = function() {
 			this.maybe_add_new_page();
