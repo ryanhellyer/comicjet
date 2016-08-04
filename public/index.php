@@ -52,9 +52,6 @@ $base_url = 'http://dev.comicjet.com/';
 		<div class="content">
 			<h1 id="site-title"></h1>
 			<div id="page-content"></div>
-			<div id="to-comic-selection">
-				<a id="to-comic-selection-link" href="#">Back to comic selection page</a>
-			</div>
 		</div>
 	</div>
 </div>

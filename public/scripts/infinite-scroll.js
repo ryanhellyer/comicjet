@@ -17,10 +17,33 @@ function Class_Scroll(e) {
 			this.maybe_add_new_page();
 		}
 
+/*
+console.log('Check for presence of ol#comic before adding it. Currently generating three.');
+
 		// Insert OL#comic tag
+		var bla = document.getElementById('comic');
+		console.log(bla);
 		var new_ol = document.createElement('ol');
 		new_ol.id = 'comic';
 		document.getElementById('page-content').appendChild(new_ol);
+*/
+
+		// Insert comic selection link
+
+//		var comic_selection = document.createElement('div');
+//		comic_selection.id = 'to-comic-selection';
+
+//		document.getElementById('page-content').insertBefore(comic_selection,document.getElementById('page-content'));
+
+//comic_selection.parentNode.insertBefore(comic_selection, parentGuest.nextSibling);
+
+//		document.getElementById('page-content').insertBefore(childGuest, parentGuest.nextSibling);
+//		document.getElementById('page-content').appendChild(comic_selection_link);
+//page-content
+
+//		var comic_selection_link = document.createElement('a');
+//		comic_selection_link.id = 'to-comic-selection-link';
+//		document.getElementById('page-content').appendChild(comic_selection_link);
 
 		// Add new pages on scrolling.
 		document.onscroll = function() {
