@@ -1,6 +1,53 @@
 
 document.body.addEventListener("click", function (e) {
 
+	// Select a comic
+	var the_comics = document.getElementsByClassName('block-inner');
+	for (var key in the_comics) {
+
+		// Bail out if key not numeric
+		if ( isNaN( key ) ) {
+			break;
+		}
+
+		var the_comic_id = the_comics[key]['id']
+		if (
+			( typeof e.target.id != 'undefined' && the_comic_id == e.target.id )
+			||
+			( typeof e.target.id != 'undefined' && the_comics[key].parentNode.id == e.target.id )
+		) {
+
+			// Get URL base - Note: this should probably be simplified by combinging with code in index.php
+			if ( '' != get_primary_language_cookie() && '' != get_secondary_language_cookie() ) {
+
+				// Redirect based on cookies
+				var string = get_primary_language_cookie()+'/'+get_secondary_language_cookie()+'/';
+
+			} else {
+
+				// Redirect based on the browsers language setting
+				var browser_language = navigator.language;
+				var german_languages = ['de-AT', 'de-DE', 'de-LI', 'de-LU', 'de-CH'];
+				var result = german_languages.indexOf(browser_language);
+				if ( 0 == result ) {
+					var string = 'de/en/';
+				} else {
+					var string = 'en/de/';
+				}
+
+			}
+
+			string = home_url+string+the_comics[key].parentNode.id+'/';
+			window.history.pushState(null, null, string);
+
+			refresh_content();
+
+			// Preventing form submission
+			event.preventDefault();
+		}
+
+	}
+
 	// Scroll to top link
 	if ( typeof e.target.id != 'undefined' && 'scroll-to-top' == e.target.id ) {
 
@@ -32,6 +79,8 @@ document.body.addEventListener("click", function (e) {
 
 		home_page();
 
+		window.scrollTo(0, 0);
+
 		// Preventing form submission
 		event.preventDefault();
 	}
@@ -60,8 +109,7 @@ document.body.addEventListener("click", function (e) {
 	}
 
 	// Change the comic language
-	if(e.target && e.target.nodeName == 'IMG') {
-
+	if ( e.target && e.target.nodeName == 'IMG' && 'comic-page' == e.target.className ) {
 		var img = e.target;
 		var id = e.target.id;''
 		var src = e.target.src;

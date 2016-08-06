@@ -78,6 +78,7 @@ function Class_Scroll(e) {
 		// Add new list item with image
 		var li_node = document.createElement('li');
 		var img_node = document.createElement('img');
+		img_node.className = 'comic-page';
 		var new_li = document.getElementById('comic').appendChild(li_node);
 		var new_img = new_li.appendChild(img_node);
 		var comic_slug = comic.slug['en'];
