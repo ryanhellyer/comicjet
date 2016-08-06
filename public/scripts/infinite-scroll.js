@@ -52,7 +52,6 @@ function Class_Scroll(e) {
 
 			// Show scroll to top button
 			var current_distance_from_top = document.body.scrollTop;
-			console.log(current_distance_from_top);
 			if ( 20 < current_distance_from_top ) {
 				scroll_to_top_button.style.display = 'block';
 			} else {

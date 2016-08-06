@@ -89,7 +89,7 @@ var comics = [
 	},
 	{
 		name:{'en':'Shadow dancers','de':'Schatten tänzer'},
-		slug:{'en':'shadowdancers','de':'schatten-tänzer'},
+		slug:{'en':'shadowdancers','de':'schatten-tanzer'},
 		pages:93
 	},
 	{
@@ -163,8 +163,6 @@ for (i = 0; i < comics.length; i++) {
 
 set_home_links();
 var current_url = window.location.pathname.split( '/' );
-console.log(available_languages.indexOf(current_url[1]));
-console.log(available_languages.indexOf(current_url[2]));
 if ( '/' == window.location.pathname ) {
 	var page_type = 'home';
 
