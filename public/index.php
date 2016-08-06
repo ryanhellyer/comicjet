@@ -144,22 +144,10 @@ var home_url = '<?php echo $base_url; ?>';
 var comics_folder_url = window.location.origin + '/comics/';
 
 /**
- * Get current URL chunks.
+ * Work out which comic we're on. Note: These should be accessed via the functions directly now (they weren't as functions originally)
  */
-var current_url_chunks = window.location.pathname.split( '/' );
-
-/**
- * Work out which comic we're on.
- */
-var current_slug = current_url_chunks[3];
-for (i = 0; i < comics.length; i++) { 
-	slugs = comics[i].slug;
-	slug = slugs[get_primary_language()];
-	if ( current_slug == slug ) {
-		var comic_slug = slug;
-		var comic = comics[i];
-	}
-}
+var comic_slug = get_current_comic_slug();
+var comic = get_current_comic();
 
 set_home_links();
 var current_url = window.location.pathname.split( '/' );

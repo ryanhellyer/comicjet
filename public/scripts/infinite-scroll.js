@@ -81,13 +81,13 @@ function Class_Scroll(e) {
 		img_node.className = 'comic-page';
 		var new_li = document.getElementById('comic').appendChild(li_node);
 		var new_img = new_li.appendChild(img_node);
-		var comic_slug = comic.slug['en'];
-		new_img.src = comics_folder_url+comic_slug+'/'+page_number+'-'+get_secondary_language()+'.jpg';
+
+		new_img.src = comics_folder_url+get_current_comic_slug()+'/'+page_number+'-'+get_secondary_language()+'.jpg';
 		new_img.id = page_number;
 
 		// Add page counter
 		var page_count = document.createElement('div');
-		page_count.innerHTML = '<strong>'+page_number+'</strong>/'+get_total_page_count(comic_slug);
+		page_count.innerHTML = '<strong>'+page_number+'</strong>/'+get_total_page_count(get_current_comic_slug());
 		page_count.className = 'page-counter';
 		new_li.appendChild(page_count);
 
@@ -105,7 +105,7 @@ function Class_Scroll(e) {
 		if ( 0 == lis.length ) {
 			this.add_new_page(1);
 		} else {
-			var number_of_pages = comic.pages;
+			var number_of_pages = get_current_comic_().pages;
 			var number_already_displayed = lis.length;
 
 			if ( number_already_displayed < number_of_pages ) {
@@ -165,8 +165,7 @@ function Class_Scroll(e) {
 	this.set_page_url = function (current_page_number) {
 		var hash = window.location.hash.substring(1);
 		if ( hash != current_page_number ) { // Making sure we don't hammer pushState unnecessarily
-			var comic_slug = comic.slug[get_primary_language()];
-			var string = '/'+get_primary_language()+'/'+get_secondary_language()+'/'+comic_slug;
+			var string = '/'+get_primary_language()+'/'+get_secondary_language()+'/'+get_current_comic_slug();
 			if ( is_number(current_page_number) ) {
 				string = string + '#' + current_page_number;
 			}

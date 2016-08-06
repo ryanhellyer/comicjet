@@ -122,9 +122,9 @@ document.body.addEventListener("click", function (e) {
 			var new_language = get_secondary_language();
 		}
 
-		var comic_slug = comic.slug['en'];
+		var comic_slug = get_current_comic().slug['en'];
 
-		img.src = comics_folder_url+comic_slug+'/'+id+'-'+new_language+'.jpg';
+		img.src = comics_folder_url+get_current_comic_slug()+'/'+id+'-'+new_language+'.jpg';
 
 	}
 

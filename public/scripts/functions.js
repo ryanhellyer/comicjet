@@ -157,3 +157,37 @@ function getCookie(cname) {
 function eraseCookie(name) {
 	setCookie(name,"",-1);
 }
+
+/**
+ * Get the current comic slug.
+ */
+function get_current_comic_slug() {
+	var current_url_chunks = window.location.pathname.split( '/' );
+	var current_slug = current_url_chunks[3];
+	for (i = 0; i < comics.length; i++) { 
+		slugs = comics[i].slug;
+		slug = slugs[get_primary_language()];
+		if ( current_slug == slug ) {
+			var comic_slug = slug;
+		}
+	}
+
+	return comic_slug;
+}
+
+/**
+ * Get the current comic object.
+ */
+function get_current_comic() {
+	var current_url_chunks = window.location.pathname.split( '/' );
+	var current_slug = current_url_chunks[3];
+	for (i = 0; i < comics.length; i++) { 
+		slugs = comics[i].slug;
+		slug = slugs[get_primary_language()];
+		if ( current_slug == slug ) {
+			var comic = comics[i];
+		}
+	}
+
+	return comic;
+}
