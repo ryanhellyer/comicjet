@@ -25,6 +25,11 @@ function translate_page() {
 			'id':'creation',
 			'en':'A creation of',
 			'de':'Eine Kreation von',
+		},
+		{
+			'id':'scroll-to-top',
+			'en':'Scroll to top',
+			'de':'Scrolle nach oben',
 		}
 	];
 

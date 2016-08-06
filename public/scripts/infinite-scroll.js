@@ -1,6 +1,9 @@
 
 function Class_Scroll(e) {
 
+	var last_updated_url_hash;
+	var scroll_to_top_button = document.getElementById('scroll-to-top');
+
 	/**
 	 * Class constructor.
 	 */
@@ -18,40 +21,50 @@ function Class_Scroll(e) {
 			this.maybe_add_new_page( true );
 		}
 
-/*
-Xonsole.log('Check for presence of ol#comic before adding it. Currently generating three.');
+		// Add scroll-to-top button if not already present
+		var primary_menu =  document.getElementById('primary-menu');
+		for (var key in primary_menu.childNodes) {
 
-		// Insert OL#comic tag
-		var bla = document.getElementById('comic');
-Xonsole.log(bla);
-		var new_ol = document.createElement('ol');
-		new_ol.id = 'comic';
-		document.getElementById('page-content').appendChild(new_ol);
-*/
+			// Bail out if key not numeric
+			if ( isNaN( key ) ) {
+				break;
+			}
 
-		// Insert comic selection link
+			if ( 'scroll-to-top' == primary_menu.childNodes[key]['id'] ) {
+				var scroll_button_present = true;
+			}
+		}
+		if (typeof(scroll_button_present) == 'undefined' ) {
 
-//		var comic_selection = document.createElement('div');
-//		comic_selection.id = 'to-comic-selection';
+			// Add scroll to top button
+			var scroll_to_top_button = document.createElement('a');
+			scroll_to_top_button.href = '#';
+			scroll_to_top_button.id = 'scroll-to-top';
+			scroll_to_top_button.innerHTML = 'Scroll to top';
+			document.getElementById('primary-menu').appendChild(scroll_to_top_button);
 
-//		document.getElementById('page-content').insertBefore(comic_selection,document.getElementById('page-content'));
+		}
+		scroll_to_top_button = document.getElementById('scroll-to-top');
 
-//comic_selection.parentNode.insertBefore(comic_selection, parentGuest.nextSibling);
-
-//		document.getElementById('page-content').insertBefore(childGuest, parentGuest.nextSibling);
-//		document.getElementById('page-content').appendChild(comic_selection_link);
-//page-content
-
-//		var comic_selection_link = document.createElement('a');
-//		comic_selection_link.id = 'to-comic-selection-link';
-//		document.getElementById('page-content').appendChild(comic_selection_link);
-
-		// Add new pages on scrolling.
+		// Run actions on scrolling
 		document.onscroll = function() {
 			this.maybe_add_new_page();
 
+			// Show scroll to top button
+			var current_distance_from_top = document.body.scrollTop;
+			console.log(current_distance_from_top);
+			if ( 20 < current_distance_from_top ) {
+				scroll_to_top_button.style.display = 'block';
+			} else {
+				scroll_to_top_button.style.display = 'none';
+			}
+
+			// Add new pages on scrolling
 			current_page_number = this.get_current_page_number();
-			this.set_page_url(current_page_number);
+			if ( last_updated_url_hash != current_page_number) {
+				last_updated_url_hash = current_page_number;
+				this.set_page_url(current_page_number);
+			}
 		};
 
 	}

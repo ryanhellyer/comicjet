@@ -5,8 +5,8 @@ function home_page() {
 	var content_area = `
 
 		<div class="buttons">
-			<a class="button" href="`+home_url+``+`de/en/">Learnen Englisch</a>
-			<a class="button" href="`+home_url+`en/de/`+`">Learn German</a>
+			<a id="learn-german" class="button" href="`+home_url+`en/de/`+`">Learn German</a>
+			<a id="learn-english" class="button" href="`+home_url+``+`de/en/">Learnen Englisch</a>
 		</div>
 
 		<div id="comic-selection">

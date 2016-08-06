@@ -58,10 +58,33 @@ function get_secondary_language() {
 }
 
 /**
- * Set header link URL.
+ * Set home link URLs.
  */
-function set_header_link() {
-	document.getElementById('header-link').href = home_url+get_primary_language()+'/'+get_secondary_language()+'/';
+function set_home_links() {
+
+	if ( '' != get_primary_language_cookie() && '' != get_secondary_language_cookie() ) {
+
+		// Redirect based on cookies
+		var string = get_primary_language_cookie()+'/'+get_secondary_language_cookie()+'/';
+
+	} else {
+
+		// Redirect based on the browsers language setting
+		var browser_language = navigator.language;
+		var german_languages = ['de-AT', 'de-DE', 'de-LI', 'de-LU', 'de-CH'];
+		var result = german_languages.indexOf(browser_language);
+		if ( 0 == result ) {
+			var string = 'de/en/';
+		} else {
+			var string = 'en/de/';
+		}
+
+	}
+
+
+
+	document.getElementById('header-link').href = home_url+string;
+	document.getElementById('footer-link').href = home_url+string;
 }
 
 /**
@@ -78,7 +101,37 @@ function get_total_page_count(comic_slug) {
 
 }
 
+/**
+ * Set the primary language cookie.
+ *
+ * @param  string  The primary language to be set
+ */
+function set_primary_language_cookie(language) {
+	setCookie('primary_lang',language,365);
+}
 
+/**
+ * Set the secondary language cookie.
+ *
+ * @param  string  The secondary language to be set
+ */
+function set_secondary_language_cookie(language) {
+	setCookie('secondary_lang',language,365);
+}
+
+/**
+ * Get the primary language cookie.
+ */
+function get_primary_language_cookie() {
+	return getCookie('primary_lang');
+}
+
+/**
+ * Get the secondary language cookie.
+ */
+function get_secondary_language_cookie() {
+	return getCookie('secondary_lang');
+}
 
 function setCookie(name,value,days) {
 	if (days) {

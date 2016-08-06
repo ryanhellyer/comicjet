@@ -1,21 +1,62 @@
 
-document.getElementById('page-content').addEventListener("click", function (e) {
+document.body.addEventListener("click", function (e) {
 
-	// Change language
-	if(e.target && e.target.id == 'select-language') {
+	// Scroll to top link
+	if ( typeof e.target.id != 'undefined' && 'scroll-to-top' == e.target.id ) {
+
+		window.scrollTo(0, 0);
 
 		// Preventing form submission
 		event.preventDefault();
+	}
 
-		var primary_language = document.getElementById('language1').value;
-		var secondary_language = document.getElementById('language2').value;
+	// Legal notice link
+	if ( typeof e.target.id != 'undefined' && 'legal-notice' == e.target.id ) {
+		var url = home_url+'legal-notice/';
 
-		var string = '/'+primary_language+'/'+secondary_language+'/';
+		window.history.pushState(null, null, url);
 
-		window.history.pushState(null, null, string);
+		legal_notice_page();
+
+		window.scrollTo(0, 0);
+
+		// Preventing form submission
+		event.preventDefault();
+	}
+
+	// Home page links
+	if ( typeof e.target.id != 'undefined' && ( 'header-link' == e.target.id || 'footer-link' == e.target.id ) ) {
+		var url = home_url+get_primary_language_cookie()+'/'+get_secondary_language_cookie()+'/';
+
+		window.history.pushState(null, null, url);
 
 		home_page();
 
+		// Preventing form submission
+		event.preventDefault();
+	}
+
+	// Language switcher button functionality
+	if ( typeof e.target.id != 'undefined' && 'learn-english' == e.target.id ) {
+		var switch_language = '/de/en/';
+		set_primary_language_cookie( 'de' );
+		set_secondary_language_cookie( 'en' );
+	} else if ( typeof e.target.id != 'undefined' && 'learn-german' == e.target.id ) {
+		var switch_language = '/en/de/';
+		set_primary_language_cookie( 'en' );
+		set_secondary_language_cookie( 'de' );
+	}
+	if ( typeof switch_language != 'undefined' ) {
+
+		// Set the home links
+		set_home_links();
+
+		window.history.pushState(null, null, switch_language);
+
+		home_page();
+
+		// Preventing form submission
+		event.preventDefault();
 	}
 
 	// Change the comic language

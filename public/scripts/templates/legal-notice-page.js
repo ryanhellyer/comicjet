@@ -33,6 +33,5 @@ function legal_notice_page() {
 `;
 
 	document.getElementById('page-content').innerHTML = content_area;
-	document.getElementById('to-comic-selection').remove();
 
 }

@@ -37,6 +37,7 @@ $base_url = 'http://dev.comicjet.com/';
 					</small>
 		</a>
 	</h1>
+	<div id="primary-menu"></div>
 <?php
 /*
 	<nav id="primary-menu">
@@ -61,7 +62,7 @@ $base_url = 'http://dev.comicjet.com/';
 
 <footer>
 	<p>
-		<span id="copyright">Copyright</span> &copy; 2016 <a href="<?php echo $base_url; ?>">Comic Jet</a>. <span id="creation">A creation of</span> <a href="https://geek.hellyer.kiwi/">Ryan Hellyer</a>
+		<span id="copyright">Copyright</span> &copy; 2016 <a id="footer-link" href="<?php echo $base_url; ?>">Comic Jet</a>. <span id="creation">A creation of</span> <a href="https://geek.hellyer.kiwi/">Ryan Hellyer</a>
 		<a id="legal-notice" href="<?php echo $base_url; ?>legal-notice/" class="alignright">Legal Notice</a>
 	</p>
 </footer>
@@ -87,8 +88,8 @@ var comics = [
 		pages:49
 	},
 	{
-		name:{'en':'Shadow dancers','de':'Dhadow danzers de'},
-		slug:{'en':'shadowdancers','de':'dhadow-danzers-de'},
+		name:{'en':'Shadow dancers','de':'Schatten tänzer'},
+		slug:{'en':'shadowdancers','de':'schatten-tänzer'},
 		pages:93
 	},
 	{
@@ -160,22 +161,32 @@ for (i = 0; i < comics.length; i++) {
 	}
 }
 
-set_header_link();
+set_home_links();
 var current_url = window.location.pathname.split( '/' );
 console.log(available_languages.indexOf(current_url[1]));
 console.log(available_languages.indexOf(current_url[2]));
 if ( '/' == window.location.pathname ) {
 	var page_type = 'home';
 
-	// Redirect, based on the browsers language setting
-	var browser_language = navigator.language;
-	var german_languages = ['de-AT', 'de-DE', 'de-LI', 'de-LU', 'de-CH'];
-	var result = german_languages.indexOf(browser_language);
-	if ( 0 == result ) {
-		var string = '/de/en/';
+	if ( '' != get_primary_language_cookie() && '' != get_secondary_language_cookie() ) {
+
+		// Redirect based on cookies
+		var string = '/'+get_primary_language_cookie()+'/'+get_secondary_language_cookie()+'/';
+
 	} else {
-		var string = '/en/de/';
+
+		// Redirect based on the browsers language setting
+		var browser_language = navigator.language;
+		var german_languages = ['de-AT', 'de-DE', 'de-LI', 'de-LU', 'de-CH'];
+		var result = german_languages.indexOf(browser_language);
+		if ( 0 == result ) {
+			var string = '/de/en/';
+		} else {
+			var string = '/en/de/';
+		}
+
 	}
+
 	window.history.pushState(null, null, string);
 	home_page();
 
