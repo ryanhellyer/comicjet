@@ -1,3 +1,32 @@
+function comicjet_image_preload( args, callback ) {
+  "use strict";
+
+	var imgs = args['imgs'];
+	var page_number = args['page_number'];
+
+	var loaded = 0;
+	var images = [];
+	imgs = Object.prototype.toString.apply( imgs ) === '[object Array]' ? imgs : [imgs];
+	var inc = function() {
+		loaded += 1;
+		if ( loaded === imgs.length && callback ) {
+			callback( images, args );
+		}
+	};
+	for ( var i = 0; i < imgs.length; i++ ) {
+		images[i] = new Image();
+		images[i].onabort = inc;
+		images[i].onerror = inc;
+		images[i].onload = inc;
+		images[i].src = imgs[i];
+	}
+}
+
+//'http://dev.comicjet.com/comics/the-red-hall/thumbnail-en.jpg'
+//'http://dev.comicjet.com/comics/shadowdancers/thumbnail-en.jpg'
+
+
+
 
 function Class_Scroll(e) {
 
@@ -80,15 +109,43 @@ function Class_Scroll(e) {
 		var img_node = document.createElement('img');
 		img_node.className = 'comic-page';
 		var new_li = document.getElementById('comic').appendChild(li_node);
+
+//		img_node.style.border = '10px solid red';
+
 		var new_img = new_li.appendChild(img_node);
 
-		new_img.src = comics_folder_url+get_current_comic_slug()+'/'+page_number+'-'+get_secondary_language()+'.jpg';
+		var primary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_secondary_language()+'.jpg';
+		var secondary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_primary_language()+'.jpg';
+
+new_img.style.border = '10px solid red';
+
+		var args = [];
+		args['imgs'] = [primary_image_url, secondary_image_url];
+		args['page_number'] = page_number;
+		args['new_image'] = new_img;
+
+		comicjet_image_preload( args, function(images, args) {
+
+			var new_image = args['new_image'];
+			new_image.style.border = '10px solid blue';
+			var primary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_secondary_language()+'.jpg';
+			new_image.src = primary_image_url;
+			console.log('processing')
+		} );
+
+
+//'http://dev.comicjet.com/comics/the-red-hall/thumbnail-en.jpg'
+//'http://dev.comicjet.com/comics/shadowdancers/thumbnail-en.jpg'
+
+		new_img.src = home_url+'images/loading.gif';
+		//new_img.src = primary_image_url;
 		new_img.id = page_number;
 
 		// Add page counter
 		var page_count = document.createElement('div');
-		page_count.innerHTML = '<strong>'+page_number+'</strong>/'+get_total_page_count(get_current_comic_slug());
+		page_count.innerHTML = '<strong>'+page_number+'</strong>/'+get_total_page_count(get_current_comic_slug('en'));
 		page_count.className = 'page-counter';
+
 		new_li.appendChild(page_count);
 
 	}
@@ -105,7 +162,7 @@ function Class_Scroll(e) {
 		if ( 0 == lis.length ) {
 			this.add_new_page(1);
 		} else {
-			var number_of_pages = get_current_comic_().pages;
+			var number_of_pages = get_current_comic().pages;
 			var number_already_displayed = lis.length;
 
 			if ( number_already_displayed < number_of_pages ) {
