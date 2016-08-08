@@ -73,6 +73,7 @@ $base_url = 'http://dev.comicjet.com/';
 <script src="<?php echo $base_url; ?>scripts/templates/home-page.js"></script>
 <script src="<?php echo $base_url; ?>scripts/templates/error-404-page.js"></script>
 <script src="<?php echo $base_url; ?>scripts/templates/legal-notice-page.js"></script>
+<script src="<?php echo $base_url; ?>scripts/templates/root-page.js"></script>
 <script src="<?php echo $base_url; ?>scripts/translation.js"></script>
 
 <script>
@@ -142,6 +143,7 @@ var comics = [
 
 var home_url = '<?php echo $base_url; ?>';
 var comics_folder_url = window.location.origin + '/comics/';
+var page_type;
 
 /**
  * Work out which comic we're on. Note: These should be accessed via the functions directly now (they weren't as functions originally)
@@ -151,50 +153,18 @@ var comic = get_current_comic();
 
 set_home_links();
 var current_url = window.location.pathname.split( '/' );
-if ( '/' == window.location.pathname ) {
-	var page_type = 'home';
-
-	if ( '' != get_primary_language_cookie() && '' != get_secondary_language_cookie() ) {
-
-		// Redirect based on cookies
-		var string = '/'+get_primary_language_cookie()+'/'+get_secondary_language_cookie()+'/';
-
-	} else {
-
-		// Redirect based on the browsers language setting
-		var browser_language = navigator.language;
-		var german_languages = ['de-AT', 'de-DE', 'de-LI', 'de-LU', 'de-CH'];
-		var result = german_languages.indexOf(browser_language);
-		if ( 0 == result ) {
-			var string = '/de/en/';
-		} else {
-			var string = '/en/de/';
-		}
-
-	}
-
-	window.history.pushState(null, null, string);
+if ( 'root' == get_page_type() ) {
+	root_page();
+} else if ( 'home' == get_page_type() ) {
 	home_page();
-
-} else if ( '/'+get_primary_language()+'/'+get_secondary_language()+'/' == window.location.pathname ) {
-	var page_type = 'home';
-	home_page();
-} else if ( '/legal-notice/' == window.location.pathname ) {
-	var page_type = 'legal-notice';
+} else if ( 'legal-notice' == get_page_type()) {
 	legal_notice_page();
-} else if (
-	undefined == comic
-	||
-	( '-1' == available_languages.indexOf(current_url[1]) )
-	&&
-	( '-1' == available_languages.indexOf(current_url[2]) )
-) {
-	var page_type = '404';
+} else if ( '404' == get_page_type() ) {
 	error_404_page();
-} else {
+} else if ( 'comic' == get_page_type() ) {
 	var page_type = 'comic';
 	document.addEventListener("DOMContentLoaded", Class_Scroll );
-	refresh_content();
+	refresh_comic();
 }
 
 </script>

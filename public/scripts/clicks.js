@@ -40,10 +40,7 @@ document.body.addEventListener("click", function (e) {
 			string = home_url+string+the_comics[key].parentNode.id+'/';
 			window.history.pushState(null, null, string);
 
-			refresh_content();
-
-			// Preventing form submission
-			event.preventDefault();
+			refresh_comic();
 		}
 
 	}

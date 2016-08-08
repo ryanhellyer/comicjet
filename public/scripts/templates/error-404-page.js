@@ -1,5 +1,6 @@
 
 function error_404_page() {
+	page_type = '404';
 
 	document.getElementById('site-title').innerHTML = '404 Error';
 

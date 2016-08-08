@@ -36,7 +36,8 @@ function translate_page() {
 	for (i = 0; i < translation_strings.length; i++) { 
 		var id = translation_strings[i]['id'];
 		var when = translation_strings[i]['when'];
-		if ( typeof string_when != 'undefined' || page_type == when ) {
+
+		if ( typeof when == 'undefined' || page_type == when ) {
 			var element = document.getElementById(id);
 			if ( element && typeof element.innerHTML != 'undefined' && element.innerHTML != '') {
 				element.innerHTML = translation_strings[i][get_primary_language()];

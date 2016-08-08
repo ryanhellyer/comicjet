@@ -1,28 +1,3 @@
-function comicjet_image_preload( args, callback ) {
-  "use strict";
-
-	var imgs = args['imgs'];
-	var page_number = args['page_number'];
-
-	var loaded = 0;
-	var images = [];
-	imgs = Object.prototype.toString.apply( imgs ) === '[object Array]' ? imgs : [imgs];
-	var inc = function() {
-		loaded += 1;
-		if ( loaded === imgs.length && callback ) {
-			callback( images, args );
-		}
-	};
-	for ( var i = 0; i < imgs.length; i++ ) {
-		images[i] = new Image();
-		images[i].onabort = inc;
-		images[i].onerror = inc;
-		images[i].onload = inc;
-		images[i].src = imgs[i];
-	}
-}
-
-
 
 function Class_Scroll(e) {
 
@@ -32,7 +7,7 @@ function Class_Scroll(e) {
 	/**
 	 * Class constructor.
 	 */
-	var __construct = function () {
+	var __construct = function() {
 
 		// Get current page number, and add all pages up to that point
 		var hash = window.location.hash
@@ -73,6 +48,7 @@ function Class_Scroll(e) {
 
 		// Run actions on scrolling
 		document.onscroll = function() {
+
 			this.maybe_add_new_page();
 
 			// Show scroll to top button
@@ -89,8 +65,33 @@ function Class_Scroll(e) {
 				last_updated_url_hash = current_page_number;
 				this.set_page_url(current_page_number);
 			}
+
 		};
 
+	}
+
+	this.comicjet_image_preload = function( args, callback ) {
+	  "use strict";
+
+		var imgs = args['imgs'];
+		var page_number = args['page_number'];
+
+		var loaded = 0;
+		var images = [];
+		imgs = Object.prototype.toString.apply( imgs ) === '[object Array]' ? imgs : [imgs];
+		var inc = function() {
+			loaded += 1;
+			if ( loaded === imgs.length && callback ) {
+				callback( images, args );
+			}
+		};
+		for ( var i = 0; i < imgs.length; i++ ) {
+			images[i] = new Image();
+			images[i].onabort = inc;
+			images[i].onerror = inc;
+			images[i].onload = inc;
+			images[i].src = imgs[i];
+		}
 	}
 
 	/**
@@ -98,7 +99,7 @@ function Class_Scroll(e) {
 	 *
 	 * @param  int  page_number  The page number to add
 	 */
-	this.add_new_page = function (page_number) {
+	this.add_new_page = function(page_number) {
 
 		// Add new list item with image
 		var li_node = document.createElement('li');
@@ -111,20 +112,17 @@ function Class_Scroll(e) {
 		var primary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_secondary_language()+'.jpg';
 		var secondary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_primary_language()+'.jpg';
 
-new_img.style.width = '20%';
 
+		new_img.style.width = '20%';
 		var args = [];
 		args['imgs'] = [primary_image_url, secondary_image_url];
 		args['page_number'] = page_number;
 		args['new_image'] = new_img;
-
-		comicjet_image_preload( args, function(images, args) {
-
+		this.comicjet_image_preload( args, function(images, args) {
 			var new_image = args['new_image'];
 			var primary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_secondary_language()+'.jpg';
 			new_image.style.width = '100%';
 			new_image.src = primary_image_url;
-			console.log('processing')
 		} );
 
 		new_img.src = home_url+'images/loading.gif';
@@ -142,7 +140,12 @@ new_img.style.width = '20%';
 	/**
 	 * Add a new page if required.
 	 */
-	this.maybe_add_new_page = function (load_to_specific_anchor = false) {
+	this.maybe_add_new_page = function(load_to_specific_anchor = false) {
+
+		if ( 'comic' != get_page_type() ) {
+			return;
+		}
+
 		var all_existing_pages = document.getElementById('comic');
 
 		var list_items = all_existing_pages.getElementsByTagName('li');
@@ -179,7 +182,12 @@ new_img.style.width = '20%';
 	 * Set the current page URL.
 	 * URL is based on the page number we are at.
 	 */
-	this.get_current_page_number = function () {
+	this.get_current_page_number = function() {
+
+		if ( 'comic' != get_page_type() ) {
+			return;
+		}
+
 		var all_existing_pages = document.getElementById('comic');
 		list_items = all_existing_pages.getElementsByTagName('li');
 		lis = Array.prototype.slice.call(list_items); // Convert to array
@@ -208,7 +216,7 @@ new_img.style.width = '20%';
 	 * Note: This is not very performant. 
 	 *       Changing the hash causes graphical glitches.
 	 */
-	this.set_page_url = function (current_page_number) {
+	this.set_page_url = function(current_page_number) {
 		var hash = window.location.hash.substring(1);
 		if ( hash != current_page_number ) { // Making sure we don't hammer pushState unnecessarily
 			var string = '/'+get_primary_language()+'/'+get_secondary_language()+'/'+get_current_comic_slug();

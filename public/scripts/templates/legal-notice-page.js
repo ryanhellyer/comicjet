@@ -1,4 +1,5 @@
 function legal_notice_page() {
+	page_type = 'legal-notice';
 
 	document.getElementById('site-title').innerHTML = 'Legal Notice';
 

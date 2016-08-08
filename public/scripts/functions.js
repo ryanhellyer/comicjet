@@ -3,16 +3,25 @@
  * Reset the page content.
  * Used for shifting between comics and the home page.
  */
-function refresh_content() {
+function refresh_comic() {
 
 	// Set the page title
-	document.getElementById('site-title').innerHTML = comic.name[get_primary_language()];
+	if ( 'undefined' != typeof get_current_comic() ) {
+		document.getElementById('site-title').innerHTML = get_current_comic().name[get_primary_language()];
+	}
 
 	// Reset the page content
 	document.getElementById('page-content').innerHTML = '<ol id="comic"></ol>';
+
 	var thecomic = document.getElementById('comic');
 	thecomic.innerHTML = '';
+
 	Class_Scroll();
+
+	// Preventing page reload
+	if ( 'undefined' != typeof event ) {
+		event.preventDefault();
+	}
 }
 
 /**
@@ -195,4 +204,30 @@ function get_current_comic() {
 	}
 
 	return comic;
+}
+
+/**
+ * Get page type (home, legal-notice, comic etc).
+ */
+function get_page_type() {
+	var current_url = window.location.pathname.split( '/' );
+
+	if ( '/' == window.location.pathname ) {
+		return 'root';
+	} else if ( '/'+get_primary_language()+'/'+get_secondary_language()+'/' == window.location.pathname ) {
+		return 'home';
+	} else if ( '/legal-notice/' == window.location.pathname ) {
+		return 'legal-notice';
+	} else if (
+		'undefined' == typeof get_current_comic()
+		||
+		( '-1' == available_languages.indexOf(current_url[1]) )
+		||
+		( '-1' == available_languages.indexOf(current_url[2]) )
+	) {
+		return '404';
+	} else {
+		return 'comic';
+	}
+
 }

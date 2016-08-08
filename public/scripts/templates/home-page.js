@@ -1,4 +1,14 @@
 function home_page() {
+	page_type = 'home';
+
+console.log('home page');
+/*
+var scroll_to_top_button = document.getElementById('scroll-to-top');
+if (typeof(scroll_to_top_button) != 'undefined' && scroll_to_top_button != null) {
+console.log('xxxxxxxxxx');
+	scroll_to_top.remove();			
+}
+*/
 
 	document.getElementById('site-title').innerHTML = 'Learn languages from comics';
 
