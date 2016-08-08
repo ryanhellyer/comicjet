@@ -113,7 +113,6 @@ document.body.addEventListener("click", function (e) {
 		var img = e.target;
 		var id = e.target.id;''
 		var src = e.target.src;
-
 		var end_of_file = src.substr(src.length - 7);
 
 		if ( '-'+get_secondary_language()+'.jpg' == end_of_file ) {
@@ -123,8 +122,7 @@ document.body.addEventListener("click", function (e) {
 		}
 
 		var comic_slug = get_current_comic().slug['en'];
-
-		img.src = comics_folder_url+get_current_comic_slug()+'/'+id+'-'+new_language+'.jpg';
+		img.src = comics_folder_url+comic_slug+'/'+id+'-'+new_language+'.jpg';
 
 	}
 

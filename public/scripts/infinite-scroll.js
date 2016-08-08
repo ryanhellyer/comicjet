@@ -22,10 +22,6 @@ function comicjet_image_preload( args, callback ) {
 	}
 }
 
-//'http://dev.comicjet.com/comics/the-red-hall/thumbnail-en.jpg'
-//'http://dev.comicjet.com/comics/shadowdancers/thumbnail-en.jpg'
-
-
 
 
 function Class_Scroll(e) {
@@ -110,14 +106,12 @@ function Class_Scroll(e) {
 		img_node.className = 'comic-page';
 		var new_li = document.getElementById('comic').appendChild(li_node);
 
-//		img_node.style.border = '10px solid red';
-
 		var new_img = new_li.appendChild(img_node);
 
 		var primary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_secondary_language()+'.jpg';
 		var secondary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_primary_language()+'.jpg';
 
-new_img.style.border = '10px solid red';
+new_img.style.width = '20%';
 
 		var args = [];
 		args['imgs'] = [primary_image_url, secondary_image_url];
@@ -127,18 +121,13 @@ new_img.style.border = '10px solid red';
 		comicjet_image_preload( args, function(images, args) {
 
 			var new_image = args['new_image'];
-			new_image.style.border = '10px solid blue';
 			var primary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_secondary_language()+'.jpg';
+			new_image.style.width = '100%';
 			new_image.src = primary_image_url;
 			console.log('processing')
 		} );
 
-
-//'http://dev.comicjet.com/comics/the-red-hall/thumbnail-en.jpg'
-//'http://dev.comicjet.com/comics/shadowdancers/thumbnail-en.jpg'
-
 		new_img.src = home_url+'images/loading.gif';
-		//new_img.src = primary_image_url;
 		new_img.id = page_number;
 
 		// Add page counter
