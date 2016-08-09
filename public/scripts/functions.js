@@ -5,18 +5,20 @@
  */
 function refresh_comic() {
 
-	// Set the page title
 	if ( 'undefined' != typeof get_current_comic() ) {
+
+		// Set the page title
 		document.getElementById('site-title').innerHTML = get_current_comic().name[get_primary_language()];
+
+		// Reset the page content
+		document.getElementById('page-content').innerHTML = '<ol id="comic"></ol>';
+
+		var thecomic = document.getElementById('comic');
+		thecomic.innerHTML = '';
+
 	}
 
-	// Reset the page content
-	document.getElementById('page-content').innerHTML = '<ol id="comic"></ol>';
-
-	var thecomic = document.getElementById('comic');
-	thecomic.innerHTML = '';
-
-	Class_Scroll();
+	Load_Comic();
 
 	// Preventing page reload
 	if ( 'undefined' != typeof event ) {
@@ -67,10 +69,9 @@ function get_secondary_language() {
 }
 
 /**
- * Set home link URLs.
+ * Get the current home link URL.
  */
-function set_home_links() {
-
+function get_home_link_url() {
 	if ( '' != get_primary_language_cookie() && '' != get_secondary_language_cookie() ) {
 
 		// Redirect based on cookies
@@ -90,10 +91,17 @@ function set_home_links() {
 
 	}
 
+	return home_url+string;
+}
+
+/**
+ * Set home link URLs.
+ */
+function set_home_links() {
 
 
-	document.getElementById('header-link').href = home_url+string;
-	document.getElementById('footer-link').href = home_url+string;
+	document.getElementById('header-link').href = get_home_link_url();
+	document.getElementById('footer-link').href = get_home_link_url();
 }
 
 /**
@@ -210,8 +218,8 @@ function get_current_comic() {
  * Get page type (home, legal-notice, comic etc).
  */
 function get_page_type() {
-	var current_url = window.location.pathname.split( '/' );
 
+	var current_url = window.location.pathname.split( '/' );
 	if ( '/' == window.location.pathname ) {
 		return 'root';
 	} else if ( '/'+get_primary_language()+'/'+get_secondary_language()+'/' == window.location.pathname ) {
@@ -219,8 +227,8 @@ function get_page_type() {
 	} else if ( '/legal-notice/' == window.location.pathname ) {
 		return 'legal-notice';
 	} else if (
-		'undefined' == typeof get_current_comic()
-		||
+//		'undefined' == typeof get_current_comic()
+//		||
 		( '-1' == available_languages.indexOf(current_url[1]) )
 		||
 		( '-1' == available_languages.indexOf(current_url[2]) )

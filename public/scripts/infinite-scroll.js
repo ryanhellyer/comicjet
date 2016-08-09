@@ -1,5 +1,5 @@
 
-function Class_Scroll(e) {
+function Load_Comic(e) {
 
 	var last_updated_url_hash;
 	var scroll_to_top_button = document.getElementById('scroll-to-top');
@@ -46,10 +46,11 @@ function Class_Scroll(e) {
 		}
 		scroll_to_top_button = document.getElementById('scroll-to-top');
 
+		var self = this;
+
 		// Run actions on scrolling
 		document.onscroll = function() {
-
-			this.maybe_add_new_page();
+			self.maybe_add_new_page();
 
 			// Show scroll to top button
 			var current_distance_from_top = document.body.scrollTop;
@@ -82,7 +83,7 @@ function Class_Scroll(e) {
 		var inc = function() {
 			loaded += 1;
 			if ( loaded === imgs.length && callback ) {
-				callback( images, args );
+				callback( args );
 			}
 		};
 		for ( var i = 0; i < imgs.length; i++ ) {
@@ -112,27 +113,25 @@ function Class_Scroll(e) {
 		var primary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_secondary_language()+'.jpg';
 		var secondary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_primary_language()+'.jpg';
 
-
 		new_img.style.width = '20%';
+		new_img.src = home_url+'images/loading.gif';
+		new_img.id = page_number;
 		var args = [];
 		args['imgs'] = [primary_image_url, secondary_image_url];
 		args['page_number'] = page_number;
 		args['new_image'] = new_img;
-		this.comicjet_image_preload( args, function(images, args) {
+
+		this.comicjet_image_preload( args, function(args) {
 			var new_image = args['new_image'];
 			var primary_image_url = comics_folder_url+get_current_comic_slug('en')+'/'+page_number+'-'+get_secondary_language()+'.jpg';
 			new_image.style.width = '100%';
 			new_image.src = primary_image_url;
 		} );
 
-		new_img.src = home_url+'images/loading.gif';
-		new_img.id = page_number;
-
 		// Add page counter
 		var page_count = document.createElement('div');
 		page_count.innerHTML = '<strong>'+page_number+'</strong>/'+get_total_page_count(get_current_comic_slug('en'));
 		page_count.className = 'page-counter';
-
 		new_li.appendChild(page_count);
 
 	}
@@ -141,7 +140,6 @@ function Class_Scroll(e) {
 	 * Add a new page if required.
 	 */
 	this.maybe_add_new_page = function(load_to_specific_anchor = false) {
-
 		if ( 'comic' != get_page_type() ) {
 			return;
 		}
@@ -217,6 +215,11 @@ function Class_Scroll(e) {
 	 *       Changing the hash causes graphical glitches.
 	 */
 	this.set_page_url = function(current_page_number) {
+
+		if ( 'comic' != get_page_type() ) {
+			return;
+		}
+
 		var hash = window.location.hash.substring(1);
 		if ( hash != current_page_number ) { // Making sure we don't hammer pushState unnecessarily
 			var string = '/'+get_primary_language()+'/'+get_secondary_language()+'/'+get_current_comic_slug();

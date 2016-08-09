@@ -76,6 +76,8 @@ $base_url = 'http://dev.comicjet.com/';
 <script src="<?php echo $base_url; ?>scripts/templates/root-page.js"></script>
 <script src="<?php echo $base_url; ?>scripts/translation.js"></script>
 
+<script src="<?php echo $base_url; ?>scripts/test.js"></script>
+
 <script>
 
 /**
@@ -162,8 +164,6 @@ if ( 'root' == get_page_type() ) {
 } else if ( '404' == get_page_type() ) {
 	error_404_page();
 } else if ( 'comic' == get_page_type() ) {
-	var page_type = 'comic';
-	document.addEventListener("DOMContentLoaded", Class_Scroll );
 	refresh_comic();
 }
 

@@ -24,7 +24,7 @@ function translate_page() {
 		{
 			'id':'creation',
 			'en':'A creation of',
-			'de':'Eine Kreation von',
+			'de':'Eine kreation von',
 		},
 		{
 			'id':'scroll-to-top',
@@ -37,7 +37,7 @@ function translate_page() {
 		var id = translation_strings[i]['id'];
 		var when = translation_strings[i]['when'];
 
-		if ( typeof when == 'undefined' || page_type == when ) {
+		if ( typeof when == 'undefined' || get_page_type() == when ) {
 			var element = document.getElementById(id);
 			if ( element && typeof element.innerHTML != 'undefined' && element.innerHTML != '') {
 				element.innerHTML = translation_strings[i][get_primary_language()];

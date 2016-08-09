@@ -37,3 +37,22 @@ Finish "back to comic selection page" button on each comic.
 
 Convert file formats:
 mogrify -format jpg /home/ryan/vagrant/VVV/www/dev.comicjet.com/public/comics/xkcd1/*.png
+
+
+
+
+
+
+
+Tutorial:
+
+Have text which shows, then disappears once they've clicked comic. It stays fixed to bottom of page rather than bottom of comic, so that it's always present.
+
+
+Huge radial circle, heart beat in middle.
+
+"Tap to switch languages"
+
+Have it stay on every single comic, until clicked.
+
+On desktop: follow mouse cursor perhaps.

@@ -70,10 +70,9 @@ document.body.addEventListener("click", function (e) {
 
 	// Home page links
 	if ( typeof e.target.id != 'undefined' && ( 'header-link' == e.target.id || 'footer-link' == e.target.id ) ) {
-		var url = home_url+get_primary_language_cookie()+'/'+get_secondary_language_cookie()+'/';
 
-		window.history.pushState(null, null, url);
-
+		window.history.pushState( null, null, get_home_link_url() );
+		event.preventDefault();
 		home_page();
 
 		window.scrollTo(0, 0);

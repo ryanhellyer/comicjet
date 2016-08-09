@@ -1,14 +1,4 @@
 function home_page() {
-	page_type = 'home';
-
-console.log('home page');
-/*
-var scroll_to_top_button = document.getElementById('scroll-to-top');
-if (typeof(scroll_to_top_button) != 'undefined' && scroll_to_top_button != null) {
-console.log('xxxxxxxxxx');
-	scroll_to_top.remove();			
-}
-*/
 
 	document.getElementById('site-title').innerHTML = 'Learn languages from comics';
 
@@ -16,7 +6,7 @@ console.log('xxxxxxxxxx');
 
 		<div class="buttons">
 			<a id="learn-german" class="button" href="`+home_url+`en/de/`+`">Learn German</a>
-			<a id="learn-english" class="button" href="`+home_url+``+`de/en/">Learnen Englisch</a>
+			<a id="learn-english" class="button" href="`+home_url+``+`de/en/">Englisch lernen</a>
 		</div>
 
 		<div id="comic-selection">
@@ -37,9 +27,6 @@ console.log('xxxxxxxxxx');
 			</div>`;
 		}
 	} else {
-
-
-
 alert('home without selection');
 console.log('home without language selection yet');
 	}
