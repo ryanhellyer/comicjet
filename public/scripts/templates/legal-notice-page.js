@@ -33,4 +33,5 @@ function legal_notice_page() {
 
 	document.getElementById('page-content').innerHTML = content_area;
 
+	clean_non_comic_pages();
 }

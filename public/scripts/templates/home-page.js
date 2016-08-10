@@ -41,6 +41,5 @@ console.log('home without language selection yet');
 
 	document.getElementById('page-content').innerHTML = content_area;
 
-	translate_page();
-
+	clean_non_comic_pages();
 }
