@@ -65,7 +65,7 @@ var comics_folder_url = window.location.origin + "/comics/";
 var page_type;
 
 /**
- * Work out which comic we're on. Note: These should be accessed via the functions directly now (they weren't as functions originally)
+ * Work out which comic we are on. Note: These should be accessed via the functions directly now (they weren't as functions originally)
  */
 var comic_slug = get_current_comic_slug();
 var comic = get_current_comic();

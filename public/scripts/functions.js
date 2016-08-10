@@ -72,10 +72,12 @@ function get_secondary_language() {
  * Get the current home link URL.
  */
 function get_home_link_url() {
+    var home_slug;
+
     if ( "" != get_primary_language_cookie() && "" != get_secondary_language_cookie() ) {
 
         // Redirect based on cookies
-        var string = get_primary_language_cookie()+"/"+get_secondary_language_cookie()+"/";
+        home_slug = get_primary_language_cookie()+"/"+get_secondary_language_cookie()+"/";
 
     } else {
 
@@ -84,14 +86,14 @@ function get_home_link_url() {
         var german_languages = ["de-AT", "de-DE", "de-LI", "de-LU", "de-CH"];
         var result = german_languages.indexOf(browser_language);
         if ( 0 == result ) {
-            var string = "de/en/";
+            home_slug = "de/en/";
         } else {
-            var string = "en/de/";
+            home_slug = "en/de/";
         }
 
     }
 
-    return home_url+string;
+    return home_url+home_slug;
 }
 
 /**
@@ -109,8 +111,8 @@ function set_home_links() {
  */
 function get_total_page_count(comic_slug) {
 
-    for (i = 0; i < comics.length; i++) { 
-        if (comic_slug == comics[i].slug["en"]) {
+    for (i = 0; i < comics.length; i+= 1) {
+        if (comic_slug == comics[i].slug.en) {
             pages = comics[i].pages;
             return pages;
         }
@@ -151,22 +153,32 @@ function get_secondary_language_cookie() {
 }
 
 function setCookie(name,value,days) {
+    var expires;
     if (days) {
         var date = new Date();
         date.setTime(date.getTime()+(days*24*60*60*1000));
-        var expires = "; expires="+date.toGMTString();
+        expires = "; expires="+date.toGMTString();
+    } else {
+        expires = "";
     }
-    else var expires = "";
     document.cookie = name+"="+value+expires+"; path=/";
 }
 
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(";");
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==" ") c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    var i;
+    var c;
+    for(i=0; i<ca.length; i+= 1) {
+        c = ca[i];
+
+        while (c.charAt(0)==" ") {
+            c = c.substring(1);
+        }
+
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
     return "";
 }
@@ -178,18 +190,19 @@ function eraseCookie(name) {
 /**
  * Get the current comic slug.
  */
-function get_current_comic_slug(language = null) {
+function get_current_comic_slug(language) {
     var current_url_chunks = window.location.pathname.split( "/" );
     var current_slug = current_url_chunks[3];
+    var comic_slug;
 
-    for (i = 0; i < comics.length; i++) { 
+    for (i = 0; i < comics.length; i+= 1) {
         slugs = comics[i].slug;
         slug = slugs[get_primary_language()];
         if ( current_slug == slug ) {
             if ( null != language ) {
                 comic_slug = slugs[language];
             } else {
-                var comic_slug = slug;
+                comic_slug = slug;
             }
         }
     }
@@ -203,11 +216,12 @@ function get_current_comic_slug(language = null) {
 function get_current_comic() {
     var current_url_chunks = window.location.pathname.split( "/" );
     var current_slug = current_url_chunks[3];
-    for (i = 0; i < comics.length; i++) { 
+    var comic;
+    for (i = 0; i < comics.length; i+= 1) {
         slugs = comics[i].slug;
         slug = slugs[get_primary_language()];
         if ( current_slug == slug ) {
-            var comic = comics[i];
+            comic = comics[i];
         }
     }
 
@@ -227,7 +241,7 @@ function get_page_type() {
     } else if ( "/legal-notice/" == window.location.pathname ) {
         return "legal-notice";
     } else if (
-        'undefined' == typeof get_current_comic()
+        "undefined" == typeof get_current_comic()
         ||
         ( "-1" == available_languages.indexOf(current_url[1]) )
         ||

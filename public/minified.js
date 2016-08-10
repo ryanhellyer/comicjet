@@ -74,10 +74,12 @@ function get_secondary_language() {
  * Get the current home link URL.
  */
 function get_home_link_url() {
+    var home_slug;
+
     if ( "" != get_primary_language_cookie() && "" != get_secondary_language_cookie() ) {
 
         // Redirect based on cookies
-        var string = get_primary_language_cookie()+"/"+get_secondary_language_cookie()+"/";
+        home_slug = get_primary_language_cookie()+"/"+get_secondary_language_cookie()+"/";
 
     } else {
 
@@ -86,14 +88,14 @@ function get_home_link_url() {
         var german_languages = ["de-AT", "de-DE", "de-LI", "de-LU", "de-CH"];
         var result = german_languages.indexOf(browser_language);
         if ( 0 == result ) {
-            var string = "de/en/";
+            home_slug = "de/en/";
         } else {
-            var string = "en/de/";
+            home_slug = "en/de/";
         }
 
     }
 
-    return home_url+string;
+    return home_url+home_slug;
 }
 
 /**
@@ -111,8 +113,8 @@ function set_home_links() {
  */
 function get_total_page_count(comic_slug) {
 
-    for (i = 0; i < comics.length; i++) { 
-        if (comic_slug == comics[i].slug["en"]) {
+    for (i = 0; i < comics.length; i+= 1) {
+        if (comic_slug == comics[i].slug.en) {
             pages = comics[i].pages;
             return pages;
         }
@@ -153,22 +155,32 @@ function get_secondary_language_cookie() {
 }
 
 function setCookie(name,value,days) {
+    var expires;
     if (days) {
         var date = new Date();
         date.setTime(date.getTime()+(days*24*60*60*1000));
-        var expires = "; expires="+date.toGMTString();
+        expires = "; expires="+date.toGMTString();
+    } else {
+        expires = "";
     }
-    else var expires = "";
     document.cookie = name+"="+value+expires+"; path=/";
 }
 
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(";");
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==" ") c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    var i;
+    var c;
+    for(i=0; i<ca.length; i+= 1) {
+        c = ca[i];
+
+        while (c.charAt(0)==" ") {
+            c = c.substring(1);
+        }
+
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
     return "";
 }
@@ -180,18 +192,19 @@ function eraseCookie(name) {
 /**
  * Get the current comic slug.
  */
-function get_current_comic_slug(language = null) {
+function get_current_comic_slug(language) {
     var current_url_chunks = window.location.pathname.split( "/" );
     var current_slug = current_url_chunks[3];
+    var comic_slug;
 
-    for (i = 0; i < comics.length; i++) { 
+    for (i = 0; i < comics.length; i+= 1) {
         slugs = comics[i].slug;
         slug = slugs[get_primary_language()];
         if ( current_slug == slug ) {
             if ( null != language ) {
                 comic_slug = slugs[language];
             } else {
-                var comic_slug = slug;
+                comic_slug = slug;
             }
         }
     }
@@ -205,11 +218,12 @@ function get_current_comic_slug(language = null) {
 function get_current_comic() {
     var current_url_chunks = window.location.pathname.split( "/" );
     var current_slug = current_url_chunks[3];
-    for (i = 0; i < comics.length; i++) { 
+    var comic;
+    for (i = 0; i < comics.length; i+= 1) {
         slugs = comics[i].slug;
         slug = slugs[get_primary_language()];
         if ( current_slug == slug ) {
-            var comic = comics[i];
+            comic = comics[i];
         }
     }
 
@@ -229,7 +243,7 @@ function get_page_type() {
     } else if ( "/legal-notice/" == window.location.pathname ) {
         return "legal-notice";
     } else if (
-        'undefined' == typeof get_current_comic()
+        "undefined" == typeof get_current_comic()
         ||
         ( "-1" == available_languages.indexOf(current_url[1]) )
         ||
@@ -268,11 +282,12 @@ function Load_Comic(e) {
     var __construct = function() {
 
         // Get current page number, and add all pages up to that point
-        var hash = window.location.hash
+        var hash = window.location.hash;
+        var current_page_number;
         if ( "" == hash ) {
-            var current_page_number = 1;
+            current_page_number = 1;
         } else {
-            var current_page_number = hash.replace("#", "");
+            current_page_number = hash.replace("#", "");
         }
 
         for (i = 0; i < current_page_number; i++) {
@@ -281,7 +296,9 @@ function Load_Comic(e) {
 
         // Add scroll-to-top button if not already present
         var primary_menu =  document.getElementById("primary-menu");
-        for (var key in primary_menu.childNodes) {
+        var key;
+
+        for (key in primary_menu.childNodes) {
 
             // Bail out if key not numeric
             if ( isNaN( key ) ) {
@@ -291,7 +308,9 @@ function Load_Comic(e) {
             if ( "scroll-to-top" == primary_menu.childNodes[key]["id"] ) {
                 var scroll_button_present = true;
             }
-        }
+        };
+
+
         if (typeof(scroll_button_present) == "undefined") {
 
             // Add scroll to top button
@@ -397,7 +416,12 @@ function Load_Comic(e) {
     /**
      * Add a new page if required.
      */
-    this.maybe_add_new_page = function(load_to_specific_anchor = false) {
+    this.maybe_add_new_page = function(load_to_specific_anchor) {
+
+        if ( load_to_specific_anchor != true) {
+            load_to_specific_anchor = false;
+        }
+
         if ( "comic" != get_page_type() ) {
             return;
         }
@@ -469,7 +493,7 @@ function Load_Comic(e) {
      * Set the current page URL.
      * URL is based on the page number we are at.
      *
-     * Note: This is not very performant. 
+     * Note: This is not very performant.
      *       Changing the hash causes graphical glitches.
      */
     this.set_page_url = function(current_page_number) {
@@ -494,7 +518,7 @@ function Load_Comic(e) {
 document.body.addEventListener("click", function (e) {
 
     // Select a comic
-    var the_comics = document.getElementsByClassName('block-inner');
+    var the_comics = document.getElementsByClassName("block-inner");
     for (var key in the_comics) {
 
         // Bail out if key not numeric
@@ -509,28 +533,8 @@ document.body.addEventListener("click", function (e) {
             ( typeof e.target.id != "undefined" && the_comics[key].parentNode.id == e.target.id )
         ) {
 
-            // Get URL base - Note: this should probably be simplified by combinging with code in index.php
-            if ( "" != get_primary_language_cookie() && "" != get_secondary_language_cookie() ) {
-
-                // Redirect based on cookies
-                var string = get_primary_language_cookie()+"/"+get_secondary_language_cookie()+"/";
-
-            } else {
-
-                // Redirect based on the browsers language setting
-                var browser_language = navigator.language;
-                var german_languages = ["de-AT", "de-DE", "de-LI", "de-LU", "de-CH"];
-                var result = german_languages.indexOf(browser_language);
-                if ( 0 == result ) {
-                    var string = "de/en/";
-                } else {
-                    var string = "en/de/";
-                }
-
-            }
-
-            string = home_url+string+the_comics[key].parentNode.id+"/";
-            window.history.pushState(null, null, string);
+            var comic_url = get_home_link_url()+the_comics[key].parentNode.id+"/";
+            window.history.pushState(null, null, comic_url);
 
             refresh_comic();
         }
@@ -617,167 +621,97 @@ document.body.addEventListener("click", function (e) {
 });
 function home_page() {
 
-	document.getElementById('site-title').innerHTML = 'Learn languages from comics';
+    document.getElementById("site-title").innerHTML = "Learn languages from comics";
 
-	var content_area = `
+    var content_area = '<div class="buttons"><a id="learn-german" class="button" href="'+home_url+'en/de/'+'">Learn German</a><a id="learn-english" class="button" href="'+home_url+'de/en/">Englisch lernen</a></div><div id="comic-selection">';
 
-		<div class="buttons">
-			<a id="learn-german" class="button" href="`+home_url+`en/de/`+`">Learn German</a>
-			<a id="learn-english" class="button" href="`+home_url+``+`de/en/">Englisch lernen</a>
-		</div>
+    if(typeof get_primary_language()!="undefined") {
+        for (i = 0; i < comics.length; i+= 1) {
+            slugs = comics[i].slug;
+            names = comics[i].name;
+            name = names[get_primary_language()];
+            var slug = slugs[get_primary_language()];
+            content_area = content_area + '<div class="block block-1" id="'+slug+'"><a id="comic-link-'+i+'" href="'+home_url+get_primary_language()+'/'+get_secondary_language()+'/'+slug+'/" class="block-inner"><img id="'+slug+'" src="'+home_url+'comics/'+slugs["en"]+'/thumbnail-en.jpg" /><p>`+name+`</p></a></div>';
+        }
+    }
 
-		<div id="comic-selection">
-`;
+    content_area = content_area + '</div>';
 
-	if(typeof get_primary_language()!='undefined') {
-		for (i = 0; i < comics.length; i++) { 
-			slugs = comics[i].slug;
-			names = comics[i].name;
-			name = names[get_primary_language()];
-			var slug = slugs[get_primary_language()];
-			content_area = content_area + `
-			<div class="block block-1" id="`+slug+`">
-				<a id="comic-link-`+i+`" href="`+home_url+get_primary_language()+`/`+get_secondary_language()+`/`+slug+`/" class="block-inner">
-					<img id="`+slug+`" src="`+home_url+`comics/`+slugs['en']+`/thumbnail-en.jpg" />
-					<p>`+name+`</p>
-				</a>
-			</div>`;
-		}
-	} else {
-alert('home without selection');
-console.log('home without language selection yet');
-	}
+    document.getElementById("page-content").innerHTML = content_area;
 
-
-
-
-	content_area = content_area + `
-
-		</div>
-`;
-
-	document.getElementById('page-content').innerHTML = content_area;
-
-	clean_non_comic_pages();
+    clean_non_comic_pages();
 }
 
 function error_404_page() {
-	document.getElementById("site-title").innerHTML = "404 Error";
-	var content_area = "<img src='" + home_url + "/images/404.png' />";
-	document.getElementById("page-content").innerHTML = content_area;
+    document.getElementById("site-title").innerHTML = "404 Error";
+    var content_area = "<img src='" + home_url + "/images/404.png' />";
+    document.getElementById("page-content").innerHTML = content_area;
 
-	clean_non_comic_pages();
+    clean_non_comic_pages();
 }
 function legal_notice_page() {
-	document.getElementById('site-title').innerHTML = 'Legal Notice';
+    document.getElementById("site-title").innerHTML = "Legal Notice";
 
-	var content_area = `
+   var content_area = '<div id="static-page"><h3>Personal Information</h3><p>Like most websites, we collect non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, Internet Protocol (IP) address, referring site, and the date and time of each visitor request. Our purpose in collecting non-personally identifying information is to better understand how our visitors use our website. From time to time, we may release non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the usage of the website.</p><h3>Browser storage</h3><p>Browser storage allows a website to store information on a visitor’s computer. We use this to store information such as the last visited comic, last page read and whether the end of the comic has been reached previously.</p><h3>Contact information</h3><p><a href="https://ryan.hellyer.kiwi/contact/">Ryan Hellyer</a><br />Friedrichstraße 123<br />Berlin 10117<br />Germany<br /></p></div>';
 
-		<div id="static-page">
-			<h3>Personal Information</h3>
-			<p>
-				Like most websites, we collect non-personally-identifying information of the sort that web browsers and 
-				servers typically make available, such as the browser type, language preference, Internet Protocol (IP) address, referring site, and the 
-				date and time of each visitor request. Our purpose in collecting non-personally identifying information 
-				is to better understand how our visitors use our website. From time to time, we may release 
-				non-personally-identifying information in the aggregate, e.g., by publishing a report on trends in the 
-				usage of the website.
-			</p>
+    document.getElementById("page-content").innerHTML = content_area;
 
-			<h3>Browser storage</h3>
-			<p>
-				Browser storage allows a website to store information on a visitor’s computer. We use this to store 
-				information such as the last visited comic, last page read and whether the end of the comic has been
-				reached previously.
-			</p>
-
-			<h3>Contact information</h3>
-			<p>
-				<a href="https://ryan.hellyer.kiwi/contact/">Ryan Hellyer</a><br />
-				Friedrichstraße 123<br />
-				Berlin 10117<br />
-				Germany<br />
-			</p>
-		</div>
-`;
-
-	document.getElementById('page-content').innerHTML = content_area;
-
-	clean_non_comic_pages();
+    clean_non_comic_pages();
 }
+
 function root_page() {
-
-	if ( '' != get_primary_language_cookie() && '' != get_secondary_language_cookie() ) {
-
-		// Redirect based on cookies
-		var string = '/'+get_primary_language_cookie()+'/'+get_secondary_language_cookie()+'/';
-
-	} else {
-
-		// Redirect based on the browsers language setting
-		var browser_language = navigator.language;
-		var german_languages = ['de-AT', 'de-DE', 'de-LI', 'de-LU', 'de-CH'];
-		var result = german_languages.indexOf(browser_language);
-		if ( 0 == result ) {
-			var string = '/de/en/';
-		} else {
-			var string = '/en/de/';
-		}
-
-	}
-
-	window.history.pushState(null, null, string);
-	home_page();
+    window.history.pushState(null, null, get_home_link_url() );
+    home_page();
 }
 /**
  * Set translation strings.
  */
 function translate_page() {
 
-	// Set every translation string
-	var translation_strings = [
-		{
-			"id":"copyright",
-			"en":"Copyright",
-			"de":"Copyright",
-		},
-		{
-			"id":"legal-notice",
-			"en":"Legal Notice",
-			"de":"Impressum (auf Englisch)",
-		},
-		{
-			"id":"site-title",
-			"en":"Learn languages from comics",
-			"de":"Sprachen lernen von Comics",
-			'when':"home",
-		},
-		{
-			"id":"creation",
-			"en":"A creation of",
-			"de":"Eine kreation von",
-		},
-		{
-			"id":"scroll-to-top",
-			"en":"Scroll to top",
-			"de":"Scrolle nach oben",
-		}
-	];
+    // Set every translation string
+    var translation_strings = [
+        {
+            "id":"copyright",
+            "en":"Copyright",
+            "de":"Copyright",
+        },
+        {
+            "id":"legal-notice",
+            "en":"Legal Notice",
+            "de":"Impressum (auf Englisch)",
+        },
+        {
+            "id":"site-title",
+            "en":"Learn languages from comics",
+            "de":"Sprachen lernen von Comics",
+            "when":"home",
+        },
+        {
+            "id":"creation",
+            "en":"A creation of",
+            "de":"Eine kreation von",
+        },
+        {
+            "id":"scroll-to-top",
+            "en":"Scroll to top",
+            "de":"Scrolle nach oben",
+        }
+    ];
 
-	for (i = 0; i < translation_strings.length; i++) { 
-		var id = translation_strings[i]["id"];
-		var when = translation_strings[i]["when"];
+    for (i = 0; i < translation_strings.length; i+= 1) {
+        var id = translation_strings[i]["id"];
+        var when = translation_strings[i]["when"];
 
-		if ( typeof when == "undefined" || get_page_type() == when ) {
-			var element = document.getElementById(id);
-			if ( element && typeof element.innerHTML != "undefined" && element.innerHTML != "") {
-				element.innerHTML = translation_strings[i][get_primary_language()];
-			} else if ( element && typeof element.value != "undefined" && element.value != "") {
-				element.value = translation_strings[i][get_primary_language()];
-			}
-		}
+        if ( typeof when == "undefined" || get_page_type() == when ) {
+            var element = document.getElementById(id);
+            if ( element && typeof element.innerHTML != "undefined" && element.innerHTML != "") {
+                element.innerHTML = translation_strings[i][get_primary_language()];
+            } else if ( element && typeof element.value != "undefined" && element.value != "") {
+                element.value = translation_strings[i][get_primary_language()];
+            }
+        }
 
-	}
+    }
 }
 document.addEventListener("DOMContentLoaded", translate_page );
 /**
@@ -847,7 +781,7 @@ var comics_folder_url = window.location.origin + "/comics/";
 var page_type;
 
 /**
- * Work out which comic we're on. Note: These should be accessed via the functions directly now (they weren't as functions originally)
+ * Work out which comic we are on. Note: These should be accessed via the functions directly now (they weren't as functions originally)
  */
 var comic_slug = get_current_comic_slug();
 var comic = get_current_comic();

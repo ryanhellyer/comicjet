@@ -2,7 +2,7 @@
 document.body.addEventListener("click", function (e) {
 
     // Select a comic
-    var the_comics = document.getElementsByClassName('block-inner');
+    var the_comics = document.getElementsByClassName("block-inner");
     for (var key in the_comics) {
 
         // Bail out if key not numeric
@@ -17,28 +17,8 @@ document.body.addEventListener("click", function (e) {
             ( typeof e.target.id != "undefined" && the_comics[key].parentNode.id == e.target.id )
         ) {
 
-            // Get URL base - Note: this should probably be simplified by combinging with code in index.php
-            if ( "" != get_primary_language_cookie() && "" != get_secondary_language_cookie() ) {
-
-                // Redirect based on cookies
-                var string = get_primary_language_cookie()+"/"+get_secondary_language_cookie()+"/";
-
-            } else {
-
-                // Redirect based on the browsers language setting
-                var browser_language = navigator.language;
-                var german_languages = ["de-AT", "de-DE", "de-LI", "de-LU", "de-CH"];
-                var result = german_languages.indexOf(browser_language);
-                if ( 0 == result ) {
-                    var string = "de/en/";
-                } else {
-                    var string = "en/de/";
-                }
-
-            }
-
-            string = home_url+string+the_comics[key].parentNode.id+"/";
-            window.history.pushState(null, null, string);
+            var comic_url = get_home_link_url()+the_comics[key].parentNode.id+"/";
+            window.history.pushState(null, null, comic_url);
 
             refresh_comic();
         }

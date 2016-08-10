@@ -5,6 +5,39 @@ $base_path = '/srv/www/dev.comicjet.com/public/';
 
 require( 'minify.php' );
 
+/**
+ * Minifying and concatenating JS.
+ */
+$scripts = array(
+	'functions.js',
+	'load-comic.js',
+	'clicks.js',
+	'templates/home-page.js',
+	'templates/error-404-page.js',
+	'templates/legal-notice-page.js',
+	'templates/root-page.js',
+	'translation.js',
+	'init.js',
+);
+$script_path = $base_path . 'scripts/';
+
+$combined_scripts = '
+var home_url = "' . $base_url . '";
+';
+foreach ( $scripts as $script ) {
+	$combined_scripts .= file_get_contents( $script_path . $script );
+}
+$minified_script = minify_js( $combined_scripts );
+file_put_contents( $base_path . 'minified.js', $minified_script );
+
+/**
+ * Minifying CSS.
+ */
+$css = file_get_contents( 'style.css' );
+$minified_css = minify_css( $css );
+file_put_contents( $base_path . 'minified.css', $minified_css );
+
+
 ?><!DOCTYPE html>
 <html lang="en_US">
 <head>
@@ -12,7 +45,7 @@ require( 'minify.php' );
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<title>Comic Jet</title>
-	<link rel="stylesheet" href="<?php echo $base_url; ?>style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="<?php echo $base_url; ?>minified.css" type="text/css" media="all" />
 </head>
 <body class="comic">
 
@@ -70,38 +103,7 @@ require( 'minify.php' );
 	</p>
 </footer>
 
-<?php
-
-$scripts = array(
-	'functions.js',
-	'load-comic.js',
-	'clicks.js',
-	'templates/home-page.js',
-	'templates/error-404-page.js',
-	'templates/legal-notice-page.js',
-	'templates/root-page.js',
-	'translation.js',
-	'init.js',
-);
-$script_path = $base_path . 'scripts/';
-
-$combined_scripts = '
-var home_url = "' . $base_url . '";
-';
-//echo $combined_scripts;die;
-foreach ( $scripts as $script ) {
-	$combined_scripts .= file_get_contents( $script_path . $script );
-}
-
-//$minified_script = minifyJS( $combined_scripts );
-$minified_script = $combined_scripts;
-//echo $minified_script;die;
-
-file_put_contents( $script_path . 'minified.js', $minified_script );
-
-?>
-
-<script src="<?php echo $base_url; ?>scripts/minified.js"></script>
+<script src="<?php echo $base_url; ?>minified.js"></script>
 
 </body>
 </html>

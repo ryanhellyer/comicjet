@@ -10,11 +10,12 @@ function Load_Comic(e) {
     var __construct = function() {
 
         // Get current page number, and add all pages up to that point
-        var hash = window.location.hash
+        var hash = window.location.hash;
+        var current_page_number;
         if ( "" == hash ) {
-            var current_page_number = 1;
+            current_page_number = 1;
         } else {
-            var current_page_number = hash.replace("#", "");
+            current_page_number = hash.replace("#", "");
         }
 
         for (i = 0; i < current_page_number; i++) {
@@ -23,7 +24,9 @@ function Load_Comic(e) {
 
         // Add scroll-to-top button if not already present
         var primary_menu =  document.getElementById("primary-menu");
-        for (var key in primary_menu.childNodes) {
+        var key;
+
+        for (key in primary_menu.childNodes) {
 
             // Bail out if key not numeric
             if ( isNaN( key ) ) {
@@ -33,7 +36,9 @@ function Load_Comic(e) {
             if ( "scroll-to-top" == primary_menu.childNodes[key]["id"] ) {
                 var scroll_button_present = true;
             }
-        }
+        };
+
+
         if (typeof(scroll_button_present) == "undefined") {
 
             // Add scroll to top button
@@ -139,7 +144,12 @@ function Load_Comic(e) {
     /**
      * Add a new page if required.
      */
-    this.maybe_add_new_page = function(load_to_specific_anchor = false) {
+    this.maybe_add_new_page = function(load_to_specific_anchor) {
+
+        if ( load_to_specific_anchor != true) {
+            load_to_specific_anchor = false;
+        }
+
         if ( "comic" != get_page_type() ) {
             return;
         }
@@ -211,7 +221,7 @@ function Load_Comic(e) {
      * Set the current page URL.
      * URL is based on the page number we are at.
      *
-     * Note: This is not very performant. 
+     * Note: This is not very performant.
      *       Changing the hash causes graphical glitches.
      */
     this.set_page_url = function(current_page_number) {
