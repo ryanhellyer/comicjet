@@ -1,5 +1,9 @@
 <?php
 
+function minify_html( $html ) {
+	return preg_replace( ['/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s'],['>','<','\\1'], $html );
+}
+
 function minify_js( $js ) {
 
 return $js;
