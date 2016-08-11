@@ -520,9 +520,13 @@ function Load_Comic(e) {
 
         var hash = window.location.hash.substring(1);
         if ( hash != current_page_number ) { // Making sure we do not hammer pushState unnecessarily
-            var string = "/"+get_primary_language()+"/"+get_secondary_language()+"/"+get_current_comic_slug();
+            var string = "/"+get_primary_language()+"/"+get_secondary_language()+"/"+get_current_comic_slug()+"/";
             if ( is_number(current_page_number) ) {
                 string = string + "#" + current_page_number;
+
+                // Store where we are in the comic
+                store_last_page_number( get_current_comic_slug(), current_page_number );
+
             }
             window.history.pushState(null, null, string);
         }
@@ -531,9 +535,31 @@ function Load_Comic(e) {
     __construct();
 }
 
+/**
+ * Storing the current page number for a specific comic.
+ *
+ * @param  string  The current comic slug
+ * @param  string  The current page number
+ */
+function store_last_page_number( comic_slug, current_page_number ) {
+    console.log( 'Comic slug: '+comic_slug );
+    console.log( 'Current page number: '+current_page_number );
+    localStorage.setItem( comic_slug, current_page_number );
+}
+
+/**
+ * Storing the current page number for a specific comic.
+ *
+ * @param  string  The current comic slug
+ */
+function get_last_page_number( comic_slug ) {
+    return localStorage.getItem( comic_slug );
+}
+
 document.body.addEventListener("click", function (e) {
 
     // Select a comic
+    var comic_slug;
     var the_comics = document.getElementsByClassName("block-inner");
     for (var key in the_comics) {
 
@@ -550,6 +576,12 @@ document.body.addEventListener("click", function (e) {
         ) {
 
             var comic_url = get_home_link_url()+the_comics[key].parentNode.id+"/";
+
+            comic_slug = comics[key].slug[get_primary_language()];
+            if ( null != get_last_page_number( comic_slug ) ) {
+                comic_url += '#'+get_last_page_number( comic_slug );
+            }
+
             window.history.pushState(null, null, comic_url);
 
             refresh_comic();
@@ -642,12 +674,17 @@ function home_page() {
     var content_area = '<div class="buttons"><a id="learn-german" class="button" href="'+home_url+'en/de/'+'">Learn German</a><a id="learn-english" class="button" href="'+home_url+'de/en/">Englisch lernen</a></div><div id="comic-selection">';
 
     if(typeof get_primary_language()!="undefined") {
+        var comic_url;
         for (i = 0; i < comics.length; i+= 1) {
             slugs = comics[i].slug;
             names = comics[i].name;
             name = names[get_primary_language()];
             var slug = slugs[get_primary_language()];
-            content_area = content_area + '<div class="block block-1" id="'+slug+'"><a id="comic-link-'+i+'" href="'+home_url+get_primary_language()+'/'+get_secondary_language()+'/'+slug+'/" class="block-inner"><img id="'+slug+'" src="'+home_url+'comics/'+slugs["en"]+'/thumbnail-en.jpg" /><p>'+name+'</p></a></div>';
+            comic_url = home_url+get_primary_language()+'/'+get_secondary_language()+'/'+slug+'/';
+            if ( null != get_last_page_number( slug ) ) {
+                comic_url += '#'+get_last_page_number( slug );
+            }
+            content_area = content_area + '<div class="block block-1" id="'+slug+'"><a id="comic-link-'+i+'" href="'+comic_url+'" class="block-inner"><img id="'+slug+'" src="'+home_url+'comics/'+slugs["en"]+'/thumbnail-en.jpg" /><p>'+name+'</p></a></div>';
         }
     }
 

@@ -232,7 +232,7 @@ function Load_Comic(e) {
 
         var hash = window.location.hash.substring(1);
         if ( hash != current_page_number ) { // Making sure we do not hammer pushState unnecessarily
-            var string = "/"+get_primary_language()+"/"+get_secondary_language()+"/"+get_current_comic_slug();
+            var string = "/"+get_primary_language()+"/"+get_secondary_language()+"/"+get_current_comic_slug()+"/";
             if ( is_number(current_page_number) ) {
                 string = string + "#" + current_page_number;
             }

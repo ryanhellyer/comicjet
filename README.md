@@ -1,10 +1,7 @@
 # comicjet
 Comic Jet language learning application
 
-
-Bad URLs still possbie:
-http://dev.comicjet.com/de/en/der-rote-saal/xxxxx
-
+Fix #'s so that that page scrolls to them even when clicking home page links.
 
 TODO:
 http://comicbookplus.com/
@@ -13,7 +10,7 @@ http://furycomics.com/
 Main comic is creative commons ... http://www.jesusandmo.net/images/jesusogmosmags.pdf (Jesus and Mo)
 
 Tutorial:
-	unavoidable - happens on viewing your first comic
+	unavoidable - happens on viewing your first comice
 
 Save:
 	store last page info and fades out read comics on home page and highlights last one in reading
