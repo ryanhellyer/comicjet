@@ -2,6 +2,10 @@
 Comic Jet language learning application
 
 
+Bad URLs still possbie:
+http://dev.comicjet.com/de/en/der-rote-saal/xxxxx
+
+
 TODO:
 http://comicbookplus.com/
 http://digitalcomicmuseum.com/

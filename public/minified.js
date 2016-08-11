@@ -236,6 +236,7 @@ function get_current_comic() {
 function get_page_type() {
 
     var current_url = window.location.pathname.split( "/" );
+
     if ( "/" == window.location.pathname ) {
         return "root";
     } else if ( "/"+get_primary_language()+"/"+get_secondary_language()+"/" == window.location.pathname ) {
@@ -248,6 +249,8 @@ function get_page_type() {
         ( "-1" == available_languages.indexOf(current_url[1]) )
         ||
         ( "-1" == available_languages.indexOf(current_url[2]) )
+        ||
+        ( "" != current_url[4] )
     ) {
         return "404";
     } else {
@@ -269,6 +272,19 @@ function clean_non_comic_pages() {
 
     // Translate stuff
     translate_page();
+}
+
+/**
+ * Redirecting to URL with trailing slash.
+ */
+function redirect_to_trailing_slash() {
+    var current_url = window.location.pathname.split( "/" );
+    
+    if ( "/" != window.location.pathname.slice(-1) ) {
+        window.history.pushState( null, null, window.location.pathname + "/" );        
+    }
+
+//    console.log( window.location.pathname );    
 }
 
 function Load_Comic(e) {
@@ -714,6 +730,11 @@ function translate_page() {
     }
 }
 document.addEventListener("DOMContentLoaded", translate_page );
+/**
+ * Redirect to correct URL.
+ */
+redirect_to_trailing_slash();
+
 /**
  * Set available languages and comics.
  */

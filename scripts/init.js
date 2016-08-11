@@ -1,4 +1,9 @@
 /**
+ * Redirect to correct URL.
+ */
+redirect_to_trailing_slash();
+
+/**
  * Set available languages and comics.
  */
 var available_languages = ["en","de"];
