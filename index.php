@@ -94,8 +94,16 @@ ob_start();
 <div id="wrap">
 	<div class="inner">
 		<div class="content">
-			<h1 id="site-title"></h1>
-			<div id="page-content"></div>
+			<h1 id="site-title"><noscript>Comic Jet requires JavaScript.</noscript></h1>
+			<div id="page-content">
+				<noscript>
+					<div id="static-page">
+						<p>
+							Please enable JavaScript in your browser and reload this page to continue.
+						</p>
+					</div>
+				</noscript>
+			</div>
 		</div>
 	</div>
 </div>
@@ -114,5 +122,6 @@ ob_start();
 
 $html = ob_get_contents();
 $minified_html = minify_html( $html );
-file_put_contents( $base_path . 'public/index.php', $minified_html );
+file_put_contents( $base_path . 'public/index.html', $minified_html );
+					file_put_contents( $base_path . 'public/index.html', $html );
 ob_end_clean();
