@@ -304,10 +304,14 @@ function Load_Comic(e) {
             current_page_number = 1;
         } else {
             current_page_number = hash.replace("#", "");
+            current_page_number = parseInt( current_page_number );
         }
 
-        for (i = 0; i < current_page_number; i++) {
+        var i = 0;
+console.log( 'Follow while loop should also check rect position and fill page with comic images' );
+        while ( i < current_page_number ) {
             this.maybe_add_new_page( true );
+            i++;
         }
 
         // Add scroll-to-top button if not already present
@@ -357,7 +361,9 @@ function Load_Comic(e) {
             current_page_number = self.get_current_page_number();
             if ( last_updated_url_hash != current_page_number) {
                 last_updated_url_hash = current_page_number;
+
                 self.set_page_url(current_page_number);
+
             }
 
         };
@@ -451,21 +457,27 @@ function Load_Comic(e) {
             this.add_new_page(1);
         } else {
             var number_of_pages = get_current_comic().pages;
-            var number_already_displayed = lis.length;
+            var number_of_page_already_displayed = lis.length;
 
-            if ( number_already_displayed < number_of_pages ) {
+            if ( number_of_page_already_displayed < number_of_pages ) {
 
-                var length = lis.length - 1; // Need to subtract 1 because the array starts at 0
+                var length = number_of_page_already_displayed - 1; // Need to subtract 1 because the array starts at 0
                 var last_page = lis[length];
                 var rect = last_page.getBoundingClientRect();
                 var distance_of_last_page_from_top = rect.top + document.body.scrollTop;
                 var current_distance_from_top = document.body.scrollTop + window.innerHeight;
-
-                // If the distance of the last page from the top is less than the current distance from the top, then add a new page
+                var bottom_of_window = +document.body.scrollTop + window.innerHeight;
+console.log( rect.bottom + ' : ' + bottom_of_window + ' : ' + last_page.childNodes[0].currentSrc );
                 if (
                     true == load_to_specific_anchor // Allows for loading everything up until the specified anchor
                     ||
-                    ( distance_of_last_page_from_top < current_distance_from_top )
+                    (
+                        ( rect.bottom < bottom_of_window )
+                        &&
+                        ( home_url+"images/loading.gif" != last_page.childNodes[0].currentSrc )
+                        &&
+                        ( "" != last_page.childNodes[0].currentSrc )
+                    )
                 ) {
                     this.add_new_page(length + 2);
                 }
@@ -542,8 +554,6 @@ function Load_Comic(e) {
  * @param  string  The current page number
  */
 function store_last_page_number( comic_slug, current_page_number ) {
-    console.log( 'Comic slug: '+comic_slug );
-    console.log( 'Current page number: '+current_page_number );
     localStorage.setItem( comic_slug, current_page_number );
 }
 
