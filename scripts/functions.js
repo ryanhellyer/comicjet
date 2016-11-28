@@ -1,3 +1,20 @@
+/**
+ * Refresh the page content.
+ */
+function refresh_page_content() {
+    if ( "root" == get_page_type() ) {
+        root_page();
+    } else if ( "home" == get_page_type() ) {
+        home_page();
+    } else if ( "legal-notice" == get_page_type()) {
+        legal_notice_page();
+    } else if ( "404" == get_page_type() ) {
+        error_404_page();
+    } else if ( "comic" == get_page_type() ) {
+        refresh_comic();
+    }
+}
+
 
 /**
  * Reset the page content.
@@ -8,7 +25,7 @@ function refresh_comic() {
     if ( "undefined" != typeof get_current_comic() ) {
 
         // Set the page title
-        document.getElementById("site-title").innerHTML = get_current_comic().name[get_primary_language()];
+        document.getElementById("site-title").innerHTML = get_current_comic().name[get_secondary_language()];
 
         // Reset the page content
         document.getElementById("page-content").innerHTML = "<ol id='comic'></ol>";

@@ -1,5 +1,22 @@
 
 var home_url = "http://dev.comicjet.com/";
+/**
+ * Refresh the page content.
+ */
+function refresh_page_content() {
+    if ( "root" == get_page_type() ) {
+        root_page();
+    } else if ( "home" == get_page_type() ) {
+        home_page();
+    } else if ( "legal-notice" == get_page_type()) {
+        legal_notice_page();
+    } else if ( "404" == get_page_type() ) {
+        error_404_page();
+    } else if ( "comic" == get_page_type() ) {
+        refresh_comic();
+    }
+}
+
 
 /**
  * Reset the page content.
@@ -10,7 +27,7 @@ function refresh_comic() {
     if ( "undefined" != typeof get_current_comic() ) {
 
         // Set the page title
-        document.getElementById("site-title").innerHTML = get_current_comic().name[get_primary_language()];
+        document.getElementById("site-title").innerHTML = get_current_comic().name[get_secondary_language()];
 
         // Reset the page content
         document.getElementById("page-content").innerHTML = "<ol id='comic'></ol>";
@@ -304,14 +321,10 @@ function Load_Comic(e) {
             current_page_number = 1;
         } else {
             current_page_number = hash.replace("#", "");
-            current_page_number = parseInt( current_page_number );
         }
 
-        var i = 0;
-console.log( 'Follow while loop should also check rect position and fill page with comic images' );
-        while ( i < current_page_number ) {
+        for (i = 0; i < current_page_number; i++) {
             this.maybe_add_new_page( true );
-            i++;
         }
 
         // Add scroll-to-top button if not already present
@@ -361,9 +374,7 @@ console.log( 'Follow while loop should also check rect position and fill page wi
             current_page_number = self.get_current_page_number();
             if ( last_updated_url_hash != current_page_number) {
                 last_updated_url_hash = current_page_number;
-
                 self.set_page_url(current_page_number);
-
             }
 
         };
@@ -457,27 +468,21 @@ console.log( 'Follow while loop should also check rect position and fill page wi
             this.add_new_page(1);
         } else {
             var number_of_pages = get_current_comic().pages;
-            var number_of_page_already_displayed = lis.length;
+            var number_already_displayed = lis.length;
 
-            if ( number_of_page_already_displayed < number_of_pages ) {
+            if ( number_already_displayed < number_of_pages ) {
 
-                var length = number_of_page_already_displayed - 1; // Need to subtract 1 because the array starts at 0
+                var length = lis.length - 1; // Need to subtract 1 because the array starts at 0
                 var last_page = lis[length];
                 var rect = last_page.getBoundingClientRect();
                 var distance_of_last_page_from_top = rect.top + document.body.scrollTop;
                 var current_distance_from_top = document.body.scrollTop + window.innerHeight;
-                var bottom_of_window = +document.body.scrollTop + window.innerHeight;
-console.log( rect.bottom + ' : ' + bottom_of_window + ' : ' + last_page.childNodes[0].currentSrc );
+
+                // If the distance of the last page from the top is less than the current distance from the top, then add a new page
                 if (
                     true == load_to_specific_anchor // Allows for loading everything up until the specified anchor
                     ||
-                    (
-                        ( rect.bottom < bottom_of_window )
-                        &&
-                        ( home_url+"images/loading.gif" != last_page.childNodes[0].currentSrc )
-                        &&
-                        ( "" != last_page.childNodes[0].currentSrc )
-                    )
+                    ( distance_of_last_page_from_top < current_distance_from_top )
                 ) {
                     this.add_new_page(length + 2);
                 }
@@ -535,10 +540,6 @@ console.log( rect.bottom + ' : ' + bottom_of_window + ' : ' + last_page.childNod
             var string = "/"+get_primary_language()+"/"+get_secondary_language()+"/"+get_current_comic_slug()+"/";
             if ( is_number(current_page_number) ) {
                 string = string + "#" + current_page_number;
-
-                // Store where we are in the comic
-                store_last_page_number( get_current_comic_slug(), current_page_number );
-
             }
             window.history.pushState(null, null, string);
         }
@@ -547,29 +548,9 @@ console.log( rect.bottom + ' : ' + bottom_of_window + ' : ' + last_page.childNod
     __construct();
 }
 
-/**
- * Storing the current page number for a specific comic.
- *
- * @param  string  The current comic slug
- * @param  string  The current page number
- */
-function store_last_page_number( comic_slug, current_page_number ) {
-    localStorage.setItem( comic_slug, current_page_number );
-}
-
-/**
- * Storing the current page number for a specific comic.
- *
- * @param  string  The current comic slug
- */
-function get_last_page_number( comic_slug ) {
-    return localStorage.getItem( comic_slug );
-}
-
 document.body.addEventListener("click", function (e) {
 
     // Select a comic
-    var comic_slug;
     var the_comics = document.getElementsByClassName("block-inner");
     for (var key in the_comics) {
 
@@ -586,12 +567,6 @@ document.body.addEventListener("click", function (e) {
         ) {
 
             var comic_url = get_home_link_url()+the_comics[key].parentNode.id+"/";
-
-            comic_slug = comics[key].slug[get_primary_language()];
-            if ( null != get_last_page_number( comic_slug ) ) {
-                comic_url += '#'+get_last_page_number( comic_slug );
-            }
-
             window.history.pushState(null, null, comic_url);
 
             refresh_comic();
@@ -676,6 +651,8 @@ document.body.addEventListener("click", function (e) {
 
     }
 
+    location_on_page_load = window.location.href;
+
 });
 function home_page() {
 
@@ -684,17 +661,12 @@ function home_page() {
     var content_area = '<div class="buttons"><a id="learn-german" class="button" href="'+home_url+'en/de/'+'">Learn German</a><a id="learn-english" class="button" href="'+home_url+'de/en/">Englisch lernen</a></div><div id="comic-selection">';
 
     if(typeof get_primary_language()!="undefined") {
-        var comic_url;
         for (i = 0; i < comics.length; i+= 1) {
             slugs = comics[i].slug;
             names = comics[i].name;
             name = names[get_primary_language()];
             var slug = slugs[get_primary_language()];
-            comic_url = home_url+get_primary_language()+'/'+get_secondary_language()+'/'+slug+'/';
-            if ( null != get_last_page_number( slug ) ) {
-                comic_url += '#'+get_last_page_number( slug );
-            }
-            content_area = content_area + '<div class="block block-1" id="'+slug+'"><a id="comic-link-'+i+'" href="'+comic_url+'" class="block-inner"><img id="'+slug+'" src="'+home_url+'comics/'+slugs["en"]+'/thumbnail-en.jpg" /><p>'+name+'</p></a></div>';
+            content_area = content_area + '<div class="block block-1" id="'+slug+'"><a id="comic-link-'+i+'" href="'+home_url+get_primary_language()+'/'+get_secondary_language()+'/'+slug+'/" class="block-inner"><img id="'+slug+'" src="'+home_url+'comics/'+slugs["en"]+'/thumbnail-en.jpg" /><p>'+name+'</p></a></div>';
         }
     }
 
@@ -778,6 +750,23 @@ function translate_page() {
 }
 document.addEventListener("DOMContentLoaded", translate_page );
 /**
+ * If back button is hit, we still need the page to refresh.
+ * To solve this, we simply check if the window location has changed recently, and if so, we refresh the page content again.
+ */
+var location_on_page_load = window.location.href;
+setInterval(
+    function(){
+        if ( window.location.href != location_on_page_load ) {
+            location_on_page_load = window.location.href;
+            if ( window.location.hash == "" ) { // We don't want to refesh the page everytime someone goes back from a #
+            	console.log('bang');
+            	refresh_page_content();
+        	}
+        }
+    },
+    500
+);
+/**
  * Redirect to correct URL.
  */
 redirect_to_trailing_slash();
@@ -855,15 +844,5 @@ var comic_slug = get_current_comic_slug();
 var comic = get_current_comic();
 
 set_home_links();
-var current_url = window.location.pathname.split( "/" );
-if ( "root" == get_page_type() ) {
-    root_page();
-} else if ( "home" == get_page_type() ) {
-    home_page();
-} else if ( "legal-notice" == get_page_type()) {
-    legal_notice_page();
-} else if ( "404" == get_page_type() ) {
-    error_404_page();
-} else if ( "comic" == get_page_type() ) {
-    refresh_comic();
-}
+var current_url;
+refresh_page_content();

@@ -1,7 +1,7 @@
 <?php
 
 $base_url = 'http://dev.comicjet.com/';
-$base_path = '/srv/www/dev.comicjet.com/';
+$base_path = '/home/ryan/nginx/dev.comicjet.com/';
 
 require( 'minify.php' );
 
@@ -17,6 +17,7 @@ $scripts = array(
 	'templates/legal-notice-page.js',
 	'templates/root-page.js',
 	'translation.js',
+	'handle-back-click.js',
 	'init.js',
 );
 $script_path = $base_path . 'scripts/';
@@ -28,14 +29,14 @@ foreach ( $scripts as $script ) {
 	$combined_scripts .= file_get_contents( $script_path . $script );
 }
 $minified_script = minify_js( $combined_scripts );
-file_put_contents( $base_path . 'public/minified.js', $minified_script );
+file_put_contents( $base_path . 'public_html/minified.js', $minified_script );
 
 /**
  * Minifying CSS.
  */
 $css = file_get_contents( 'style.css' );
 $minified_css = minify_css( $css );
-file_put_contents( $base_path . 'public/minified.css', $minified_css );
+file_put_contents( $base_path . 'public_html/minified.css', $minified_css );
 
 
 /**
@@ -115,6 +116,8 @@ ob_start();
 	</p>
 </footer>
 
+<input type="hidden" id="refreshed" value="no">
+
 <script src="<?php echo $base_url; ?>minified.js"></script>
 
 </body>
@@ -122,6 +125,6 @@ ob_start();
 
 $html = ob_get_contents();
 $minified_html = minify_html( $html );
-file_put_contents( $base_path . 'public/index.html', $minified_html );
-					file_put_contents( $base_path . 'public/index.html', $html );
+file_put_contents( $base_path . 'public_html/index.html', $minified_html );
+					file_put_contents( $base_path . 'public_html/index.html', $html );
 ob_end_clean();

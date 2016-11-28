@@ -76,15 +76,5 @@ var comic_slug = get_current_comic_slug();
 var comic = get_current_comic();
 
 set_home_links();
-var current_url = window.location.pathname.split( "/" );
-if ( "root" == get_page_type() ) {
-    root_page();
-} else if ( "home" == get_page_type() ) {
-    home_page();
-} else if ( "legal-notice" == get_page_type()) {
-    legal_notice_page();
-} else if ( "404" == get_page_type() ) {
-    error_404_page();
-} else if ( "comic" == get_page_type() ) {
-    refresh_comic();
-}
+var current_url;
+refresh_page_content();

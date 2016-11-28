@@ -102,4 +102,6 @@ document.body.addEventListener("click", function (e) {
 
     }
 
+    location_on_page_load = window.location.href;
+
 });

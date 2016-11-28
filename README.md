@@ -3,6 +3,7 @@ Comic Jet language learning application
 
 Fix #'s so that that page scrolls to them even when clicking home page links.
 
+
 TODO:
 http://comicbookplus.com/
 http://digitalcomicmuseum.com/
@@ -57,3 +58,12 @@ Huge radial circle, heart beat in middle.
 Have it stay on every single comic, until clicked.
 
 On desktop: follow mouse cursor perhaps.
+
+
+
+
+CREDITS:
+Michelle Krüll - bug hunting
+Northern Girl - design advice
+Nina - UX and UI advice
+
