@@ -18,5 +18,7 @@ function home_page() {
 
     document.getElementById("page-content").innerHTML = content_area;
 
+    replace_body_class( "home" );
+
     clean_non_comic_pages();
 }

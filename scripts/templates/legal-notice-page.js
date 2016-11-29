@@ -5,5 +5,7 @@ function legal_notice_page() {
 
     document.getElementById("page-content").innerHTML = content_area;
 
+    replace_body_class( "legal-notice" );
+
     clean_non_comic_pages();
 }

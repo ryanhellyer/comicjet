@@ -301,3 +301,11 @@ function redirect_to_trailing_slash() {
 
 //    console.log( window.location.pathname );    
 }
+
+/**
+ * Replace body class.
+ */
+function replace_body_class( class_name ) {
+    var body_tag = obj=document.getElementsByTagName('body')[0];
+    body_tag.className = class_name;
+}

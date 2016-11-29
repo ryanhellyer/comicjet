@@ -9,6 +9,9 @@ function Load_Comic(e) {
      */
     var __construct = function() {
 
+        // Replace body class
+        replace_body_class( "comic" );
+
         // Get current page number, and add all pages up to that point
         var hash = window.location.hash;
         var current_page_number;

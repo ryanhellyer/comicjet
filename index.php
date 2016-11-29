@@ -52,7 +52,7 @@ ob_start();
 	<title>Comic Jet</title>
 	<link rel="stylesheet" href="<?php echo $base_url; ?>minified.css" type="text/css" media="all" />
 </head>
-<body class="comic">
+<body>
 
 <header id="site-header">
 	<h1>

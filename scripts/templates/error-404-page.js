@@ -4,5 +4,7 @@ function error_404_page() {
     var content_area = "<img src='" + home_url + "/images/404.png' />";
     document.getElementById("page-content").innerHTML = content_area;
 
+    replace_body_class( "error-404" );
+
     clean_non_comic_pages();
 }

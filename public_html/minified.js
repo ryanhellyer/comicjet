@@ -304,6 +304,14 @@ function redirect_to_trailing_slash() {
 //    console.log( window.location.pathname );    
 }
 
+/**
+ * Replace body class.
+ */
+function replace_body_class( class_name ) {
+    var body_tag = obj=document.getElementsByTagName('body')[0];
+    body_tag.className = class_name;
+}
+
 function Load_Comic(e) {
 
     var last_updated_url_hash;
@@ -313,6 +321,9 @@ function Load_Comic(e) {
      * Class constructor.
      */
     var __construct = function() {
+
+        // Replace body class
+        replace_body_class( "comic" );
 
         // Get current page number, and add all pages up to that point
         var hash = window.location.hash;
@@ -674,6 +685,8 @@ function home_page() {
 
     document.getElementById("page-content").innerHTML = content_area;
 
+    replace_body_class( "home" );
+
     clean_non_comic_pages();
 }
 
@@ -681,6 +694,8 @@ function error_404_page() {
     document.getElementById("site-title").innerHTML = "404 Error";
     var content_area = "<img src='" + home_url + "/images/404.png' />";
     document.getElementById("page-content").innerHTML = content_area;
+
+    replace_body_class( "error-404" );
 
     clean_non_comic_pages();
 }
@@ -691,11 +706,14 @@ function legal_notice_page() {
 
     document.getElementById("page-content").innerHTML = content_area;
 
+    replace_body_class( "legal-notice" );
+
     clean_non_comic_pages();
 }
 
 function root_page() {
     window.history.pushState(null, null, get_home_link_url() );
+    replace_body_class( "root" );
     home_page();
 }
 /**
