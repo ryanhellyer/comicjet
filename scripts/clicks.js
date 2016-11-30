@@ -25,6 +25,34 @@ document.body.addEventListener("click", function (e) {
 
     }
 
+    // Clicking the tutorial button
+    if (
+        "tutorial-blob" == e.target.className
+        ||
+        e.target && e.target.nodeName == "IMG" && "comic-page" == e.target.className
+    ) {
+
+        // Set new tutorial step
+        if ( null == localStorage.getItem( 'tutorial' ) ) {
+            localStorage.setItem( 'tutorial', 1 );
+        } else if ( 1 == localStorage.getItem( 'tutorial' ) ) {
+            localStorage.setItem( 'tutorial', 2 );
+        }
+
+        // Change text
+        if ( e.target && e.target.nodeName == "IMG" && "comic-page" == e.target.className ) {
+            var element = e.target.nextElementSibling;
+            tutorial_blob_text( element );
+        }
+
+        // If clicking tutorial blob, then change the comic language
+        if ( "tutorial-blob" == e.target.className ) {
+            tutorial_blob_text( e.target );
+            change_comic_language( e.target.previousElementSibling );
+        }
+
+    }
+
     // Scroll to top link
     if ( typeof e.target.id != "undefined" && "scroll-to-top" == e.target.id ) {
 
@@ -86,20 +114,7 @@ document.body.addEventListener("click", function (e) {
 
     // Change the comic language
     if ( e.target && e.target.nodeName == "IMG" && "comic-page" == e.target.className ) {
-        var img = e.target;
-        var id = e.target.id;
-        var src = e.target.src;
-        var end_of_file = src.substr(src.length - 7);
-
-        if ( "-"+get_secondary_language()+".jpg" == end_of_file ) {
-            var new_language = get_primary_language();
-        } else if ( "-"+get_primary_language()+".jpg" == end_of_file ) {
-            var new_language = get_secondary_language();
-        }
-
-        var comic_slug = get_current_comic().slug["en"];
-        img.src = comics_folder_url+comic_slug+"/"+id+"-"+new_language+".jpg";
-
+        change_comic_language( e.target );
     }
 
     location_on_page_load = window.location.href;

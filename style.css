@@ -206,6 +206,10 @@ h4 {
 	width: 100%;
 }
 
+#comic li {
+	position: relative;
+}
+
 
 
 /* =Buttons
@@ -391,6 +395,81 @@ footer p.align-right {
 	text-align: right;
 }
 
+/* =Tutorial
+-------------------------------------------------------------- */
+
+#tutorial {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+#tutorial p {
+	display: inline-block;
+	color: #fff;
+	width: auto;
+	margin: 0 auto;	
+	padding: 1em 4em;
+	background: #0185bf;
+	font-weight: bold;
+}
+
+.tutorial-blob {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: #fff;
+	border-radius: 125px;
+	margin: -125px 0 -0 -125px;
+	border: 2px solid rgba(255,0,0,0.9);
+
+	-webkit-animation: pulse 1.5s ease-out;
+	-moz-animation: pulse 1.5s ease-out;
+	animation: pulse 1.5s ease-out;
+
+	-webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+
+	width: 200px;
+	height: 100px;
+	padding: 75px 25px;
+
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.8em;
+	font-weight: bold;
+	text-align: center;
+}
+
+@-moz-keyframes "pulse" {
+	0% {
+		background: rgba(255,0,0,0.6);
+	}
+	75% {
+		background: rgba(255,0,0,0.9);
+	}
+	100% {
+		background: rgba(255,0,0,0.6);
+	}
+}
+
+@-webkit-keyframes "pulse" {
+	0% {
+		background: rgba(255,0,0,0.6);
+	}
+	75% {
+		background: rgba(255,0,0,0.9);
+	}
+	100% {
+		background: rgba(255,0,0,0.6);
+	}
+}
+
+.tutorial-blob:hover {
+	cursor: pointer;
+}
 
 /* =Form
 -------------------------------------------------------------- */
@@ -471,7 +550,7 @@ img {
 	#site-title {
 		font-size: 1.3em;
 		width: 92%;
-		padding: 4%;
+		padding: 8% 4%;
 	}
 
 	#primary-menu {
@@ -491,7 +570,7 @@ img {
 	.buttons {
 		float: left;
 		width: 100%;
-		margin: 2% auto;
+		margin: 2% auto 8% auto;
 	}
 
 	.button {
@@ -552,6 +631,18 @@ img {
 	#legal-notice {
 		float: none;
 	}
+
+	.tutorial-blob {
+		top: 50%;
+		left: 50%;
+		border-radius: 125px;
+		margin: -62.5px 0 -0 -62.5px;
+		width: 120px;
+		height: 60px;
+		padding: 32.5px 2.5px;
+		font-size: 1.0em;
+	}
+
 }
 
 @media (max-width: 600px) {

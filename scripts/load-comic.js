@@ -21,7 +21,7 @@ function Load_Comic(e) {
             current_page_number = hash.replace("#", "");
         }
 
-        for (i = 0; i < current_page_number; i++) {
+        for (ix = 0; ix < current_page_number; ix++) {
             this.maybe_add_new_page( true );
         }
 
@@ -117,6 +117,14 @@ function Load_Comic(e) {
         var new_li = document.getElementById("comic").appendChild(li_node);
 
         var new_img = new_li.appendChild(img_node);
+
+
+        // Add tutorial message
+        var span_node = document.createElement("span");
+        span_node.className = "tutorial-blob";
+        tutorial_blob_text( span_node );
+        var new_span_node = new_li.appendChild(span_node);
+
 
         var primary_image_url = comics_folder_url+get_current_comic_slug("en")+"/"+page_number+"-"+get_secondary_language()+".jpg";
         var secondary_image_url = comics_folder_url+get_current_comic_slug("en")+"/"+page_number+"-"+get_primary_language()+".jpg";

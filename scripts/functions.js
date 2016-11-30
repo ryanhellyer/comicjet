@@ -309,3 +309,45 @@ function replace_body_class( class_name ) {
     var body_tag = obj=document.getElementsByTagName('body')[0];
     body_tag.className = class_name;
 }
+
+/**
+ * Handling the tutorial text blob when clicked or iniitially loaded.
+ */
+function tutorial_blob_text( element ) {
+
+    if ( 2 == localStorage.getItem( 'tutorial' ) ) {
+        element.style.display = "none";
+    }
+
+    var initial_text = "Click the comic to change it's language";
+    var second_text = "Click the comic to revert back to the original language";
+
+    if ( null == localStorage.getItem( 'tutorial' ) ) {
+        element.innerHTML = initial_text;
+    } else if ( 1 == localStorage.getItem( 'tutorial' ) ) {
+        element.innerHTML = second_text;
+        localStorage.setItem( 'tutorial', 1 );
+    } else if ( 2 == localStorage.getItem( 'tutorial' ) ) {
+        element.innerHTML = "";
+    }
+
+}
+
+/**
+ * Change the comic language (usually on click).
+ */
+function change_comic_language( element ) {
+    var img = element;
+    var id = element.id;
+    var src = element.src;
+    var end_of_file = src.substr(src.length - 7);
+
+    if ( "-"+get_secondary_language()+".jpg" == end_of_file ) {
+        var new_language = get_primary_language();
+    } else if ( "-"+get_primary_language()+".jpg" == end_of_file ) {
+        var new_language = get_secondary_language();
+    }
+
+    var comic_slug = get_current_comic().slug["en"];
+    img.src = comics_folder_url+comic_slug+"/"+id+"-"+new_language+".jpg";
+}
