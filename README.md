@@ -28,6 +28,11 @@ mogrify -format jpg /home/ryan/vagrant/VVV/www/dev.comicjet.com/public/comics/xk
 
 
 
+Add new menu item:
+	Need "Main menu" button, so that users can obviously get from comic back to main page again.
+	Maybe don't show on mobile, but get users to test it to ensure they can find their way back.
+
+
 Language selector:
 	Change to single select box, otherwise people click "learn german" and nothing happens.
 
