@@ -184,9 +184,9 @@ h4 {
 	float: left;
 	color: #555;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 2.5em;
+	font-size: 2.3em;
 	font-weight: 200;
-	padding: 0.5em 1em;
+	padding: 0.5em 0 0.5em 1em;
 }
 
 #site-description {
@@ -243,6 +243,52 @@ h4 {
 	color: #fff;
 }
 
+/* =Language selector
+-------------------------------------------------------------- */
+
+#language-selector {
+	float: right;
+	position: relative;
+	width: auto;
+	margin: 1em auto 3em auto;
+	text-align: center;
+	display: block;
+	font-size: 1.2em;
+	line-height: 3em;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	cursor: pointer;
+	color: #fff;
+	background: #0185bf;
+	outline: none;
+	margin: 2% 2% 2% 0;
+	padding: 0 1.5% 0 3%;
+}
+
+#language-selector #language-selector-pulldown {
+	position: absolute;
+	left: -999em;
+	z-index: 20;
+	width: 100%;
+}
+
+#language-selector:hover {
+	cursor: pointer;
+}
+
+#language-selector:hover #language-selector-pulldown {
+	left: 0;
+}
+
+#language-selector:hover:hover #language-selector-pulldown span {
+	display: block;
+	background: #1296cf;
+}
+
+#language-selector:hover:hover #language-selector-pulldown span:hover {
+	background: #23a7df;
+	cursor: pointer;
+}
 
 /* =Static page
 -------------------------------------------------------------- */

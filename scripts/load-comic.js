@@ -75,6 +75,10 @@ function Load_Comic(e) {
                 self.set_page_url(current_page_number);
             }
 
+            // Store current page number for later use
+            var comic_slug = get_current_comic_slug( get_secondary_language() );
+            localStorage.setItem( comic_slug, current_page_number );
+
         };
 
     }

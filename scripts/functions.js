@@ -351,3 +351,12 @@ function change_comic_language( element ) {
     var comic_slug = get_current_comic().slug["en"];
     img.src = comics_folder_url+comic_slug+"/"+id+"-"+new_language+".jpg";
 }
+
+/**
+ * Handling the tutorial text blob when clicked or iniitially loaded.
+ */
+function store_current_page( comic, page_number ) {
+
+    localStorage.setItem( comic, page_number );
+
+}

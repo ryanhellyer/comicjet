@@ -65,7 +65,6 @@ var comics = [
     },
 ];
 
-
 var comics_folder_url = window.location.origin + "/comics/";
 var page_type;
 

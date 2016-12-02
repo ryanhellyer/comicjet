@@ -17,6 +17,19 @@ document.body.addEventListener("click", function (e) {
             ( typeof e.target.id != "undefined" && the_comics[key].parentNode.id == e.target.id )
         ) {
 
+
+            // Getting storage slug
+            for (var key2 in the_comics) {
+//                console.log(             comics[key2].slug         );
+
+if ( typeof comics[ key2 ].slug != "undefined" ) {
+    console.log( "TEST");
+//    console.log(    comics[ key2 ].slug    );
+}
+
+            }
+console.log('test');
+
             var comic_url = get_home_link_url()+the_comics[key].parentNode.id+"/";
             window.history.pushState(null, null, comic_url);
 
@@ -89,15 +102,22 @@ document.body.addEventListener("click", function (e) {
         event.preventDefault();
     }
 
-    // Language switcher button functionality
-    if ( typeof e.target.id != "undefined" && "learn-english" == e.target.id ) {
-        var switch_language = "/de/en/";
-        set_primary_language_cookie( "de" );
-        set_secondary_language_cookie( "en" );
-    } else if ( typeof e.target.id != "undefined" && "learn-german" == e.target.id ) {
-        var switch_language = "/en/de/";
-        set_primary_language_cookie( "en" );
-        set_secondary_language_cookie( "de" );
+    // Language switcher
+    if ( "language-selector-pulldown" == e.target.parentElement.id ) {
+        
+        var language_switcher_button_id = e.target.id;
+        var language = language_switcher_button_id.replace( "learn-", "" );
+
+        if ( "en" == language ) {
+            var switch_language = "/de/en/";
+            set_primary_language_cookie( "de" );
+            set_secondary_language_cookie( "en" );
+        } else if ( "de" == language ) {
+            var switch_language = "/en/de/";
+            set_primary_language_cookie( "en" );
+            set_secondary_language_cookie( "de" );
+        }
+
     }
     if ( typeof switch_language != "undefined" ) {
 
