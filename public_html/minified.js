@@ -394,23 +394,19 @@ function Load_Comic(e) {
             this.maybe_add_new_page( true );
         }
 
-        // Add scroll-to-top button if not already present
         var primary_menu =  document.getElementById("primary-menu");
-        var key;
 
-        for (key in primary_menu.childNodes) {
+        // Add home button
+        if (typeof(scroll_button_present) == "undefined") {
+            var home_button = document.createElement("a");
+            home_button.href = get_home_link_url();
+            home_button.id = "home";
+            home_button.innerHTML = "Home";
+            document.getElementById("primary-menu").appendChild(home_button);
+        }
 
-            // Bail out if key not numeric
-            if ( isNaN( key ) ) {
-                break;
-            }
-
-            if ( "scroll-to-top" == primary_menu.childNodes[key]["id"] ) {
-                var scroll_button_present = true;
-            }
-        };
-
-
+        // Add scroll to top button
+        scroll_to_top_button = document.getElementById("scroll-to-top");
         if (typeof(scroll_button_present) == "undefined") {
 
             // Add scroll to top button
@@ -421,7 +417,6 @@ function Load_Comic(e) {
             document.getElementById("primary-menu").appendChild(scroll_to_top_button);
 
         }
-        scroll_to_top_button = document.getElementById("scroll-to-top");
 
         var self = this;
 
@@ -432,9 +427,9 @@ function Load_Comic(e) {
             // Show scroll to top button
             var current_distance_from_top = document.body.scrollTop;
             if ( 20 < current_distance_from_top ) {
-                scroll_to_top_button.style.display = "block";
+                scroll_to_top_button.style.visibility = "visible";
             } else {
-                scroll_to_top_button.style.display = "none";
+                scroll_to_top_button.style.visibility = "hidden";
             }
 
             // Add new pages on scrolling
@@ -679,6 +674,16 @@ document.body.addEventListener("click", function (e) {
 
     }
 
+    // Clicking language selector
+    if ( "language-selector" == e.target.id ) {
+        var pulldown = document.getElementById("language-selector-pulldown");
+        if ( "0px" == pulldown.style.left ) {
+            pulldown.style.left = "-999em";
+        } else {
+            pulldown.style.left = "0px";
+        }
+    }
+
     // Clicking the tutorial button
     if (
         "tutorial-blob" == e.target.className
@@ -705,6 +710,11 @@ document.body.addEventListener("click", function (e) {
             change_comic_language( e.target.previousElementSibling );
         }
 
+    }
+
+    // Home link
+    if ( typeof e.target.id != "undefined" && "home" == e.target.id ) {
+        //
     }
 
     // Scroll to top link
@@ -785,7 +795,7 @@ function home_page() {
 
     document.getElementById("site-title").innerHTML = "Learn languages from comics";
 
-    var content_area = '<div id="language-selector"><span id="language-selector-text">Select a language to learn</span> &nbsp; &#x25bc;<div id="language-selector-pulldown"><span class="select-language" id="learn-de">Learn German</span><span class="select-language" id="learn-en">Learn English</span></div></div><div id="comic-selection">';
+    var content_area = '<div id="language-selector"><span id="language-selector-text">Select a language to learn</span> &nbsp; &#x25bc;<div id="language-selector-pulldown"><span class="select-language" id="learn-de">Learn German</span><span class="select-language" id="learn-en">Englisch lernen</span></div></div><div id="comic-selection">';
 
 
     if(typeof get_primary_language()!="undefined") {

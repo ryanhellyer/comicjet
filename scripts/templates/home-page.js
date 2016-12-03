@@ -2,7 +2,7 @@ function home_page() {
 
     document.getElementById("site-title").innerHTML = "Learn languages from comics";
 
-    var content_area = '<div id="language-selector"><span id="language-selector-text">Select a language to learn</span> &nbsp; &#x25bc;<div id="language-selector-pulldown"><span class="select-language" id="learn-de">Learn German</span><span class="select-language" id="learn-en">Learn English</span></div></div><div id="comic-selection">';
+    var content_area = '<div id="language-selector"><span id="language-selector-text">Select a language to learn</span> &nbsp; &#x25bc;<div id="language-selector-pulldown"><span class="select-language" id="learn-de">Learn German</span><span class="select-language" id="learn-en">Englisch lernen</span></div></div><div id="comic-selection">';
 
 
     if(typeof get_primary_language()!="undefined") {

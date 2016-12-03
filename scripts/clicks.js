@@ -41,6 +41,16 @@ document.body.addEventListener("click", function (e) {
 
     }
 
+    // Clicking language selector
+    if ( "language-selector" == e.target.id ) {
+        var pulldown = document.getElementById("language-selector-pulldown");
+        if ( "0px" == pulldown.style.left ) {
+            pulldown.style.left = "-999em";
+        } else {
+            pulldown.style.left = "0px";
+        }
+    }
+
     // Clicking the tutorial button
     if (
         "tutorial-blob" == e.target.className
@@ -67,6 +77,11 @@ document.body.addEventListener("click", function (e) {
             change_comic_language( e.target.previousElementSibling );
         }
 
+    }
+
+    // Home link
+    if ( typeof e.target.id != "undefined" && "home" == e.target.id ) {
+        //
     }
 
     // Scroll to top link

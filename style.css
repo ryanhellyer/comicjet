@@ -103,14 +103,16 @@ a:hover {
 }
 
 #primary-menu a {
+	display: inline-block;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 1.2em;
+	margin-top: 0.2em;
 	margin-left: 1em;
 	color: #fff;
 }
 
 #scroll-to-top {
-	display: none;
+	visibility: hidden;
 }
 
 
@@ -592,7 +594,7 @@ img {
 	}
 
 	#site-title {
-		font-size: 1.3em;
+		font-size: 2em;
 		width: 92%;
 		padding: 8% 4%;
 	}
@@ -696,6 +698,10 @@ img {
 		font-size: 1.2em;
 		margin: 2% 0 0 0;
 		padding: 0;
+	}
+
+	#primary-menu a#home {
+		display: none;
 	}
 
 }
