@@ -250,13 +250,11 @@ h4 {
 	float: right;
 	position: relative;
 	width: auto;
-	margin: 1em auto 3em auto;
 	text-align: center;
 	display: block;
 	font-size: 1.2em;
 	line-height: 3em;
 	font-family: 'Open Sans', sans-serif;
-	margin: 0;
 	cursor: pointer;
 	color: #fff;
 	background: #0185bf;
@@ -687,6 +685,17 @@ img {
 		height: 60px;
 		padding: 32.5px 2.5px;
 		font-size: 1.0em;
+	}
+
+	#language-selector {
+		clear: both;
+		float: none;
+		display: block;
+		position: relative;
+		width: 100%;
+		font-size: 1.2em;
+		margin: 2% 0 0 0;
+		padding: 0 1.5%;
 	}
 
 }

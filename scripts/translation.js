@@ -30,6 +30,11 @@ function translate_page() {
             "id":"scroll-to-top",
             "en":"Scroll to top",
             "de":"Scrolle nach oben",
+        },
+        {
+            "id":"language-selector-text",
+            "en":"Select a language to learn",
+            "de":"Select a language to learn <br /><span style='font-size:9px'>(if you speak German, can you translate this for Ryan please?)</span>",
         }
     ];
 
