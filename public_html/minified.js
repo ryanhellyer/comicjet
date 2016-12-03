@@ -301,7 +301,6 @@ function redirect_to_trailing_slash() {
         window.history.pushState( null, null, window.location.pathname + "/" );        
     }
 
-//    console.log( window.location.pathname );    
 }
 
 /**
@@ -362,6 +361,11 @@ function store_current_page( comic, page_number ) {
     localStorage.setItem( comic, page_number );
 
 }
+setTimeout(function () {
+//    window.location.hash = "#30";
+}, 3000);
+
+
 
 function Load_Comic(e) {
 
@@ -378,6 +382,7 @@ function Load_Comic(e) {
 
         // Get current page number, and add all pages up to that point
         var hash = window.location.hash;
+
         var current_page_number;
         if ( "" == hash ) {
             current_page_number = 1;
@@ -440,10 +445,20 @@ function Load_Comic(e) {
             }
 
             // Store current page number for later use
-            var comic_slug = get_current_comic_slug( get_secondary_language() );
+            var comic_slug = get_current_comic_slug( get_primary_language() );
             localStorage.setItem( comic_slug, current_page_number );
-
         };
+
+        // If hash exists, then scroll to the hash once it's image has loaded (important to only do it after the image has loaded, because otherwise it'll have nowhere to scroll to)
+        var hash = window.location.hash;
+        if ( "" != hash ) {
+            var img_to_scroll_to = document.getElementById( hash.replace( "#", "" ) );
+
+            img_to_scroll_to.onload = function () {
+                img_to_scroll_to.scrollIntoView();
+            }
+
+        }
 
     }
 
@@ -640,7 +655,6 @@ document.body.addEventListener("click", function (e) {
             ( typeof e.target.id != "undefined" && the_comics[key].parentNode.id == e.target.id )
         ) {
 
-
             // Get required page number if stored
             for (var comic_number in comics) {
                 if ( comics[comic_number].slug[ get_secondary_language() ] == the_comics[key].parentNode.id ) {
@@ -781,14 +795,14 @@ function home_page() {
             name = names[get_primary_language()];
             var slug = slugs[get_primary_language()];
 
-            var storageslug = slugs[get_secondary_language()];
+            var storageslug = slugs[get_primary_language()];
             var page_number = localStorage.getItem( storageslug );
             if ( null != page_number ) {
                 page_number = "#" + page_number;
             } else {
                 page_number = "";   
             }
-console.log( name + ": " + page_number);
+
             content_area = content_area + '<div class="block block-1" id="'+slug+'"><a id="comic-link-'+i+'" href="'+home_url+get_primary_language()+'/'+get_secondary_language()+'/'+slug+'/'+page_number+'" class="block-inner"><img id="'+slug+'" src="'+home_url+'comics/'+slugs["en"]+'/thumbnail-en.jpg" /><p>'+name+'</p></a></div>';
         }
     }
@@ -894,7 +908,6 @@ setInterval(
         if ( window.location.href != location_on_page_load ) {
             location_on_page_load = window.location.href;
             if ( window.location.hash == "" ) { // We don't want to refesh the page everytime someone goes back from a #
-            	console.log('bang');
             	refresh_page_content();
         	}
         }

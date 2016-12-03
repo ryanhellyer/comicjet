@@ -8,7 +8,6 @@ setInterval(
         if ( window.location.href != location_on_page_load ) {
             location_on_page_load = window.location.href;
             if ( window.location.hash == "" ) { // We don't want to refesh the page everytime someone goes back from a #
-            	console.log('bang');
             	refresh_page_content();
         	}
         }

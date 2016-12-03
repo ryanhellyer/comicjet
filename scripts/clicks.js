@@ -17,7 +17,6 @@ document.body.addEventListener("click", function (e) {
             ( typeof e.target.id != "undefined" && the_comics[key].parentNode.id == e.target.id )
         ) {
 
-
             // Get required page number if stored
             for (var comic_number in comics) {
                 if ( comics[comic_number].slug[ get_secondary_language() ] == the_comics[key].parentNode.id ) {

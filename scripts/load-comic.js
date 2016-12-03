@@ -1,3 +1,8 @@
+setTimeout(function () {
+//    window.location.hash = "#30";
+}, 3000);
+
+
 
 function Load_Comic(e) {
 
@@ -14,6 +19,7 @@ function Load_Comic(e) {
 
         // Get current page number, and add all pages up to that point
         var hash = window.location.hash;
+
         var current_page_number;
         if ( "" == hash ) {
             current_page_number = 1;
@@ -76,10 +82,20 @@ function Load_Comic(e) {
             }
 
             // Store current page number for later use
-            var comic_slug = get_current_comic_slug( get_secondary_language() );
+            var comic_slug = get_current_comic_slug( get_primary_language() );
             localStorage.setItem( comic_slug, current_page_number );
-
         };
+
+        // If hash exists, then scroll to the hash once it's image has loaded (important to only do it after the image has loaded, because otherwise it'll have nowhere to scroll to)
+        var hash = window.location.hash;
+        if ( "" != hash ) {
+            var img_to_scroll_to = document.getElementById( hash.replace( "#", "" ) );
+
+            img_to_scroll_to.onload = function () {
+                img_to_scroll_to.scrollIntoView();
+            }
+
+        }
 
     }
 

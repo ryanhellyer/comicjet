@@ -12,14 +12,14 @@ function home_page() {
             name = names[get_primary_language()];
             var slug = slugs[get_primary_language()];
 
-            var storageslug = slugs[get_secondary_language()];
+            var storageslug = slugs[get_primary_language()];
             var page_number = localStorage.getItem( storageslug );
             if ( null != page_number ) {
                 page_number = "#" + page_number;
             } else {
                 page_number = "";   
             }
-console.log( name + ": " + page_number);
+
             content_area = content_area + '<div class="block block-1" id="'+slug+'"><a id="comic-link-'+i+'" href="'+home_url+get_primary_language()+'/'+get_secondary_language()+'/'+slug+'/'+page_number+'" class="block-inner"><img id="'+slug+'" src="'+home_url+'comics/'+slugs["en"]+'/thumbnail-en.jpg" /><p>'+name+'</p></a></div>';
         }
     }

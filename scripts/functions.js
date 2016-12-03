@@ -299,7 +299,6 @@ function redirect_to_trailing_slash() {
         window.history.pushState( null, null, window.location.pathname + "/" );        
     }
 
-//    console.log( window.location.pathname );    
 }
 
 /**
