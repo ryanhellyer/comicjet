@@ -4,6 +4,11 @@ function home_page() {
 
     var content_area = '<div id="language-selector"><span id="language-selector-text">Select a language to learn</span> &nbsp;&#x25bc;<div id="language-selector-pulldown"><span class="select-language" id="learn-de">Learn German</span><span class="select-language" id="learn-en">Englisch lernen</span></div></div><div id="comic-selection">';
 
+    // Remove home button if it exists (only needed on comic pages)
+    var home_button = document.getElementById( "home" );
+    if ( null !== home_button ) {
+        home_button.parentNode.removeChild(home_button);
+    }
 
     if(typeof get_primary_language()!="undefined") {
         for (i = 0; i < comics.length; i+= 1) {
