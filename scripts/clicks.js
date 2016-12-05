@@ -64,6 +64,13 @@ document.body.addEventListener("click", function (e) {
         // Set new tutorial step
         if ( null == localStorage.getItem( 'tutorial' ) ) {
             localStorage.setItem( 'tutorial', 1 );
+
+            // Translate whole page again, so that the tutorial gets translated (hacky inefficient solution)
+            var all_elems = document.getElementsByClassName( "tutorial-click-to-change" );
+            for (ae_counter = 0; ae_counter < all_elems.length; ae_counter++) {
+                all_elems[ae_counter].className = "tutorial-click-to-revert";
+            }
+
         } else if ( 1 == localStorage.getItem( 'tutorial' ) ) {
             localStorage.setItem( 'tutorial', 2 );
         }

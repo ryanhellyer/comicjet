@@ -332,6 +332,7 @@ function tutorial_blob_text( element ) {
         element.innerHTML = "";
     }
 
+    translate_page();
 }
 
 /**

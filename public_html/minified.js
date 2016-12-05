@@ -334,6 +334,7 @@ function tutorial_blob_text( element ) {
         element.innerHTML = "";
     }
 
+    translate_page();
 }
 
 /**
@@ -701,6 +702,13 @@ document.body.addEventListener("click", function (e) {
         // Set new tutorial step
         if ( null == localStorage.getItem( 'tutorial' ) ) {
             localStorage.setItem( 'tutorial', 1 );
+
+            // Translate whole page again, so that the tutorial gets translated (hacky inefficient solution)
+            var all_elems = document.getElementsByClassName( "tutorial-click-to-change" );
+            for (ae_counter = 0; ae_counter < all_elems.length; ae_counter++) {
+                all_elems[ae_counter].className = "tutorial-click-to-revert";
+            }
+
         } else if ( 1 == localStorage.getItem( 'tutorial' ) ) {
             localStorage.setItem( 'tutorial', 2 );
         }
@@ -920,6 +928,11 @@ function translate_page() {
             "de":"Eine kreation von",
         },
         {
+            "id":"home",
+            "en":"Home",
+            "de":"Start",
+        },
+        {
             "id":"scroll-to-top",
             "en":"To top",
             "de":"Nach oben",
@@ -953,8 +966,6 @@ function translate_page() {
 
             if ( undefined != class_name ) {
                 var elements = document.getElementsByClassName(class_name);
-//                console.log( translation_strings[translation_counter]["en"] + ": " + id + " / " + class_name );
-                console.log( elements );
             } else {
                 var element = document.getElementById(id);
                 var elements = [element];

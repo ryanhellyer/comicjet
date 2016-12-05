@@ -27,6 +27,11 @@ function translate_page() {
             "de":"Eine kreation von",
         },
         {
+            "id":"home",
+            "en":"Home",
+            "de":"Start",
+        },
+        {
             "id":"scroll-to-top",
             "en":"To top",
             "de":"Nach oben",
@@ -60,7 +65,6 @@ function translate_page() {
 
             if ( undefined != class_name ) {
                 var elements = document.getElementsByClassName(class_name);
-                console.log( elements );
             } else {
                 var element = document.getElementById(id);
                 var elements = [element];
