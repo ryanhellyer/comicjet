@@ -56,6 +56,9 @@ document.body.addEventListener("click", function (e) {
         "tutorial-blob" == e.target.className
         ||
         e.target && e.target.nodeName == "IMG" && "comic-page" == e.target.className
+        ||
+        "tutorial-blob" == e.target.parentNode.className
+
     ) {
 
         // Set new tutorial step
@@ -65,23 +68,64 @@ document.body.addEventListener("click", function (e) {
             localStorage.setItem( 'tutorial', 2 );
         }
 
-        // Change text
-        if ( e.target && e.target.nodeName == "IMG" && "comic-page" == e.target.className ) {
-            var element = e.target.nextElementSibling;
-            tutorial_blob_text( element );
-        }
+//console.log( e.target.parentNode.previousElementSibling );
+//console.dir( e.target.parentNode.previousElementSibling );
 
-        // If clicking tutorial blob, then change the comic language
-        if ( "tutorial-blob" == e.target.className ) {
-            tutorial_blob_text( e.target );
-            change_comic_language( e.target.previousElementSibling );
-        }
+// Change text
+if (
+    null != e.target.nodeName
+    &&
+    e.target.nodeName == "IMG"
+    &&
+    "comic-page" == e.target.className
+) {
+    var img_element = e.target;
+    var tut_element = e.target.nextElementSibling;
 
-    }
+//    var elements = e.target.getElementsByClassName( "tutorial-click-to-change" );
+  //  var element = elements[0];
+//    console.log(  );
 
-    // Home link
-    if ( typeof e.target.id != "undefined" && "home" == e.target.id ) {
-        //
+    tutorial_blob_text( tut_element );
+//    tutorial_blob_text( tut_element );
+
+} else if (
+    typeof e.target.parentNode.previousElementSibling !== "undefined"
+    &&
+    null != e.target.parentNode.previousElementSibling
+    &&
+    e.target.parentNode.previousElementSibling.nodeName == "IMG"
+    &&
+    "comic-page" == e.target.parentNode.previousElementSibling.className
+) {
+
+    var img_element = e.target.parentNode.previousElementSibling;
+    var tut_element = e.target.parentNode;
+
+    tutorial_blob_text( tut_element );
+    change_comic_language( img_element );
+} else if (
+    typeof e.target.previousElementSibling.nodeName !== "undefined"
+    &&
+    null != e.target.previousElementSibling.nodeName
+    &&
+    e.target.previousElementSibling.nodeName == "IMG"
+    &&
+    "comic-page" == e.target.previousElementSibling.className
+) {
+
+    var img_element = e.target.previousElementSibling;
+    var tut_element = e.target;
+
+    tutorial_blob_text( tut_element );
+    change_comic_language( img_element );
+}
+
+/*
+    console.log( img_element );
+    console.log( tut_element );
+*/
+
     }
 
     // Scroll to top link
@@ -121,7 +165,11 @@ document.body.addEventListener("click", function (e) {
     }
 
     // Language switcher
-    if ( "language-selector-pulldown" == e.target.parentElement.id ) {
+    if (
+        null !== e.target.parentElement
+        &&
+        "language-selector-pulldown" == e.target.parentElement.id
+    ) {
         
         var language_switcher_button_id = e.target.id;
         var language = language_switcher_button_id.replace( "learn-", "" );

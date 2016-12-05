@@ -17,8 +17,8 @@ function translate_page() {
         },
         {
             "id":"site-title",
-            "en":"Learn languages from comics",
-            "de":"Sprachen lernen von Comics",
+            "en":"Learn German from comics",
+            "de":"Englisch lernen von Comics",
             "when":"home",
         },
         {
@@ -28,21 +28,37 @@ function translate_page() {
         },
         {
             "id":"scroll-to-top",
-            "en":"Scroll to top",
-            "de":"Scrolle nach oben",
+            "en":"To top",
+            "de":"Nach oben",
+            "when":"comic",
         },
         {
             "id":"language-selector-text",
             "en":"Select a language to learn",
-            "de":"Select a language to learn <br /><span style='font-size:9px'>(if you speak German, can you translate this for Ryan please?)</span>",
+            "de":"Wählen Sie eine Sprache zum Lernen",
+            "when":"home",
         }
+/*          NEEDS TO USE CLASS SO THAT CAN BE SHOWN ON ALL COMIC PAGES AT ONCE 
+        {
+            "id":"tutorial-click-to-change",
+            "en":"Click the comic to change it's language",
+            "de":"Klick auf den Comic für Deutsch",
+        },
+        {
+            "id":"tutorial-click-to-revert",
+            "en":"Click the comic to revert back to the original language",
+            "de":"Klick den comic für die Ausgangssprache",
+        }
+        */
     ];
 
     for (i = 0; i < translation_strings.length; i+= 1) {
+
         var id = translation_strings[i]["id"];
         var when = translation_strings[i]["when"];
 
         if ( typeof when == "undefined" || get_page_type() == when ) {
+
             var element = document.getElementById(id);
             if ( element && typeof element.innerHTML != "undefined" && element.innerHTML != "") {
                 element.innerHTML = translation_strings[i][get_primary_language()];
@@ -52,5 +68,6 @@ function translate_page() {
         }
 
     }
+
 }
 document.addEventListener("DOMContentLoaded", translate_page );

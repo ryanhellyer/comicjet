@@ -34,8 +34,9 @@ function Load_Comic(e) {
         var primary_menu =  document.getElementById("primary-menu");
 
         // Add home button
-        if (typeof(scroll_button_present) == "undefined") {
-            var home_button = document.createElement("a");
+        var home_button =  document.getElementById("home");
+        if (null == home_button ) {
+            home_button = document.createElement("a");
             home_button.href = get_home_link_url();
             home_button.id = "home";
             home_button.innerHTML = "Home";
@@ -50,7 +51,7 @@ function Load_Comic(e) {
             var scroll_to_top_button = document.createElement("a");
             scroll_to_top_button.href = "#";
             scroll_to_top_button.id = "scroll-to-top";
-            scroll_to_top_button.innerHTML = "Scroll to top";
+            scroll_to_top_button.innerHTML = "To top";
             document.getElementById("primary-menu").appendChild(scroll_to_top_button);
 
         }

@@ -234,12 +234,14 @@ function get_current_comic() {
     var current_url_chunks = window.location.pathname.split( "/" );
     var current_slug = current_url_chunks[3];
     var comic;
-    for (i = 0; i < comics.length; i+= 1) {
-        slugs = comics[i].slug;
+    for (gcc_counter = 0; gcc_counter < comics.length; gcc_counter+= 1) {
+
+        slugs = comics[gcc_counter].slug;
         slug = slugs[get_primary_language()];
         if ( current_slug == slug ) {
-            comic = comics[i];
+            comic = comics[gcc_counter];
         }
+
     }
 
     return comic;
@@ -318,8 +320,8 @@ function tutorial_blob_text( element ) {
         element.style.display = "none";
     }
 
-    var initial_text = "Click the comic to change it's language";
-    var second_text = "Click the comic to revert back to the original language";
+    var initial_text = "<span class=\"tutorial-click-to-change\">X</span>";
+    var second_text = "<span class=\"tutorial-click-to-revert\">Z</span>";
 
     if ( null == localStorage.getItem( 'tutorial' ) ) {
         element.innerHTML = initial_text;
@@ -335,10 +337,9 @@ function tutorial_blob_text( element ) {
 /**
  * Change the comic language (usually on click).
  */
-function change_comic_language( element ) {
-    var img = element;
-    var id = element.id;
-    var src = element.src;
+function change_comic_language( ccl_img ) {
+    var id = ccl_img.id;
+    var src = ccl_img.src;
     var end_of_file = src.substr(src.length - 7);
 
     if ( "-"+get_secondary_language()+".jpg" == end_of_file ) {
@@ -348,7 +349,7 @@ function change_comic_language( element ) {
     }
 
     var comic_slug = get_current_comic().slug["en"];
-    img.src = comics_folder_url+comic_slug+"/"+id+"-"+new_language+".jpg";
+    ccl_img.src = comics_folder_url+comic_slug+"/"+id+"-"+new_language+".jpg";
 }
 
 /**
