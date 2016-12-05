@@ -37,34 +37,47 @@ function translate_page() {
             "en":"Select a language to learn",
             "de":"Wählen Sie eine Sprache zum Lernen",
             "when":"home",
-        }
-/*          NEEDS TO USE CLASS SO THAT CAN BE SHOWN ON ALL COMIC PAGES AT ONCE 
+        },
         {
-            "id":"tutorial-click-to-change",
+            "class":"tutorial-click-to-change",
             "en":"Click the comic to change it's language",
             "de":"Klick auf den Comic für Deutsch",
         },
         {
-            "id":"tutorial-click-to-revert",
+            "class":"tutorial-click-to-revert",
             "en":"Click the comic to revert back to the original language",
             "de":"Klick den comic für die Ausgangssprache",
         }
-        */
     ];
 
-    for (i = 0; i < translation_strings.length; i+= 1) {
+    for (translation_counter = 0; translation_counter < translation_strings.length; translation_counter+= 1) {
 
-        var id = translation_strings[i]["id"];
-        var when = translation_strings[i]["when"];
+        var when = translation_strings[translation_counter]["when"];
 
         if ( typeof when == "undefined" || get_page_type() == when ) {
+            var id = translation_strings[translation_counter]["id"];
+            var class_name = translation_strings[translation_counter]["class"];
 
-            var element = document.getElementById(id);
-            if ( element && typeof element.innerHTML != "undefined" && element.innerHTML != "") {
-                element.innerHTML = translation_strings[i][get_primary_language()];
-            } else if ( element && typeof element.value != "undefined" && element.value != "") {
-                element.value = translation_strings[i][get_primary_language()];
+            if ( undefined != class_name ) {
+                var elements = document.getElementsByClassName(class_name);
+                console.log( elements );
+            } else {
+                var element = document.getElementById(id);
+                var elements = [element];
             }
+
+            // Loop through all elements
+            for (trans_el_counter = 0; trans_el_counter < elements.length; trans_el_counter++) { 
+                
+                element = elements[trans_el_counter];
+                if ( element && typeof element.innerHTML != "undefined" && element.innerHTML != "") {
+                    element.innerHTML = translation_strings[translation_counter][get_primary_language()];
+                } else if ( element && typeof element.value != "undefined" && element.value != "") {
+                    element.value = translation_strings[translation_counter][get_primary_language()];
+                }
+
+            }
+
         }
 
     }

@@ -457,6 +457,7 @@ function Load_Comic(e) {
 
         }
 
+        translate_page();
     }
 
     this.comicjet_image_preload = function( args, callback ) {
@@ -529,7 +530,6 @@ function Load_Comic(e) {
         page_count.innerHTML = "<strong>"+page_number+"</strong>/"+get_total_page_count(get_current_comic_slug("en"));
         page_count.className = "page-counter";
         new_li.appendChild(page_count);
-
     }
 
     /**
@@ -575,6 +575,8 @@ function Load_Comic(e) {
 
             }
         }
+
+        translate_page();
     }
 
     /**
@@ -703,63 +705,50 @@ document.body.addEventListener("click", function (e) {
             localStorage.setItem( 'tutorial', 2 );
         }
 
-//console.log( e.target.parentNode.previousElementSibling );
-//console.dir( e.target.parentNode.previousElementSibling );
+        // Change text
+        if (
+            null != e.target.nodeName
+            &&
+            e.target.nodeName == "IMG"
+            &&
+            "comic-page" == e.target.className
+        ) {
+            var img_element = e.target;
+            var tut_element = e.target.nextElementSibling;
 
-// Change text
-if (
-    null != e.target.nodeName
-    &&
-    e.target.nodeName == "IMG"
-    &&
-    "comic-page" == e.target.className
-) {
-    var img_element = e.target;
-    var tut_element = e.target.nextElementSibling;
+            tutorial_blob_text( tut_element );
 
-//    var elements = e.target.getElementsByClassName( "tutorial-click-to-change" );
-  //  var element = elements[0];
-//    console.log(  );
+        } else if (
+            typeof e.target.parentNode.previousElementSibling !== "undefined"
+            &&
+            null != e.target.parentNode.previousElementSibling
+            &&
+            e.target.parentNode.previousElementSibling.nodeName == "IMG"
+            &&
+            "comic-page" == e.target.parentNode.previousElementSibling.className
+        ) {
 
-    tutorial_blob_text( tut_element );
-//    tutorial_blob_text( tut_element );
+            var img_element = e.target.parentNode.previousElementSibling;
+            var tut_element = e.target.parentNode;
 
-} else if (
-    typeof e.target.parentNode.previousElementSibling !== "undefined"
-    &&
-    null != e.target.parentNode.previousElementSibling
-    &&
-    e.target.parentNode.previousElementSibling.nodeName == "IMG"
-    &&
-    "comic-page" == e.target.parentNode.previousElementSibling.className
-) {
+            tutorial_blob_text( tut_element );
+            change_comic_language( img_element );
+        } else if (
+            typeof e.target.previousElementSibling.nodeName !== "undefined"
+            &&
+            null != e.target.previousElementSibling.nodeName
+            &&
+            e.target.previousElementSibling.nodeName == "IMG"
+            &&
+            "comic-page" == e.target.previousElementSibling.className
+        ) {
 
-    var img_element = e.target.parentNode.previousElementSibling;
-    var tut_element = e.target.parentNode;
+            var img_element = e.target.previousElementSibling;
+            var tut_element = e.target;
 
-    tutorial_blob_text( tut_element );
-    change_comic_language( img_element );
-} else if (
-    typeof e.target.previousElementSibling.nodeName !== "undefined"
-    &&
-    null != e.target.previousElementSibling.nodeName
-    &&
-    e.target.previousElementSibling.nodeName == "IMG"
-    &&
-    "comic-page" == e.target.previousElementSibling.className
-) {
-
-    var img_element = e.target.previousElementSibling;
-    var tut_element = e.target;
-
-    tutorial_blob_text( tut_element );
-    change_comic_language( img_element );
-}
-
-/*
-    console.log( img_element );
-    console.log( tut_element );
-*/
+            tutorial_blob_text( tut_element );
+            change_comic_language( img_element );
+        }
 
     }
 
@@ -798,13 +787,7 @@ if (
         // Preventing form submission
         event.preventDefault();
     }
-/*
-console.log('start');
-console.dir( e.target );
-console.dir( e.target.parentElement );
-console.dir( e.target.parentElement.id );
-console.log('end');
-*/
+
     // Language switcher
     if (
         null !== e.target.parentElement
@@ -947,34 +930,48 @@ function translate_page() {
             "en":"Select a language to learn",
             "de":"Wählen Sie eine Sprache zum Lernen",
             "when":"home",
-        }
-/*          NEEDS TO USE CLASS SO THAT CAN BE SHOWN ON ALL COMIC PAGES AT ONCE 
+        },
         {
-            "id":"tutorial-click-to-change",
+            "class":"tutorial-click-to-change",
             "en":"Click the comic to change it's language",
             "de":"Klick auf den Comic für Deutsch",
         },
         {
-            "id":"tutorial-click-to-revert",
+            "class":"tutorial-click-to-revert",
             "en":"Click the comic to revert back to the original language",
             "de":"Klick den comic für die Ausgangssprache",
         }
-        */
     ];
 
-    for (i = 0; i < translation_strings.length; i+= 1) {
+    for (translation_counter = 0; translation_counter < translation_strings.length; translation_counter+= 1) {
 
-        var id = translation_strings[i]["id"];
-        var when = translation_strings[i]["when"];
+        var when = translation_strings[translation_counter]["when"];
 
         if ( typeof when == "undefined" || get_page_type() == when ) {
+            var id = translation_strings[translation_counter]["id"];
+            var class_name = translation_strings[translation_counter]["class"];
 
-            var element = document.getElementById(id);
-            if ( element && typeof element.innerHTML != "undefined" && element.innerHTML != "") {
-                element.innerHTML = translation_strings[i][get_primary_language()];
-            } else if ( element && typeof element.value != "undefined" && element.value != "") {
-                element.value = translation_strings[i][get_primary_language()];
+            if ( undefined != class_name ) {
+                var elements = document.getElementsByClassName(class_name);
+//                console.log( translation_strings[translation_counter]["en"] + ": " + id + " / " + class_name );
+                console.log( elements );
+            } else {
+                var element = document.getElementById(id);
+                var elements = [element];
             }
+
+            // Loop through all elements
+            for (trans_el_counter = 0; trans_el_counter < elements.length; trans_el_counter++) { 
+                
+                element = elements[trans_el_counter];
+                if ( element && typeof element.innerHTML != "undefined" && element.innerHTML != "") {
+                    element.innerHTML = translation_strings[translation_counter][get_primary_language()];
+                } else if ( element && typeof element.value != "undefined" && element.value != "") {
+                    element.value = translation_strings[translation_counter][get_primary_language()];
+                }
+
+            }
+
         }
 
     }

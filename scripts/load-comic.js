@@ -93,6 +93,7 @@ function Load_Comic(e) {
 
         }
 
+        translate_page();
     }
 
     this.comicjet_image_preload = function( args, callback ) {
@@ -165,7 +166,6 @@ function Load_Comic(e) {
         page_count.innerHTML = "<strong>"+page_number+"</strong>/"+get_total_page_count(get_current_comic_slug("en"));
         page_count.className = "page-counter";
         new_li.appendChild(page_count);
-
     }
 
     /**
@@ -211,6 +211,8 @@ function Load_Comic(e) {
 
             }
         }
+
+        translate_page();
     }
 
     /**
