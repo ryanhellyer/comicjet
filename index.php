@@ -1,7 +1,7 @@
 <?php
 
-$base_url = 'http://dev.comicjet.com/';
-$base_path = '/home/ryan/nginx/dev.comicjet.com/';
+$base_url = 'https://dev-comicjet.com/';
+$base_path = '/var/www/personal/dev-comicjet.com/';
 
 require( 'minify.php' );
 

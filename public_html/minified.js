@@ -1,5 +1,5 @@
 
-var home_url = "http://dev.comicjet.com/";
+var home_url = "https://dev-comicjet.com/";
 /**
  * Refresh the page content.
  */
