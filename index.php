@@ -10,14 +10,7 @@ require( 'minify.php' );
  */
 $scripts = array(
 	'functions.js',
-	'load-comic.js',
-	'clicks.js',
-	'templates/home-page.js',
-	'templates/error-404-page.js',
-	'templates/legal-notice-page.js',
-	'templates/root-page.js',
-	'translation.js',
-	'handle-back-click.js',
+	'vue-app.js',
 	'init.js',
 );
 $script_path = $base_path . 'scripts/';
@@ -117,6 +110,8 @@ ob_start();
 </footer>
 
 <input type="hidden" id="refreshed" value="no">
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
 <script src="<?php echo $base_url; ?>minified.js"></script>
 

@@ -71,9 +71,9 @@ var page_type;
 /**
  * Work out which comic we are on. Note: These should be accessed via the functions directly now (they weren't as functions originally)
  */
-var comic_slug = get_current_comic_slug();
-var comic = get_current_comic();
-
 set_home_links();
-var current_url;
-refresh_page_content();
+
+// Hand off UI rendering to Vue.
+if ( typeof init_vue_app === "function" ) {
+    init_vue_app();
+}
